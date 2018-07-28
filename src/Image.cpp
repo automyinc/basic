@@ -1,0 +1,87 @@
+ /*************************************************************************
+ * 
+ *  [2017] - [2018] Automy Inc. 
+ *  All Rights Reserved.
+ * 
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Automy Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Automy Incorporated
+ * and its suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Automy Incorporated.
+ */
+
+#include <basic/Image.h>
+
+#include <algorithm>
+
+#define cimg_display 0
+#include "CImg.h"
+using namespace cimg_library;
+
+
+namespace basic {
+
+template<typename T>
+CImg<T> convert_to_cimg(const Image<T>& image) {
+	CImg<T> out;
+	out.resize(image.width(), image.height(), 1, image.depth());
+	for(int y = 0; y < image.height(); ++y) {
+		for(int x = 0; x < image.width(); ++x) {
+			for(int c = 0; c < image.depth(); ++c) {
+				out(x, image.height()-y-1, 0, c) = image(x, y, c);
+			}
+		}
+	}
+	return out;
+}
+
+template<typename T>
+Image<T> convert_from_cimg(const CImg<T>& image) {
+	Image<T> out;
+	out.resize(image.width(), image.height(), image.spectrum());
+	for(int y = 0; y < image.height(); ++y) {
+		for(int x = 0; x < image.width(); ++x) {
+			for(int c = 0; c < image.spectrum(); ++c) {
+				out(x, image.height()-y-1, c) = image(x, y, 0, c);
+			}
+		}
+	}
+	return out;
+}
+
+template<>
+void read_image(Image<uint8_t>& image, const std::string& filename) {
+	CImg<uint8_t> tmp(filename.c_str());
+	image = convert_from_cimg(tmp);
+}
+
+template<>
+void write_image(const Image<uint8_t>& image, const std::string& filename, int number, int digits) {
+	convert_to_cimg(image).save(filename.c_str(), number, digits);
+}
+
+template<>
+Image<uint8_t> draw_text(int width, int font_size, const std::vector<std::string>& text, const float front_color[3], const float back_color[3]) {
+	CImg<uint8_t> tmp;
+	tmp.resize(width, font_size * text.size(), 1, 3);
+	for(int y = 0; y < tmp.height(); ++y) {
+		for(int x = 0; x < tmp.width(); ++x) {
+			for(int c = 0; c < 3; ++c) {
+				tmp(x, y, c) = back_color[c];
+			}
+		}
+	}
+	int offset = 0;
+	for(const std::string& line : text) {
+		tmp.draw_text(2, offset, line.c_str(), front_color, back_color, 1, font_size);
+		offset += font_size;
+	}
+	return convert_from_cimg<uint8_t>(tmp);
+}
+
+
+} // basic

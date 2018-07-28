@@ -1,0 +1,9 @@
+package basic;
+
+class Trigger {
+	
+	long time;
+	
+	long seq_num;
+	
+}

@@ -1,0 +1,7 @@
+package basic;
+
+class ImageFrame16 extends ImageFrame {
+	
+	Image16 image;
+	
+}

@@ -1,0 +1,7 @@
+package basic;
+
+class ImageFrameF32 extends ImageFrame {
+	
+	ImageF32 image;
+	
+}

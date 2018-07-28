@@ -1,0 +1,11 @@
+package basic;
+
+class Scalar {
+	
+	long time;
+	
+	string key;
+	
+	double value;
+	
+}

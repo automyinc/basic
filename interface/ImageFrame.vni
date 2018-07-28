@@ -1,0 +1,25 @@
+package basic;
+
+import vnx.Variant;
+
+class ImageFrame {
+	
+	long time;					// image time [usec]
+	
+	string frame;				// image coordinate frame
+	
+	string format;				// image format
+	
+	map<string, Variant> properties;
+	
+	/*
+	 * Get property value, throws exception if not found.
+	 */
+	Variant get_property(string key);
+	
+	/*
+	 * Get property value, returns default value if not found.
+	 */
+	Variant get_property_default(string key, Variant def_value);
+	
+}

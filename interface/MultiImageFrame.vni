@@ -1,0 +1,7 @@
+package basic;
+
+class MultiImageFrame extends ImageFrame {
+	
+	vector<ImageFrame*> frames;
+	
+}

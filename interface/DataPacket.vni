@@ -1,0 +1,9 @@
+package basic;
+
+class DataPacket {
+	
+	long time;
+	
+	vector<uchar> payload;
+	
+}

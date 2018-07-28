@@ -1,0 +1,7 @@
+package basic;
+
+class ImageFrame8 extends ImageFrame {
+	
+	Image8 image;
+	
+}
