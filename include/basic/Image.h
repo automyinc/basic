@@ -87,14 +87,22 @@ public:
 	}
 	
 	void resize(size_t new_width, size_t new_height, size_t new_depth = 1) {
+		if(new_width > 0xFFFFFFFF || new_height > 0xFFFFFFFF || new_depth > 0xFFFFFFFF) {
+			throw std::invalid_argument("new_width, new_height or new_depth out of bounds");
+		}
 		const size_t new_size = new_width * new_height * new_depth;
 		if(new_size != get_size()) {
-			delete [] data_;
-			data_ = new T[new_size];
+			if(data_) {
+				delete [] data_;
+				data_= 0;
+			}
+			if(new_size > 0) {
+				data_ = new T[new_size];
+			}
 		}
-		width_ = new_width;
-		height_ = new_height;
-		depth_ = new_depth;
+		width_ = uint32_t(new_width);
+		height_ = uint32_t(new_height);
+		depth_ = uint32_t(new_depth);
 	}
 	
 	void clear() {
