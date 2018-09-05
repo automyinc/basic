@@ -8,6 +8,8 @@
 
 #include <math/package.hxx>
 
+#include <vnx/package.hxx>
+
 
 namespace basic {
 
@@ -136,6 +138,9 @@ struct type<::basic::DataPacket> {
 	void accept(Visitor& visitor, const ::basic::DataPacket& value) {
 		vnx::accept(visitor, value);
 	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
+	}
 };
 
 template<>
@@ -154,6 +159,10 @@ struct type<::basic::Image16> {
 	}
 	void accept(Visitor& visitor, const ::basic::Image16& value) {
 		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		const std::vector<int> tmp = {22, 3, 2};
+		code.insert(code.end(), tmp.begin(), tmp.end());
 	}
 };
 
@@ -174,6 +183,10 @@ struct type<::basic::Image32> {
 	void accept(Visitor& visitor, const ::basic::Image32& value) {
 		vnx::accept(visitor, value);
 	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		const std::vector<int> tmp = {22, 3, 3};
+		code.insert(code.end(), tmp.begin(), tmp.end());
+	}
 };
 
 template<>
@@ -192,6 +205,10 @@ struct type<::basic::Image8> {
 	}
 	void accept(Visitor& visitor, const ::basic::Image8& value) {
 		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		const std::vector<int> tmp = {22, 3, 1};
+		code.insert(code.end(), tmp.begin(), tmp.end());
 	}
 };
 
@@ -212,6 +229,10 @@ struct type<::basic::ImageF32> {
 	void accept(Visitor& visitor, const ::basic::ImageF32& value) {
 		vnx::accept(visitor, value);
 	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		const std::vector<int> tmp = {22, 3, 9};
+		code.insert(code.end(), tmp.begin(), tmp.end());
+	}
 };
 
 template<>
@@ -230,6 +251,10 @@ struct type<::basic::ImageF64> {
 	}
 	void accept(Visitor& visitor, const ::basic::ImageF64& value) {
 		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		const std::vector<int> tmp = {22, 3, 10};
+		code.insert(code.end(), tmp.begin(), tmp.end());
 	}
 };
 
@@ -250,6 +275,9 @@ struct type<::basic::ImageFrame> {
 	void accept(Visitor& visitor, const ::basic::ImageFrame& value) {
 		vnx::accept(visitor, value);
 	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
+	}
 };
 
 template<>
@@ -268,6 +296,9 @@ struct type<::basic::ImageFrame16> {
 	}
 	void accept(Visitor& visitor, const ::basic::ImageFrame16& value) {
 		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
 	}
 };
 
@@ -288,6 +319,9 @@ struct type<::basic::ImageFrame32> {
 	void accept(Visitor& visitor, const ::basic::ImageFrame32& value) {
 		vnx::accept(visitor, value);
 	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
+	}
 };
 
 template<>
@@ -306,6 +340,9 @@ struct type<::basic::ImageFrame8> {
 	}
 	void accept(Visitor& visitor, const ::basic::ImageFrame8& value) {
 		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
 	}
 };
 
@@ -326,6 +363,9 @@ struct type<::basic::ImageFrameF32> {
 	void accept(Visitor& visitor, const ::basic::ImageFrameF32& value) {
 		vnx::accept(visitor, value);
 	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
+	}
 };
 
 template<>
@@ -344,6 +384,9 @@ struct type<::basic::ImageFrameF64> {
 	}
 	void accept(Visitor& visitor, const ::basic::ImageFrameF64& value) {
 		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
 	}
 };
 
@@ -364,6 +407,9 @@ struct type<::basic::MultiImageFrame> {
 	void accept(Visitor& visitor, const ::basic::MultiImageFrame& value) {
 		vnx::accept(visitor, value);
 	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
+	}
 };
 
 template<>
@@ -382,6 +428,9 @@ struct type<::basic::Scalar> {
 	}
 	void accept(Visitor& visitor, const ::basic::Scalar& value) {
 		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
 	}
 };
 
@@ -402,6 +451,9 @@ struct type<::basic::Transform3D> {
 	void accept(Visitor& visitor, const ::basic::Transform3D& value) {
 		vnx::accept(visitor, value);
 	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
+	}
 };
 
 template<>
@@ -420,6 +472,9 @@ struct type<::basic::Trigger> {
 	}
 	void accept(Visitor& visitor, const ::basic::Trigger& value) {
 		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
 	}
 };
 

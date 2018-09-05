@@ -6,6 +6,7 @@
 
 #include <basic/package.hxx>
 #include <vnx/Value.h>
+#include <vnx/Variant.h>
 
 
 namespace basic {
@@ -16,7 +17,7 @@ public:
 	::int64_t time = 0;
 	::std::string frame;
 	::std::string format;
-	::std::map<::std::string, ::float64_t> properties;
+	::std::map<::std::string, ::vnx::Variant> properties;
 	
 	typedef ::vnx::Value Super;
 	
@@ -26,8 +27,8 @@ public:
 	vnx::Hash64 get_type_hash() const;
 	const char* get_type_name() const;
 	
-	virtual ::float64_t get_property(const ::std::string& key);
-	virtual ::float64_t get_property_default(const ::std::string& key, const ::float64_t& def_value);
+	virtual ::vnx::Variant get_property(const ::std::string& key);
+	virtual ::vnx::Variant get_property_default(const ::std::string& key, const ::vnx::Variant& def_value);
 	
 	static std::shared_ptr<ImageFrame> create();
 	std::shared_ptr<vnx::Value> clone() const;
@@ -39,6 +40,9 @@ public:
 	void write(std::ostream& _out) const;
 	
 	void accept(vnx::Visitor& _visitor) const;
+	
+	vnx::Object to_object() const;
+	void from_object(const vnx::Object& object);
 	
 	friend std::ostream& operator<<(std::ostream& _out, const ImageFrame& _value);
 	friend std::istream& operator>>(std::istream& _in, ImageFrame& _value);

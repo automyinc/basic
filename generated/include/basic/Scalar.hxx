@@ -15,7 +15,7 @@ public:
 	
 	::int64_t time = 0;
 	::std::string key;
-	::float64_t value = 0;
+	::vnx::float64_t value = 0;
 	
 	typedef ::vnx::Value Super;
 	
@@ -35,6 +35,9 @@ public:
 	void write(std::ostream& _out) const;
 	
 	void accept(vnx::Visitor& _visitor) const;
+	
+	vnx::Object to_object() const;
+	void from_object(const vnx::Object& object);
 	
 	friend std::ostream& operator<<(std::ostream& _out, const Scalar& _value);
 	friend std::istream& operator>>(std::istream& _in, Scalar& _value);
