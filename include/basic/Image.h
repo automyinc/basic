@@ -229,10 +229,7 @@ public:
 	}
 	
 	void read(vnx::TypeInput& in, const vnx::TypeCode* type_code, const uint16_t* code) {
-		if(!code) {
-			throw std::logic_error("read(basic::Image<T>): code == 0");
-		}
-		if(code[0] == vnx::CODE_IMAGE) {		// new format since vnx-1.2.0
+		if(code[0] == vnx::CODE_IMAGE || code[0] == vnx::CODE_ALT_IMAGE) {		// new format since vnx-1.2.0
 			std::array<size_t, 3> size_;
 			vnx::read_image_size<3>(in, size_, code);
 			resize(size_[0], size_[1], size_[2]);
@@ -261,9 +258,6 @@ public:
 	}
 	
 	void write(vnx::TypeOutput& out, const vnx::TypeCode* type_code, const uint16_t* code) const {
-		if(!type_code) {
-			throw std::logic_error("write(basic::Image<T>): type_code == 0");	// only allowed inside another class
-		}
 		vnx::write_image<T, 3>(out, data_, {width_, height_, depth_}, code);
 	}
 	
