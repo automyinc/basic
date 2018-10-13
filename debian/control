@@ -1,7 +1,7 @@
 Package: automy-basic
 Section: base
 Priority: optional
-Depends:
-Maintainer: Max Wittal <automyinc@gmail.com>
+Depends: vnx-base, automy-math
+Maintainer: Max Wittal <max.wittal@automyinc.com>
 Description: Automy basic package
 Architecture: all
