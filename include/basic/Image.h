@@ -217,7 +217,7 @@ public:
 		if(code[0] == vnx::CODE_IMAGE || code[0] == vnx::CODE_ALT_IMAGE) {		// new format since vnx-1.2.0
 			std::array<size_t, 3> size_;
 			vnx::read_image_size<3>(in, size_, code);
-			resize(size_[0], size_[1], size_[2]);
+			resize(size_[1], size_[2], size_[0]);
 			vnx::read_image_data<T, 3>(in, data_, size_, code);
 		} else if(code[0] == vnx::CODE_ARRAY && code[1] == 4 && code[2] == vnx::CODE_DYNAMIC) {		// old format
 			{
@@ -243,7 +243,7 @@ public:
 	}
 	
 	void write(vnx::TypeOutput& out, const vnx::TypeCode* type_code, const uint16_t* code) const {
-		vnx::write_image<T, 3>(out, data_, {width_, height_, depth_}, code);
+		vnx::write_image<T, 3>(out, data_, {depth_, width_, height_}, code);
 	}
 	
 	void read(std::istream& in) {
