@@ -15,6 +15,7 @@ add_library(automy_basic SHARED
 	src/Image8.cpp
 	src/Image16.cpp
 	src/Image32.cpp
+	src/ImageF16.cpp
 	src/ImageF32.cpp
 	src/ImageF64.cpp
 	src/ImageFrame.cpp

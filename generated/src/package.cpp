@@ -8,6 +8,7 @@
 #include <basic/ImageFrame16.hxx>
 #include <basic/ImageFrame32.hxx>
 #include <basic/ImageFrame8.hxx>
+#include <basic/ImageFrameF16.hxx>
 #include <basic/ImageFrameF32.hxx>
 #include <basic/ImageFrameF64.hxx>
 #include <basic/MultiImageFrame.hxx>
@@ -26,6 +27,7 @@ static void register_all_types() {
 	vnx::register_type_code(basic::ImageFrame16::create_type_code());
 	vnx::register_type_code(basic::ImageFrame32::create_type_code());
 	vnx::register_type_code(basic::ImageFrame8::create_type_code());
+	vnx::register_type_code(basic::ImageFrameF16::create_type_code());
 	vnx::register_type_code(basic::ImageFrameF32::create_type_code());
 	vnx::register_type_code(basic::ImageFrameF64::create_type_code());
 	vnx::register_type_code(basic::MultiImageFrame::create_type_code());

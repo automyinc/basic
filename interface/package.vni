@@ -3,5 +3,6 @@ package basic;
 extern Image8 = {22, 3, 1};				// {IMAGE, 3D, UINT8}
 extern Image16 = {22, 3, 2};			// {IMAGE, 3D, UINT16}
 extern Image32 = {22, 3, 3};			// {IMAGE, 3D, UINT32}
+extern ImageF16 = {22, 3, 2};			// {IMAGE, 3D, UINT16}
 extern ImageF32 = {22, 3, 9};			// {IMAGE, 3D, FLOAT}
 extern ImageF64 = {22, 3, 10};			// {IMAGE, 3D, DOUBLE}
