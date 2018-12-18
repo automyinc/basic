@@ -24,6 +24,16 @@ template<typename T>
 Image<T> draw_text(int width, int font_size, const std::vector<std::string>& text, const float front_color[3], const float back_color[3]);
 
 
+/** \brief Generic image class for 2D and 2.5D images.
+ * 
+ * The memory layout for a single-channel image is as follows:
+ * [x0_y0, x1_y0, x2_y0, ..., x0_y1, x1_y1, x2_y1, ...]
+ * 
+ * The memory layout for a multi-channel image is as follows:
+ * [	x0_y0_c0, x0_y0_c1, x0_y0_c2, ..., x1_y0_c0, x1_y0_c1, x1_y0_c2, ...
+ * 		x0_y1_c0, x0_y1_c1, x0_y1_c2, ...]
+ * 
+ */
 template<typename T>
 class Image {
 public:
