@@ -1,4 +1,4 @@
-package basic;
+package automy.basic;
 
 extern Image8 = {22, 3, 1};				// {IMAGE, 3D, UINT8}
 extern Image16 = {22, 3, 2};			// {IMAGE, 3D, UINT16}

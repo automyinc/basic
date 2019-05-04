@@ -1,8 +1,8 @@
 
-#ifndef BASIC_INCLUDE_BASIC_TRANSFORMCLIENT_H_
-#define BASIC_INCLUDE_BASIC_TRANSFORMCLIENT_H_
+#ifndef INCLUDE_AUTOMY_BASIC_TRANSFORMCLIENT_H_
+#define INCLUDE_AUTOMY_BASIC_TRANSFORMCLIENT_H_
 
-#include <basic/TransformBuffer.h>
+#include <automy/basic/TransformBuffer.h>
 #include <vnx/Subscriber.h>
 #include <vnx/Sample.hxx>
 #include <vnx/TopicPtr.h>
@@ -10,6 +10,7 @@
 #include <unistd.h>
 
 
+namespace automy {
 namespace basic {
 
 class TransformClient : public vnx::Subscriber {
@@ -74,5 +75,6 @@ private:
 
 
 } // basic
+} // automy
 
-#endif /* BASIC_INCLUDE_BASIC_TRANSFORMCLIENT_H_ */
+#endif /* INCLUDE_AUTOMY_BASIC_TRANSFORMCLIENT_H_ */

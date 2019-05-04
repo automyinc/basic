@@ -1,7 +1,8 @@
 
-#include <basic/ImageFrame.hxx>
+#include <automy/basic/ImageFrame.hxx>
 
 
+namespace automy {
 namespace basic {
 
 ::vnx::Variant ImageFrame::get_property(const ::std::string& key) {
@@ -22,3 +23,4 @@ namespace basic {
 
 
 } // basic
+} // automy

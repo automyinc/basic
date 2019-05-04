@@ -1,12 +1,13 @@
 
-#ifndef BASIC_INCLUDE_BASIC_TRANSFORMBUFFER_H_
-#define BASIC_INCLUDE_BASIC_TRANSFORMBUFFER_H_
+#ifndef INCLUDE_AUTOMY_BASIC_TRANSFORMBUFFER_H_
+#define INCLUDE_AUTOMY_BASIC_TRANSFORMBUFFER_H_
 
-#include <basic/Transform3D.hxx>
+#include <automy/basic/Transform3D.hxx>
 
 #include <list>
 
 
+namespace automy {
 namespace basic {
 
 class TransformBuffer {
@@ -86,5 +87,6 @@ private:
 
 
 } // basic
+} // automy
 
-#endif /* BASIC_INCLUDE_BASIC_TRANSFORMBUFFER_H_ */
+#endif /* INCLUDE_AUTOMY_BASIC_TRANSFORMBUFFER_H_ */

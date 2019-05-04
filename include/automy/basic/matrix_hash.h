@@ -1,10 +1,11 @@
 
-#ifndef BASIC_INCLUDE_BASIC_MATRIX_HASH_H_
-#define BASIC_INCLUDE_BASIC_MATRIX_HASH_H_
+#ifndef INCLUDE_AUTOMY_BASIC_MATRIX_HASH_H_
+#define INCLUDE_AUTOMY_BASIC_MATRIX_HASH_H_
 
 #include <functional>
 
 
+namespace automy {
 namespace basic {
 
 // Hash function for Eigen matrix and vector.
@@ -26,5 +27,6 @@ struct matrix_hash : std::unary_function<T, size_t> {
 
 
 } // basic
+} // automy
 
-#endif /* BASIC_INCLUDE_BASIC_MATRIX_HASH_H_ */
+#endif /* INCLUDE_AUTOMY_BASIC_MATRIX_HASH_H_ */

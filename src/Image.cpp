@@ -1,5 +1,5 @@
 
-#include <basic/Image.h>
+#include <automy/basic/Image.h>
 
 #include <algorithm>
 
@@ -11,6 +11,7 @@
 using namespace cimg_library;
 
 
+namespace automy {
 namespace basic {
 
 template<typename T>
@@ -73,3 +74,4 @@ Image<uint8_t> draw_text(int width, int font_size, const std::vector<std::string
 
 
 } // basic
+} // automy

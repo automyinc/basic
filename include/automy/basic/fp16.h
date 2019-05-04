@@ -5,13 +5,14 @@
  *      Author: mad
  */
 
-#ifndef INCLUDE_BASIC_FP16_H_
-#define INCLUDE_BASIC_FP16_H_
+#ifndef INCLUDE_AUTOMY_BASIC_FP16_H_
+#define INCLUDE_AUTOMY_BASIC_FP16_H_
 
 #include <cmath>
 #include <cstdint>
 
 
+namespace automy {
 namespace basic {
 
 static inline float fp32_from_bits(uint32_t w) {
@@ -464,5 +465,6 @@ static inline uint16_t fp16_alt_from_fp32_value(float f) {
 
 
 } // basic
+} // automy
 
-#endif /* INCLUDE_BASIC_FP16_H_ */
+#endif /* INCLUDE_AUTOMY_BASIC_FP16_H_ */

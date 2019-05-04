@@ -3,37 +3,38 @@
 
 #include <vnx/Topic.h>
 
-#include <basic/DataPacket.hxx>
-#include <basic/ImageFrame.hxx>
-#include <basic/ImageFrame16.hxx>
-#include <basic/ImageFrame32.hxx>
-#include <basic/ImageFrame8.hxx>
-#include <basic/ImageFrameF16.hxx>
-#include <basic/ImageFrameF32.hxx>
-#include <basic/ImageFrameF64.hxx>
-#include <basic/MultiImageFrame.hxx>
-#include <basic/Scalar.hxx>
-#include <basic/Transform3D.hxx>
-#include <basic/Trigger.hxx>
+#include <automy/basic/DataPacket.hxx>
+#include <automy/basic/ImageFrame.hxx>
+#include <automy/basic/ImageFrame16.hxx>
+#include <automy/basic/ImageFrame32.hxx>
+#include <automy/basic/ImageFrame8.hxx>
+#include <automy/basic/ImageFrameF16.hxx>
+#include <automy/basic/ImageFrameF32.hxx>
+#include <automy/basic/ImageFrameF64.hxx>
+#include <automy/basic/MultiImageFrame.hxx>
+#include <automy/basic/Scalar.hxx>
+#include <automy/basic/Transform3D.hxx>
+#include <automy/basic/Trigger.hxx>
 
 
 
+namespace automy {
 namespace basic {
 
 
 static void register_all_types() {
-	vnx::register_type_code(basic::DataPacket::create_type_code());
-	vnx::register_type_code(basic::ImageFrame::create_type_code());
-	vnx::register_type_code(basic::ImageFrame16::create_type_code());
-	vnx::register_type_code(basic::ImageFrame32::create_type_code());
-	vnx::register_type_code(basic::ImageFrame8::create_type_code());
-	vnx::register_type_code(basic::ImageFrameF16::create_type_code());
-	vnx::register_type_code(basic::ImageFrameF32::create_type_code());
-	vnx::register_type_code(basic::ImageFrameF64::create_type_code());
-	vnx::register_type_code(basic::MultiImageFrame::create_type_code());
-	vnx::register_type_code(basic::Scalar::create_type_code());
-	vnx::register_type_code(basic::Transform3D::create_type_code());
-	vnx::register_type_code(basic::Trigger::create_type_code());
+	vnx::register_type_code(automy::basic::DataPacket::create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrame::create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrame16::create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrame32::create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrame8::create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrameF16::create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrameF32::create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrameF64::create_type_code());
+	vnx::register_type_code(automy::basic::MultiImageFrame::create_type_code());
+	vnx::register_type_code(automy::basic::Scalar::create_type_code());
+	vnx::register_type_code(automy::basic::Transform3D::create_type_code());
+	vnx::register_type_code(automy::basic::Trigger::create_type_code());
 }
 
 static struct vnx_static_init {
@@ -42,4 +43,5 @@ static struct vnx_static_init {
 	}
 } vnx_static_init_;
 
+} // namespace automy
 } // namespace basic

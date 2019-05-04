@@ -1,6 +1,6 @@
-package basic;
+package automy.basic;
 
-import math.Matrix4d;
+import automy.math.Matrix4d;
 
 class Transform3D {
 	

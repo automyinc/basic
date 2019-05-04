@@ -1,11 +1,12 @@
 
-#ifndef BASIC_INCLUDE_BASIC_SERIALIZE_H_
-#define BASIC_INCLUDE_BASIC_SERIALIZE_H_
+#ifndef INCLUDE_AUTOMY_BASIC_SERIALIZE_H_
+#define INCLUDE_AUTOMY_BASIC_SERIALIZE_H_
 
 #include <stdint.h>
 #include <string.h>
 
 
+namespace automy {
 namespace basic {
 
 inline void read(const void* data, int* offset, bool& value) {
@@ -163,5 +164,6 @@ inline void write_string(void* data, int* offset, const char* string, const size
 
 
 } // basic
+} // automy
 
-#endif /* BASIC_INCLUDE_BASIC_SERIALIZE_H_ */
+#endif /* INCLUDE_AUTOMY_BASIC_SERIALIZE_H_ */

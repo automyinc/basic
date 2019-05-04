@@ -1,6 +1,6 @@
 
-#ifndef BASIC_INCLUDE_IMAGE_H_
-#define BASIC_INCLUDE_IMAGE_H_
+#ifndef INCLUDE_AUTOMY_BASIC_IMAGE_H_
+#define INCLUDE_AUTOMY_BASIC_IMAGE_H_
 
 #include <vnx/Type.h>
 #include <vnx/Input.h>
@@ -9,6 +9,7 @@
 #include <vnx/DefaultPrinter.h>
 
 
+namespace automy {
 namespace basic {
 
 template<typename T>
@@ -304,5 +305,6 @@ Image<uint8_t> draw_text(int width, int font_size, const std::vector<std::string
 
 
 } // basic
+} // automy
 
-#endif /* BASIC_INCLUDE_IMAGE_H_ */
+#endif /* INCLUDE_AUTOMY_BASIC_IMAGE_H_ */

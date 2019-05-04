@@ -1,4 +1,4 @@
-package basic;
+package automy.basic;
 
 class ImageFrameF64 extends ImageFrame {
 	

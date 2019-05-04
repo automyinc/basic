@@ -1,10 +1,11 @@
 
-#ifndef BASIC_INCLUDE_BASIC_GENERICBUFFER_H_
-#define BASIC_INCLUDE_BASIC_GENERICBUFFER_H_
+#ifndef INCLUDE_AUTOMY_BASIC_GENERICBUFFER_H_
+#define INCLUDE_AUTOMY_BASIC_GENERICBUFFER_H_
 
 #include <vnx/Value.h>
 
 
+namespace automy {
 namespace basic {
 
 class GenericBuffer {
@@ -33,6 +34,7 @@ private:
 };
 
 
-} // vision
+} // basic
+} // automy
 
-#endif /* BASIC_INCLUDE_BASIC_GENERICBUFFER_H_ */
+#endif /* INCLUDE_AUTOMY_BASIC_GENERICBUFFER_H_ */
