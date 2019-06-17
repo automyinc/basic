@@ -267,7 +267,7 @@ public:
 	}
 	
 	void accept(vnx::Visitor& visitor) const {
-		vnx::accept_image<T, 3>(visitor, data_, {width_, height_, depth_});
+		vnx::accept_image<T, 3>(visitor, data_, {depth_, width_, height_});
 	}
 	
 private:
