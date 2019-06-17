@@ -220,7 +220,7 @@ public:
 		basic::read_image(*this, filename);
 	}
 	
-	void write_to_file(const std::string& filename, int number = -1, int digits = 6) {
+	void write_to_file(const std::string& filename, int number = -1, int digits = 6) const {
 		basic::write_image(*this, filename, number, digits);
 	}
 	
