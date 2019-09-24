@@ -2,7 +2,7 @@
 
 VERSION=$(cat VERSION)
 ARCH=$(uname -m)
-DST=automy-${PWD##*/}-$VERSION-$ARCH
+DST=automy-${PWD##*/}
 
 rm -rf $DST
 mkdir -p $DST/DEBIAN
