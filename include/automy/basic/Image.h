@@ -8,6 +8,8 @@
 #include <vnx/Visitor.h>
 #include <vnx/DefaultPrinter.h>
 
+#include <vector>
+
 
 namespace automy {
 namespace basic {
@@ -109,20 +111,6 @@ public:
 		data_ = 0;
 	}
 	
-	void fill(const T& value) {
-		for(size_t i = 0; i < get_size(); ++i) {
-			data_[i] = value;
-		}
-	}
-	
-	void fill_layer(size_t layer, const T& value) {
-		for(size_t y = 0; y < height_; ++y) {
-			for(size_t x = 0; x < width_; ++x) {
-				(*this)(x, y, layer) = value;
-			}
-		}
-	}
-	
 	T& operator[](size_t i) {
 		return data_[i];
 	}
@@ -149,6 +137,78 @@ public:
 	
 	const T* get_data() const {
 		return data_;
+	}
+	
+	void fill(const T& value) {
+		for(size_t i = 0; i < get_size(); ++i) {
+			data_[i] = value;
+		}
+	}
+	
+	void fill_layer(size_t layer, const T& value) {
+		for(size_t y = 0; y < height_; ++y) {
+			for(size_t x = 0; x < width_; ++x) {
+				(*this)(x, y, layer) = value;
+			}
+		}
+	}
+	
+	/*
+	 * Element wise addition.
+	 */
+	template<typename S>
+	void add(const S value) {
+		for(size_t i = 0; i < get_size(); ++i) {
+			(*this)[i] += value;
+		}
+	}
+	
+	/*
+	 * Element wise multiplication.
+	 */
+	template<typename S>
+	void mul(const S factor) {
+		for(size_t i = 0; i < get_size(); ++i) {
+			(*this)[i] *= factor;
+		}
+	}
+	
+	/*
+	 * Computes average pixel values using int64_t for summation.
+	 */
+	std::vector<float> get_average_int() const {
+		std::vector<int64_t> sum(depth_);
+		for(uint32_t y = 0; y < height_; ++y) {
+			for(uint32_t x = 0; x < width_; ++x) {
+				for(uint32_t z = 0; z < depth_; ++z) {
+					sum[z] += (*this)(x, y, z);
+				}
+			}
+		}
+		std::vector<float> result(depth_);
+		for(uint32_t i = 0; i < depth_; ++i) {
+			result[i] = sum[i] / float(size_t(width_) * size_t(height_));
+		}
+		return result;
+	}
+	
+	/*
+	 * Computes average pixel values using float for summation.
+	 */
+	std::vector<float> get_average_float() const {
+		std::vector<float> sum(depth_);
+		for(uint32_t y = 0; y < height_; ++y) {
+			for(uint32_t x = 0; x < width_; ++x) {
+				for(uint32_t z = 0; z < depth_; ++z) {
+					sum[z] += (*this)(x, y, z);
+				}
+			}
+		}
+		std::vector<float> result(depth_);
+		for(uint32_t i = 0; i < depth_; ++i) {
+			result[i] = sum[i] / float(size_t(width_) * size_t(height_));
+		}
+		return result;
 	}
 	
 	/*
