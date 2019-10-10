@@ -50,9 +50,9 @@ public:
 	
 	template<typename S>
 	explicit Image(const Image<S>& image) {
-		resize(image.width_, image.height_, image.depth_);
+		resize(image.width(), image.height(), image.depth());
 		for(size_t i = 0; i < image.get_size(); ++i) {
-			data_[i] = image.data_[i];
+			(*this)[i] = image[i];
 		}
 	}
 	
