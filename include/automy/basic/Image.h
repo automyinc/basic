@@ -8,6 +8,7 @@
 #include <vnx/Visitor.h>
 #include <vnx/DefaultPrinter.h>
 
+#include <cmath>
 #include <vector>
 
 
@@ -174,29 +175,47 @@ public:
 	}
 	
 	/*
-	 * Computes average pixel values using int64_t for summation.
+	 * Performs nearest neighbor lookup on the xy plane.
+	 * Pixel centers are at 0.5 offsets, ie. 0.5, 1.5, 2.5, etc..
 	 */
-	std::vector<float> get_average_int() const {
-		std::vector<int64_t> sum(depth_);
-		for(uint32_t y = 0; y < height_; ++y) {
-			for(uint32_t x = 0; x < width_; ++x) {
-				for(uint32_t z = 0; z < depth_; ++z) {
-					sum[z] += (*this)(x, y, z);
-				}
-			}
-		}
-		std::vector<float> result(depth_);
-		for(uint32_t i = 0; i < depth_; ++i) {
-			result[i] = sum[i] / float(size_t(width_) * size_t(height_));
-		}
-		return result;
+	template<typename S>
+	const T& lookup_nearest(const S x, const S y, const size_t z) const
+	{
+		const uint32_t x0 = std::min(std::max(int32_t(x), 0), int32_t(width_) - 1);
+		const uint32_t y0 = std::min(std::max(int32_t(y), 0), int32_t(height_) - 1);
+		return (*this)(x0, y0, z);
 	}
 	
 	/*
-	 * Computes average pixel values using float for summation.
+	 * Performs bi-linear interpolation on the xy plane.
+	 * Pixel centers are at 0.5 offsets, ie. 0.5, 1.5, 2.5, etc..
 	 */
-	std::vector<float> get_average_float() const {
-		std::vector<float> sum(depth_);
+	template<typename S>
+	S lookup_bilinear(const S x, const S y, const size_t z) const
+	{
+		const S x_ = x - S(0.5);
+		const S y_ = y - S(0.5);
+		const uint32_t x0 = std::min(std::max(int32_t(x_), 0), int32_t(width_) - 1);
+		const uint32_t x1 = std::min(int32_t(x0) + 1, int32_t(width_) - 1);
+		const uint32_t y0 = std::min(std::max(int32_t(y_), 0), int32_t(height_) - 1);
+		const uint32_t y1 = std::min(int32_t(y0) + 1, int32_t(height_) - 1);
+		
+		const S a = x_ - std::floor(x_);
+		const S b = y_ - std::floor(y_);
+		
+		return		S((*this)(x0, y0, z)) * ((S(1) - a) * (S(1) - b))
+				+	S((*this)(x1, y0, z)) * (a * (S(1) - b))
+				+	S((*this)(x0, y1, z)) * ((S(1) - a) * b)
+				+	S((*this)(x1, y1, z)) * (a * b);
+	}
+	
+	/*
+	 * Computes element wise sum using SumType for summation.
+	 */
+	template<typename SumType>
+	std::vector<SumType> get_element_sum() const
+	{
+		std::vector<SumType> sum(depth_);
 		for(uint32_t y = 0; y < height_; ++y) {
 			for(uint32_t x = 0; x < width_; ++x) {
 				for(uint32_t z = 0; z < depth_; ++z) {
@@ -204,9 +223,20 @@ public:
 				}
 			}
 		}
-		std::vector<float> result(depth_);
+		return sum;
+	}
+	
+	/*
+	 * Computes average pixel values using SumType for summation
+	 * and ResultType for return type.
+	 */
+	template<typename ResultType, typename SumType>
+	std::vector<ResultType> get_average() const
+	{
+		const auto sum = get_element_sum<SumType>();
+		std::vector<ResultType> result(depth_);
 		for(uint32_t i = 0; i < depth_; ++i) {
-			result[i] = sum[i] / float(size_t(width_) * size_t(height_));
+			result[i] = sum[i] / ResultType(size_t(width_) * size_t(height_));
 		}
 		return result;
 	}
