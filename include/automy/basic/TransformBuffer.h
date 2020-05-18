@@ -20,6 +20,20 @@ public:
 		return history.empty();
 	}
 	
+	std::shared_ptr<const Transform3D> front() const {
+		if(history.empty()) {
+			return 0;
+		}
+		return history.front();
+	}
+
+	std::shared_ptr<const Transform3D> back() const {
+		if(history.empty()) {
+			return 0;
+		}
+		return history.back();
+	}
+
 	int64_t front_time() const {
 		if(history.empty()) {
 			return -1;
@@ -60,6 +74,7 @@ public:
 		if(time >= (*iter)->time) {
 			return *iter;
 		}
+		// TODO: interpolate transform
 		auto prev = iter;
 		while(true) {
 			if(iter == history.cbegin()) {

@@ -6,8 +6,10 @@ class Transform3D {
 	
 	long time;						// posix timestamp [usec]
 	
-	string frame;					// frame into which is transformed
+	string frame;					// child frame
 	
-	Matrix4d matrix;
+	string parent;					// parent frame
+	
+	Matrix4d matrix;				// left multiplying transforms a point from 'frame' to 'parent'
 	
 }
