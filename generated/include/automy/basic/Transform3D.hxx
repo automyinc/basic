@@ -16,6 +16,8 @@ class Transform3D : public ::vnx::Value {
 public:
 	
 	::int64_t time = 0;
+	::std::string frame;
+	::std::string parent;
 	::automy::math::Matrix4d matrix;
 	
 	typedef ::vnx::Value Super;

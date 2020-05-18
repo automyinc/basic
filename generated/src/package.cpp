@@ -14,6 +14,7 @@
 #include <automy/basic/MultiImageFrame.hxx>
 #include <automy/basic/Scalar.hxx>
 #include <automy/basic/Transform3D.hxx>
+#include <automy/basic/TransformPublisherBase.hxx>
 #include <automy/basic/Trigger.hxx>
 
 
@@ -34,6 +35,7 @@ static void register_all_types() {
 	vnx::register_type_code(automy::basic::MultiImageFrame::static_create_type_code());
 	vnx::register_type_code(automy::basic::Scalar::static_create_type_code());
 	vnx::register_type_code(automy::basic::Transform3D::static_create_type_code());
+	vnx::register_type_code(automy::basic::TransformPublisherBase::static_create_type_code());
 	vnx::register_type_code(automy::basic::Trigger::static_create_type_code());
 }
 
@@ -58,6 +60,9 @@ const vnx::TypeCode* const vnx_native_type_code_ImageFrameF64 = vnx::get_type_co
 const vnx::TypeCode* const vnx_native_type_code_MultiImageFrame = vnx::get_type_code(vnx::Hash64(0x5ee9279d2299dc0dull));
 const vnx::TypeCode* const vnx_native_type_code_Scalar = vnx::get_type_code(vnx::Hash64(0xc0b8bdb61e0ca70eull));
 const vnx::TypeCode* const vnx_native_type_code_Transform3D = vnx::get_type_code(vnx::Hash64(0xe762feb1b334b36dull));
+const vnx::TypeCode* const vnx_native_type_code_TransformPublisher = vnx::get_type_code(vnx::Hash64(0x88d77b971994875dull));
+const vnx::TypeCode* const vnx_native_type_code_TransformPublisher_set_transform = vnx::get_type_code(vnx::Hash64(0x4b8ec99ea30fd92cull));
+const vnx::TypeCode* const vnx_native_type_code_TransformPublisher_set_transform_return = vnx::get_type_code(vnx::Hash64(0x2798b4f2ee70b0a4ull));
 const vnx::TypeCode* const vnx_native_type_code_Trigger = vnx::get_type_code(vnx::Hash64(0xae5ff291c2d59cceull));
 
 } // namespace automy
