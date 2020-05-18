@@ -4,7 +4,9 @@ import automy.math.Matrix4d;
 
 class Transform3D {
 	
-	long time;
+	long time;						// posix timestamp [usec]
+	
+	string frame;					// frame into which is transformed
 	
 	Matrix4d matrix;
 	
