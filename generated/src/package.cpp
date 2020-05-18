@@ -23,18 +23,18 @@ namespace basic {
 
 
 static void register_all_types() {
-	vnx::register_type_code(automy::basic::DataPacket::create_type_code());
-	vnx::register_type_code(automy::basic::ImageFrame::create_type_code());
-	vnx::register_type_code(automy::basic::ImageFrame16::create_type_code());
-	vnx::register_type_code(automy::basic::ImageFrame32::create_type_code());
-	vnx::register_type_code(automy::basic::ImageFrame8::create_type_code());
-	vnx::register_type_code(automy::basic::ImageFrameF16::create_type_code());
-	vnx::register_type_code(automy::basic::ImageFrameF32::create_type_code());
-	vnx::register_type_code(automy::basic::ImageFrameF64::create_type_code());
-	vnx::register_type_code(automy::basic::MultiImageFrame::create_type_code());
-	vnx::register_type_code(automy::basic::Scalar::create_type_code());
-	vnx::register_type_code(automy::basic::Transform3D::create_type_code());
-	vnx::register_type_code(automy::basic::Trigger::create_type_code());
+	vnx::register_type_code(automy::basic::DataPacket::static_create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrame::static_create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrame16::static_create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrame32::static_create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrame8::static_create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrameF16::static_create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrameF32::static_create_type_code());
+	vnx::register_type_code(automy::basic::ImageFrameF64::static_create_type_code());
+	vnx::register_type_code(automy::basic::MultiImageFrame::static_create_type_code());
+	vnx::register_type_code(automy::basic::Scalar::static_create_type_code());
+	vnx::register_type_code(automy::basic::Transform3D::static_create_type_code());
+	vnx::register_type_code(automy::basic::Trigger::static_create_type_code());
 }
 
 static struct vnx_static_init {
@@ -42,6 +42,23 @@ static struct vnx_static_init {
 		register_all_types();
 	}
 } vnx_static_init_;
+
+const vnx::TypeCode* const vnx_native_type_code_DataPacket = vnx::get_type_code(vnx::Hash64(0x2d5e2711cbd04ea0ull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrame = vnx::get_type_code(vnx::Hash64(0xad5b897ca145c94eull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property = vnx::get_type_code(vnx::Hash64(0x7e782249228b5c52ull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property_return = vnx::get_type_code(vnx::Hash64(0x1b11b62b9ea255fbull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property_default = vnx::get_type_code(vnx::Hash64(0xc10fb21a101fe61dull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property_default_return = vnx::get_type_code(vnx::Hash64(0xb69a2222c8e84e4aull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrame16 = vnx::get_type_code(vnx::Hash64(0x6f04dc915f2801b0ull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrame32 = vnx::get_type_code(vnx::Hash64(0xbd06ec311906bd99ull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrame8 = vnx::get_type_code(vnx::Hash64(0x724ec7ab579fa982ull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrameF16 = vnx::get_type_code(vnx::Hash64(0x44ca674fb06da90cull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrameF32 = vnx::get_type_code(vnx::Hash64(0x96c857eff6431525ull));
+const vnx::TypeCode* const vnx_native_type_code_ImageFrameF64 = vnx::get_type_code(vnx::Hash64(0x8c0892cc2111c0f1ull));
+const vnx::TypeCode* const vnx_native_type_code_MultiImageFrame = vnx::get_type_code(vnx::Hash64(0x5ee9279d2299dc0dull));
+const vnx::TypeCode* const vnx_native_type_code_Scalar = vnx::get_type_code(vnx::Hash64(0xc0b8bdb61e0ca70eull));
+const vnx::TypeCode* const vnx_native_type_code_Transform3D = vnx::get_type_code(vnx::Hash64(0xe762feb1b334b36dull));
+const vnx::TypeCode* const vnx_native_type_code_Trigger = vnx::get_type_code(vnx::Hash64(0xae5ff291c2d59cceull));
 
 } // namespace automy
 } // namespace basic

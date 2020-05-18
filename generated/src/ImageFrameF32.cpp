@@ -24,6 +24,9 @@ vnx::Hash64 ImageFrameF32::get_type_hash() const {
 const char* ImageFrameF32::get_type_name() const {
 	return "automy.basic.ImageFrameF32";
 }
+const vnx::TypeCode* ImageFrameF32::get_type_code() const {
+	return automy::basic::vnx_native_type_code_ImageFrameF32;
+}
 
 std::shared_ptr<ImageFrameF32> ImageFrameF32::create() {
 	return std::make_shared<ImageFrameF32>();
@@ -42,7 +45,7 @@ void ImageFrameF32::write(vnx::TypeOutput& _out, const vnx::TypeCode* _type_code
 }
 
 void ImageFrameF32::accept(vnx::Visitor& _visitor) const {
-	const vnx::TypeCode* _type_code = get_type_code();
+	const vnx::TypeCode* _type_code = automy::basic::vnx_native_type_code_ImageFrameF32;
 	_visitor.type_begin(*_type_code);
 	_visitor.type_field(_type_code->fields[0], 0); vnx::accept(_visitor, time);
 	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, frame);
@@ -118,23 +121,24 @@ std::istream& operator>>(std::istream& _in, ImageFrameF32& _value) {
 	return _in;
 }
 
-const vnx::TypeCode* ImageFrameF32::get_type_code() {
+const vnx::TypeCode* ImageFrameF32::static_get_type_code() {
 	const vnx::TypeCode* type_code = vnx::get_type_code(vnx::Hash64(0x96c857eff6431525ull));
 	if(!type_code) {
-		type_code = vnx::register_type_code(create_type_code());
+		type_code = vnx::register_type_code(static_create_type_code());
 	}
 	return type_code;
 }
 
-std::shared_ptr<vnx::TypeCode> ImageFrameF32::create_type_code() {
+std::shared_ptr<vnx::TypeCode> ImageFrameF32::static_create_type_code() {
 	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
 	type_code->name = "automy.basic.ImageFrameF32";
 	type_code->type_hash = vnx::Hash64(0x96c857eff6431525ull);
 	type_code->code_hash = vnx::Hash64(0x1a8efb77299ca18bull);
 	type_code->is_class = true;
 	type_code->parents.resize(1);
-	type_code->parents[0] = ::automy::basic::ImageFrame::get_type_code();
+	type_code->parents[0] = ::automy::basic::ImageFrame::static_get_type_code();
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<ImageFrameF32>(); };
+	type_code->methods.resize(0);
 	type_code->fields.resize(5);
 	{
 		vnx::TypeField& field = type_code->fields[0];
@@ -209,7 +213,8 @@ void read(TypeInput& in, ::automy::basic::ImageFrameF32& value, const TypeCode* 
 
 void write(TypeOutput& out, const ::automy::basic::ImageFrameF32& value, const TypeCode* type_code, const uint16_t* code) {
 	if(!type_code || (code && code[0] == CODE_ANY)) {
-		type_code = vnx::write_type_code<::automy::basic::ImageFrameF32>(out);
+		type_code = automy::basic::vnx_native_type_code_ImageFrameF32;
+		out.write_type_code(type_code);
 		vnx::write_class_header<::automy::basic::ImageFrameF32>(out);
 	}
 	if(code && code[0] == CODE_STRUCT) {

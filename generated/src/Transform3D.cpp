@@ -24,6 +24,9 @@ vnx::Hash64 Transform3D::get_type_hash() const {
 const char* Transform3D::get_type_name() const {
 	return "automy.basic.Transform3D";
 }
+const vnx::TypeCode* Transform3D::get_type_code() const {
+	return automy::basic::vnx_native_type_code_Transform3D;
+}
 
 std::shared_ptr<Transform3D> Transform3D::create() {
 	return std::make_shared<Transform3D>();
@@ -42,7 +45,7 @@ void Transform3D::write(vnx::TypeOutput& _out, const vnx::TypeCode* _type_code, 
 }
 
 void Transform3D::accept(vnx::Visitor& _visitor) const {
-	const vnx::TypeCode* _type_code = get_type_code();
+	const vnx::TypeCode* _type_code = automy::basic::vnx_native_type_code_Transform3D;
 	_visitor.type_begin(*_type_code);
 	_visitor.type_field(_type_code->fields[0], 0); vnx::accept(_visitor, time);
 	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, matrix);
@@ -97,21 +100,22 @@ std::istream& operator>>(std::istream& _in, Transform3D& _value) {
 	return _in;
 }
 
-const vnx::TypeCode* Transform3D::get_type_code() {
+const vnx::TypeCode* Transform3D::static_get_type_code() {
 	const vnx::TypeCode* type_code = vnx::get_type_code(vnx::Hash64(0xe762feb1b334b36dull));
 	if(!type_code) {
-		type_code = vnx::register_type_code(create_type_code());
+		type_code = vnx::register_type_code(static_create_type_code());
 	}
 	return type_code;
 }
 
-std::shared_ptr<vnx::TypeCode> Transform3D::create_type_code() {
+std::shared_ptr<vnx::TypeCode> Transform3D::static_create_type_code() {
 	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
 	type_code->name = "automy.basic.Transform3D";
 	type_code->type_hash = vnx::Hash64(0xe762feb1b334b36dull);
 	type_code->code_hash = vnx::Hash64(0xa40eb6a1c58f732ull);
 	type_code->is_class = true;
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<Transform3D>(); };
+	type_code->methods.resize(0);
 	type_code->fields.resize(2);
 	{
 		vnx::TypeField& field = type_code->fields[0];
@@ -165,7 +169,8 @@ void read(TypeInput& in, ::automy::basic::Transform3D& value, const TypeCode* ty
 
 void write(TypeOutput& out, const ::automy::basic::Transform3D& value, const TypeCode* type_code, const uint16_t* code) {
 	if(!type_code || (code && code[0] == CODE_ANY)) {
-		type_code = vnx::write_type_code<::automy::basic::Transform3D>(out);
+		type_code = automy::basic::vnx_native_type_code_Transform3D;
+		out.write_type_code(type_code);
 		vnx::write_class_header<::automy::basic::Transform3D>(out);
 	}
 	if(code && code[0] == CODE_STRUCT) {

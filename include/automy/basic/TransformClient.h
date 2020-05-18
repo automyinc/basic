@@ -6,6 +6,7 @@
 #include <vnx/Subscriber.h>
 #include <vnx/Sample.hxx>
 #include <vnx/TopicPtr.h>
+#include <vnx/Process.h>
 
 #include <unistd.h>
 
@@ -18,7 +19,6 @@ public:
 	TransformClient(vnx::TopicPtr topic, int64_t history_ms = 1000)
 		:	buffer(history_ms)
 	{
-		subscribe(vnx::shutdown);
 		subscribe(topic, history_ms);
 	}
 	
@@ -38,7 +38,7 @@ public:
 	}
 	
 	std::shared_ptr<const Transform3D> query(int64_t time, int64_t timeout_ms = 100) {
-		while(vnx_do_run) {
+		while(vnx::do_run()) {
 			poll();
 			if(time <= buffer.back_time()) {
 				return buffer.query(time);
@@ -47,22 +47,19 @@ public:
 			if(wait_time > timeout_ms * 1000) {
 				return 0;
 			}
-			::usleep(wait_time + 1000);
+			::usleep(wait_time + 100);
 		}
 		return 0;
 	}
 	
 protected:
 	void poll() {
-		while(std::shared_ptr<const vnx::Message> message = read()) {
-			std::shared_ptr<const vnx::Sample> sample = std::dynamic_pointer_cast<const vnx::Sample>(message);
+		while(auto msg = read()) {
+			auto sample = std::dynamic_pointer_cast<const vnx::Sample>(msg);
 			if(sample) {
 				auto transform = std::dynamic_pointer_cast<const Transform3D>(sample->value);
 				if(transform) {
 					buffer.push(transform);
-				}
-				if(!sample->value) {
-					exit();
 				}
 			}
 		}

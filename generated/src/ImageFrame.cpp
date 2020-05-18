@@ -24,6 +24,9 @@ vnx::Hash64 ImageFrame::get_type_hash() const {
 const char* ImageFrame::get_type_name() const {
 	return "automy.basic.ImageFrame";
 }
+const vnx::TypeCode* ImageFrame::get_type_code() const {
+	return automy::basic::vnx_native_type_code_ImageFrame;
+}
 
 std::shared_ptr<ImageFrame> ImageFrame::create() {
 	return std::make_shared<ImageFrame>();
@@ -42,7 +45,7 @@ void ImageFrame::write(vnx::TypeOutput& _out, const vnx::TypeCode* _type_code, c
 }
 
 void ImageFrame::accept(vnx::Visitor& _visitor) const {
-	const vnx::TypeCode* _type_code = get_type_code();
+	const vnx::TypeCode* _type_code = automy::basic::vnx_native_type_code_ImageFrame;
 	_visitor.type_begin(*_type_code);
 	_visitor.type_field(_type_code->fields[0], 0); vnx::accept(_visitor, time);
 	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, frame);
@@ -111,21 +114,92 @@ std::istream& operator>>(std::istream& _in, ImageFrame& _value) {
 	return _in;
 }
 
-const vnx::TypeCode* ImageFrame::get_type_code() {
+const vnx::TypeCode* ImageFrame::static_get_type_code() {
 	const vnx::TypeCode* type_code = vnx::get_type_code(vnx::Hash64(0xad5b897ca145c94eull));
 	if(!type_code) {
-		type_code = vnx::register_type_code(create_type_code());
+		type_code = vnx::register_type_code(static_create_type_code());
 	}
 	return type_code;
 }
 
-std::shared_ptr<vnx::TypeCode> ImageFrame::create_type_code() {
+std::shared_ptr<vnx::TypeCode> ImageFrame::static_create_type_code() {
 	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
 	type_code->name = "automy.basic.ImageFrame";
 	type_code->type_hash = vnx::Hash64(0xad5b897ca145c94eull);
 	type_code->code_hash = vnx::Hash64(0x77e21edc46ab7022ull);
 	type_code->is_class = true;
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<ImageFrame>(); };
+	type_code->methods.resize(2);
+	{
+		std::shared_ptr<vnx::TypeCode> call_type = std::make_shared<vnx::TypeCode>(true);
+		call_type->name = "automy.basic.ImageFrame.get_property";
+		call_type->type_hash = vnx::Hash64(0x7e782249228b5c52ull);
+		call_type->code_hash = vnx::Hash64(0xb16d6d42b89636cfull);
+		call_type->is_method = true;
+		{
+			std::shared_ptr<vnx::TypeCode> return_type = std::make_shared<vnx::TypeCode>(true);
+			return_type->name = "automy.basic.ImageFrame.get_property.return";
+			return_type->type_hash = vnx::Hash64(0x1b11b62b9ea255fbull);
+			return_type->code_hash = vnx::Hash64(0x6ebbb4409f369e5ull);
+			return_type->is_return = true;
+			return_type->fields.resize(1);
+			{
+				vnx::TypeField& field = return_type->fields[0];
+				field.is_extended = true;
+				field.name = "_ret_0";
+				field.code = {17};
+			}
+			return_type->build();
+			call_type->return_type = vnx::register_type_code(return_type);
+		}
+		call_type->fields.resize(1);
+		{
+			vnx::TypeField& field = call_type->fields[0];
+			field.is_extended = true;
+			field.name = "key";
+			field.code = {12, 5};
+		}
+		call_type->build();
+		type_code->methods[0] = vnx::register_type_code(call_type);
+	}
+	{
+		std::shared_ptr<vnx::TypeCode> call_type = std::make_shared<vnx::TypeCode>(true);
+		call_type->name = "automy.basic.ImageFrame.get_property_default";
+		call_type->type_hash = vnx::Hash64(0xc10fb21a101fe61dull);
+		call_type->code_hash = vnx::Hash64(0xb65846df915539efull);
+		call_type->is_method = true;
+		{
+			std::shared_ptr<vnx::TypeCode> return_type = std::make_shared<vnx::TypeCode>(true);
+			return_type->name = "automy.basic.ImageFrame.get_property_default.return";
+			return_type->type_hash = vnx::Hash64(0xb69a2222c8e84e4aull);
+			return_type->code_hash = vnx::Hash64(0xb261fc2f2bacf4e0ull);
+			return_type->is_return = true;
+			return_type->fields.resize(1);
+			{
+				vnx::TypeField& field = return_type->fields[0];
+				field.is_extended = true;
+				field.name = "_ret_0";
+				field.code = {17};
+			}
+			return_type->build();
+			call_type->return_type = vnx::register_type_code(return_type);
+		}
+		call_type->fields.resize(2);
+		{
+			vnx::TypeField& field = call_type->fields[0];
+			field.is_extended = true;
+			field.name = "key";
+			field.code = {12, 5};
+		}
+		{
+			vnx::TypeField& field = call_type->fields[1];
+			field.is_extended = true;
+			field.name = "def_value";
+			field.code = {17};
+		}
+		call_type->build();
+		type_code->methods[1] = vnx::register_type_code(call_type);
+	}
 	type_code->fields.resize(4);
 	{
 		vnx::TypeField& field = type_code->fields[0];
@@ -193,7 +267,8 @@ void read(TypeInput& in, ::automy::basic::ImageFrame& value, const TypeCode* typ
 
 void write(TypeOutput& out, const ::automy::basic::ImageFrame& value, const TypeCode* type_code, const uint16_t* code) {
 	if(!type_code || (code && code[0] == CODE_ANY)) {
-		type_code = vnx::write_type_code<::automy::basic::ImageFrame>(out);
+		type_code = automy::basic::vnx_native_type_code_ImageFrame;
+		out.write_type_code(type_code);
 		vnx::write_class_header<::automy::basic::ImageFrame>(out);
 	}
 	if(code && code[0] == CODE_STRUCT) {

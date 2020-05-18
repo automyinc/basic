@@ -24,6 +24,9 @@ vnx::Hash64 DataPacket::get_type_hash() const {
 const char* DataPacket::get_type_name() const {
 	return "automy.basic.DataPacket";
 }
+const vnx::TypeCode* DataPacket::get_type_code() const {
+	return automy::basic::vnx_native_type_code_DataPacket;
+}
 
 std::shared_ptr<DataPacket> DataPacket::create() {
 	return std::make_shared<DataPacket>();
@@ -42,7 +45,7 @@ void DataPacket::write(vnx::TypeOutput& _out, const vnx::TypeCode* _type_code, c
 }
 
 void DataPacket::accept(vnx::Visitor& _visitor) const {
-	const vnx::TypeCode* _type_code = get_type_code();
+	const vnx::TypeCode* _type_code = automy::basic::vnx_native_type_code_DataPacket;
 	_visitor.type_begin(*_type_code);
 	_visitor.type_field(_type_code->fields[0], 0); vnx::accept(_visitor, time);
 	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, payload);
@@ -97,21 +100,22 @@ std::istream& operator>>(std::istream& _in, DataPacket& _value) {
 	return _in;
 }
 
-const vnx::TypeCode* DataPacket::get_type_code() {
+const vnx::TypeCode* DataPacket::static_get_type_code() {
 	const vnx::TypeCode* type_code = vnx::get_type_code(vnx::Hash64(0x2d5e2711cbd04ea0ull));
 	if(!type_code) {
-		type_code = vnx::register_type_code(create_type_code());
+		type_code = vnx::register_type_code(static_create_type_code());
 	}
 	return type_code;
 }
 
-std::shared_ptr<vnx::TypeCode> DataPacket::create_type_code() {
+std::shared_ptr<vnx::TypeCode> DataPacket::static_create_type_code() {
 	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
 	type_code->name = "automy.basic.DataPacket";
 	type_code->type_hash = vnx::Hash64(0x2d5e2711cbd04ea0ull);
 	type_code->code_hash = vnx::Hash64(0xf2bc7f9edcafd0b1ull);
 	type_code->is_class = true;
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<DataPacket>(); };
+	type_code->methods.resize(0);
 	type_code->fields.resize(2);
 	{
 		vnx::TypeField& field = type_code->fields[0];
@@ -165,7 +169,8 @@ void read(TypeInput& in, ::automy::basic::DataPacket& value, const TypeCode* typ
 
 void write(TypeOutput& out, const ::automy::basic::DataPacket& value, const TypeCode* type_code, const uint16_t* code) {
 	if(!type_code || (code && code[0] == CODE_ANY)) {
-		type_code = vnx::write_type_code<::automy::basic::DataPacket>(out);
+		type_code = automy::basic::vnx_native_type_code_DataPacket;
+		out.write_type_code(type_code);
 		vnx::write_class_header<::automy::basic::DataPacket>(out);
 	}
 	if(code && code[0] == CODE_STRUCT) {

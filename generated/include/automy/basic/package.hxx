@@ -31,6 +31,22 @@ class MultiImageFrame;
 class Scalar;
 class Transform3D;
 class Trigger;
+extern const vnx::TypeCode* const vnx_native_type_code_DataPacket; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property_return; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property_default; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property_default_return; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame16; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame32; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame8; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrameF16; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrameF32; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_ImageFrameF64; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_MultiImageFrame; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_Scalar; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_Transform3D; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_Trigger; ///< \private
 
 } // namespace automy
 } // namespace basic
