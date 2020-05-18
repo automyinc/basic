@@ -14,6 +14,7 @@ add_library(automy_basic SHARED
 	src/ImageF32.cpp
 	src/ImageF64.cpp
 	src/ImageFrame.cpp
+	src/TransformPublisher.cpp
 )
 
 target_include_directories(automy_basic PUBLIC include generated/include PRIVATE src/)

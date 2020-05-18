@@ -1,0 +1,14 @@
+package automy.basic;
+
+module TransformPublisher {
+	
+	vnx.TopicPtr output;
+	
+	int interval_ms = 500;
+	
+	Transform3D transform;
+	
+	
+	void set_transform(Transform3D* new_transform);
+	
+}
