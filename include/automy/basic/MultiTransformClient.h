@@ -102,5 +102,4 @@ private:
 } // basic
 } // automy
 
-
 #endif /* INCLUDE_AUTOMY_BASIC_MULTITRANSFORMCLIENT_H_ */

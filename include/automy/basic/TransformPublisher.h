@@ -36,5 +36,4 @@ private:
 } // basic
 } // automy
 
-
 #endif /* AUTOMY_BASIC_TRANSFORMPUBLISHER_H_ */
