@@ -20,22 +20,25 @@ namespace basic {
 class MultiTransformClient {
 public:
 	/*
-	 * Each frame in the chain needs a dedicated topic with the same name, in the given domain.
-	 * The 'name' and 'parent' fields in the Transform3D messages have to match the requested chain.
+	 * Each frame in the chain needs a dedicated topic with the same name, in a domain matching the parent frame.
 	 *
-	 * For example: domain = "transform", chain = ["map", "odom", "sensor"]
-	 * 	- Will subscribe to "transform.map", "transform.odom" and "transform.sensor".
-	 * 	- Will compute the following transformation: map * odom * sensor
+	 * For example: domain = "tf", chain = ["odom", "base", "sensor"]
+	 * 	- Will subscribe to "tf.odom.base" and "tf.base.sensor".
+	 * 	- Will compute the following transformation: base_to_odom * sensor_to_base
 	 *
-	 * @param domain Base name for topics, eg. "transform"
+	 * @param domain Base name for topics, eg. "tf"
 	 * @param chain Chain of transformations, given as a list of frames.
 	 * @param history_ms History length in ms.
 	 */
 	MultiTransformClient(const std::string& domain, const std::vector<std::string>& chain, int64_t history_ms = 10000)
 		:	m_chain(chain)
 	{
+		std::string parent;
 		for(const auto& frame : chain) {
-			m_buffers.push_back(std::make_shared<TransformClient>(domain + "." + frame, history_ms));
+			if(!parent.empty()) {
+				m_buffers.push_back(std::make_shared<TransformClient>(domain + "." + parent + "." + frame, history_ms));
+			}
+			parent = frame;
 		}
 	}
 
