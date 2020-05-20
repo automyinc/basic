@@ -2,9 +2,11 @@ package automy.basic;
 
 module TransformPublisher {
 	
-	vnx.TopicPtr output;
+	string domain;
 	
 	int interval_ms = 500;
+	
+	bool both_ways = true;
 	
 	Transform3D transform;
 	

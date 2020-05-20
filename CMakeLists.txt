@@ -14,6 +14,7 @@ add_library(automy_basic SHARED
 	src/ImageF32.cpp
 	src/ImageF64.cpp
 	src/ImageFrame.cpp
+	src/Transform3D.cpp
 	src/TransformPublisher.cpp
 )
 

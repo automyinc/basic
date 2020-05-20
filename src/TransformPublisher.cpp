@@ -28,7 +28,13 @@ void TransformPublisher::set_transform(const std::shared_ptr<const Transform3D>&
 }
 
 void TransformPublisher::update() {
-	publish(m_transform, output);
+	if(m_transform) {
+		publish(m_transform, domain + "." + m_transform->parent + "." + m_transform->frame);
+		if(both_ways) {
+			auto inverse = m_transform->get_inverse();
+			publish(inverse, domain + "." + inverse->parent + "." + inverse->frame);
+		}
+	}
 }
 
 
