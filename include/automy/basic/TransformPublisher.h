@@ -28,7 +28,10 @@ private:
 	void update();
 
 private:
-	std::shared_ptr<const Transform3D> m_transform;
+	vnx::TopicPtr output;
+	vnx::TopicPtr output_inverse;
+
+	std::shared_ptr<const Transform3D> m_current;
 
 };
 
