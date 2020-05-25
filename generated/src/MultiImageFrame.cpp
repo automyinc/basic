@@ -56,8 +56,8 @@ void MultiImageFrame::accept(vnx::Visitor& _visitor) const {
 }
 
 void MultiImageFrame::write(std::ostream& _out) const {
-	_out << "{";
-	_out << "\"time\": "; vnx::write(_out, time);
+	_out << "{\"__type\": \"automy.basic.MultiImageFrame\"";
+	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"frame\": "; vnx::write(_out, frame);
 	_out << ", \"format\": "; vnx::write(_out, format);
 	_out << ", \"properties\": "; vnx::write(_out, properties);
@@ -130,10 +130,11 @@ const vnx::TypeCode* MultiImageFrame::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> MultiImageFrame::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
+	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.MultiImageFrame";
 	type_code->type_hash = vnx::Hash64(0x5ee9279d2299dc0dull);
 	type_code->code_hash = vnx::Hash64(0x22094641e7db27d4ull);
+	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->parents.resize(1);
 	type_code->parents[0] = ::automy::basic::ImageFrame::static_get_type_code();

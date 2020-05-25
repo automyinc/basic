@@ -47,6 +47,8 @@ extern const vnx::TypeCode* const vnx_native_type_code_ImageFrameF64; ///< \priv
 extern const vnx::TypeCode* const vnx_native_type_code_MultiImageFrame; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_Scalar; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_Transform3D; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_Transform3D_get_inverse; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_Transform3D_get_inverse_return; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_TransformPublisher; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_TransformPublisher_set_transform; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_TransformPublisher_set_transform_return; ///< \private

@@ -53,8 +53,8 @@ void DataPacket::accept(vnx::Visitor& _visitor) const {
 }
 
 void DataPacket::write(std::ostream& _out) const {
-	_out << "{";
-	_out << "\"time\": "; vnx::write(_out, time);
+	_out << "{\"__type\": \"automy.basic.DataPacket\"";
+	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"payload\": "; vnx::write(_out, payload);
 	_out << "}";
 }
@@ -109,10 +109,11 @@ const vnx::TypeCode* DataPacket::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> DataPacket::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
+	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.DataPacket";
 	type_code->type_hash = vnx::Hash64(0x2d5e2711cbd04ea0ull);
 	type_code->code_hash = vnx::Hash64(0xf2bc7f9edcafd0b1ull);
+	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<DataPacket>(); };
 	type_code->methods.resize(0);

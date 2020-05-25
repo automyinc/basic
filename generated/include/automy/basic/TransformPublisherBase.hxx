@@ -7,7 +7,6 @@
 #include <automy/basic/package.hxx>
 #include <automy/basic/Transform3D.hxx>
 #include <vnx/Module.h>
-#include <vnx/TopicPtr.h>
 
 
 namespace automy {
@@ -16,8 +15,9 @@ namespace basic {
 class TransformPublisherBase : public ::vnx::Module {
 public:
 	
-	::vnx::TopicPtr output;
+	::std::string domain;
 	::int32_t interval_ms = 500;
+	::vnx::bool_t both_ways = true;
 	::automy::basic::Transform3D transform;
 	
 	typedef ::vnx::Module Super;

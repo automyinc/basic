@@ -55,8 +55,8 @@ void Transform3D::accept(vnx::Visitor& _visitor) const {
 }
 
 void Transform3D::write(std::ostream& _out) const {
-	_out << "{";
-	_out << "\"time\": "; vnx::write(_out, time);
+	_out << "{\"__type\": \"automy.basic.Transform3D\"";
+	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"frame\": "; vnx::write(_out, frame);
 	_out << ", \"parent\": "; vnx::write(_out, parent);
 	_out << ", \"matrix\": "; vnx::write(_out, matrix);
@@ -123,13 +123,41 @@ const vnx::TypeCode* Transform3D::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> Transform3D::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
+	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.Transform3D";
 	type_code->type_hash = vnx::Hash64(0xe762feb1b334b36dull);
 	type_code->code_hash = vnx::Hash64(0x9ff4cf7b36237940ull);
+	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<Transform3D>(); };
-	type_code->methods.resize(0);
+	type_code->methods.resize(1);
+	{
+		std::shared_ptr<vnx::TypeCode> call_type = std::make_shared<vnx::TypeCode>();
+		call_type->name = "automy.basic.Transform3D.get_inverse";
+		call_type->type_hash = vnx::Hash64(0x9420e09c066e5924ull);
+		call_type->code_hash = vnx::Hash64(0x207b1330c63fac36ull);
+		call_type->is_native = true;
+		call_type->is_method = true;
+		{
+			std::shared_ptr<vnx::TypeCode> return_type = std::make_shared<vnx::TypeCode>();
+			return_type->name = "automy.basic.Transform3D.get_inverse.return";
+			return_type->type_hash = vnx::Hash64(0x98e9e629309bc5eull);
+			return_type->code_hash = vnx::Hash64(0x55e7287a139678eull);
+			return_type->is_native = true;
+			return_type->is_return = true;
+			return_type->fields.resize(1);
+			{
+				vnx::TypeField& field = return_type->fields[0];
+				field.is_extended = true;
+				field.name = "_ret_0";
+				field.code = {16};
+			}
+			return_type->build();
+			call_type->return_type = vnx::register_type_code(return_type);
+		}
+		call_type->build();
+		type_code->methods[0] = vnx::register_type_code(call_type);
+	}
 	type_code->fields.resize(4);
 	{
 		vnx::TypeField& field = type_code->fields[0];

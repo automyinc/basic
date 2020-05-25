@@ -56,8 +56,8 @@ void ImageFrame16::accept(vnx::Visitor& _visitor) const {
 }
 
 void ImageFrame16::write(std::ostream& _out) const {
-	_out << "{";
-	_out << "\"time\": "; vnx::write(_out, time);
+	_out << "{\"__type\": \"automy.basic.ImageFrame16\"";
+	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"frame\": "; vnx::write(_out, frame);
 	_out << ", \"format\": "; vnx::write(_out, format);
 	_out << ", \"properties\": "; vnx::write(_out, properties);
@@ -130,10 +130,11 @@ const vnx::TypeCode* ImageFrame16::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> ImageFrame16::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
+	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.ImageFrame16";
 	type_code->type_hash = vnx::Hash64(0x6f04dc915f2801b0ull);
 	type_code->code_hash = vnx::Hash64(0xff41abd58b6c31a2ull);
+	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->parents.resize(1);
 	type_code->parents[0] = ::automy::basic::ImageFrame::static_get_type_code();

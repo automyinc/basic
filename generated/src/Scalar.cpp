@@ -54,8 +54,8 @@ void Scalar::accept(vnx::Visitor& _visitor) const {
 }
 
 void Scalar::write(std::ostream& _out) const {
-	_out << "{";
-	_out << "\"time\": "; vnx::write(_out, time);
+	_out << "{\"__type\": \"automy.basic.Scalar\"";
+	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"key\": "; vnx::write(_out, key);
 	_out << ", \"value\": "; vnx::write(_out, value);
 	_out << "}";
@@ -116,10 +116,11 @@ const vnx::TypeCode* Scalar::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> Scalar::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
+	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.Scalar";
 	type_code->type_hash = vnx::Hash64(0xc0b8bdb61e0ca70eull);
 	type_code->code_hash = vnx::Hash64(0xa6723f13a3a352bdull);
+	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<Scalar>(); };
 	type_code->methods.resize(0);

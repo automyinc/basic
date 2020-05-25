@@ -56,8 +56,8 @@ void ImageFrameF32::accept(vnx::Visitor& _visitor) const {
 }
 
 void ImageFrameF32::write(std::ostream& _out) const {
-	_out << "{";
-	_out << "\"time\": "; vnx::write(_out, time);
+	_out << "{\"__type\": \"automy.basic.ImageFrameF32\"";
+	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"frame\": "; vnx::write(_out, frame);
 	_out << ", \"format\": "; vnx::write(_out, format);
 	_out << ", \"properties\": "; vnx::write(_out, properties);
@@ -130,10 +130,11 @@ const vnx::TypeCode* ImageFrameF32::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> ImageFrameF32::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
+	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.ImageFrameF32";
 	type_code->type_hash = vnx::Hash64(0x96c857eff6431525ull);
 	type_code->code_hash = vnx::Hash64(0x1a8efb77299ca18bull);
+	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->parents.resize(1);
 	type_code->parents[0] = ::automy::basic::ImageFrame::static_get_type_code();

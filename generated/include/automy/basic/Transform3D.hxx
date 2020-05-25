@@ -29,6 +29,8 @@ public:
 	const char* get_type_name() const override;
 	const vnx::TypeCode* get_type_code() const override;
 	
+	virtual ::std::shared_ptr<const ::automy::basic::Transform3D> get_inverse() const;
+	
 	static std::shared_ptr<Transform3D> create();
 	std::shared_ptr<vnx::Value> clone() const;
 	

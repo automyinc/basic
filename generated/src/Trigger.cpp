@@ -53,8 +53,8 @@ void Trigger::accept(vnx::Visitor& _visitor) const {
 }
 
 void Trigger::write(std::ostream& _out) const {
-	_out << "{";
-	_out << "\"time\": "; vnx::write(_out, time);
+	_out << "{\"__type\": \"automy.basic.Trigger\"";
+	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"seq_num\": "; vnx::write(_out, seq_num);
 	_out << "}";
 }
@@ -109,10 +109,11 @@ const vnx::TypeCode* Trigger::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> Trigger::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
+	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.Trigger";
 	type_code->type_hash = vnx::Hash64(0xae5ff291c2d59cceull);
 	type_code->code_hash = vnx::Hash64(0x7cc3f18cb3878861ull);
+	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<Trigger>(); };
 	type_code->methods.resize(0);

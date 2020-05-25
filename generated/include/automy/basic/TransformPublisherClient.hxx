@@ -7,7 +7,6 @@
 #include <vnx/Client.h>
 #include <automy/basic/Transform3D.hxx>
 #include <vnx/Module.h>
-#include <vnx/TopicPtr.h>
 
 
 namespace automy {

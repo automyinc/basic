@@ -55,8 +55,8 @@ void ImageFrame::accept(vnx::Visitor& _visitor) const {
 }
 
 void ImageFrame::write(std::ostream& _out) const {
-	_out << "{";
-	_out << "\"time\": "; vnx::write(_out, time);
+	_out << "{\"__type\": \"automy.basic.ImageFrame\"";
+	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"frame\": "; vnx::write(_out, frame);
 	_out << ", \"format\": "; vnx::write(_out, format);
 	_out << ", \"properties\": "; vnx::write(_out, properties);
@@ -123,24 +123,27 @@ const vnx::TypeCode* ImageFrame::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> ImageFrame::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>(true);
+	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.ImageFrame";
 	type_code->type_hash = vnx::Hash64(0xad5b897ca145c94eull);
 	type_code->code_hash = vnx::Hash64(0x77e21edc46ab7022ull);
+	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<ImageFrame>(); };
 	type_code->methods.resize(2);
 	{
-		std::shared_ptr<vnx::TypeCode> call_type = std::make_shared<vnx::TypeCode>(true);
+		std::shared_ptr<vnx::TypeCode> call_type = std::make_shared<vnx::TypeCode>();
 		call_type->name = "automy.basic.ImageFrame.get_property";
 		call_type->type_hash = vnx::Hash64(0x7e782249228b5c52ull);
 		call_type->code_hash = vnx::Hash64(0xb16d6d42b89636cfull);
+		call_type->is_native = true;
 		call_type->is_method = true;
 		{
-			std::shared_ptr<vnx::TypeCode> return_type = std::make_shared<vnx::TypeCode>(true);
+			std::shared_ptr<vnx::TypeCode> return_type = std::make_shared<vnx::TypeCode>();
 			return_type->name = "automy.basic.ImageFrame.get_property.return";
 			return_type->type_hash = vnx::Hash64(0x1b11b62b9ea255fbull);
 			return_type->code_hash = vnx::Hash64(0x6ebbb4409f369e5ull);
+			return_type->is_native = true;
 			return_type->is_return = true;
 			return_type->fields.resize(1);
 			{
@@ -163,16 +166,18 @@ std::shared_ptr<vnx::TypeCode> ImageFrame::static_create_type_code() {
 		type_code->methods[0] = vnx::register_type_code(call_type);
 	}
 	{
-		std::shared_ptr<vnx::TypeCode> call_type = std::make_shared<vnx::TypeCode>(true);
+		std::shared_ptr<vnx::TypeCode> call_type = std::make_shared<vnx::TypeCode>();
 		call_type->name = "automy.basic.ImageFrame.get_property_default";
 		call_type->type_hash = vnx::Hash64(0xc10fb21a101fe61dull);
 		call_type->code_hash = vnx::Hash64(0xb65846df915539efull);
+		call_type->is_native = true;
 		call_type->is_method = true;
 		{
-			std::shared_ptr<vnx::TypeCode> return_type = std::make_shared<vnx::TypeCode>(true);
+			std::shared_ptr<vnx::TypeCode> return_type = std::make_shared<vnx::TypeCode>();
 			return_type->name = "automy.basic.ImageFrame.get_property_default.return";
 			return_type->type_hash = vnx::Hash64(0xb69a2222c8e84e4aull);
 			return_type->code_hash = vnx::Hash64(0xb261fc2f2bacf4e0ull);
+			return_type->is_native = true;
 			return_type->is_return = true;
 			return_type->fields.resize(1);
 			{

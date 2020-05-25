@@ -36,7 +36,7 @@ uint64_t TransformPublisherAsyncClient::set_transform(const ::std::shared_ptr<co
 	return _request_id;
 }
 
-std::vector<uint64_t>TransformPublisherAsyncClient::vnx_get_pending_ids() const {
+std::vector<uint64_t> TransformPublisherAsyncClient::vnx_get_pending_ids() const {
 	std::vector<uint64_t> _list;
 	for(const auto& entry : vnx_queue_set_transform) {
 		_list.push_back(entry.first);
