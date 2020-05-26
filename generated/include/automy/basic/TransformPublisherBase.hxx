@@ -15,10 +15,10 @@ namespace basic {
 class TransformPublisherBase : public ::vnx::Module {
 public:
 	
-	::std::string domain;
+	::std::string domain = "tf";
 	::int32_t interval_ms = 500;
 	::vnx::bool_t both_ways = true;
-	::automy::basic::Transform3D transform;
+	::std::vector<::std::shared_ptr<const ::automy::basic::Transform3D>> transforms;
 	
 	typedef ::vnx::Module Super;
 	

@@ -130,7 +130,7 @@ std::shared_ptr<vnx::TypeCode> Transform3D::static_create_type_code() {
 	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<Transform3D>(); };
-	type_code->methods.resize(1);
+	type_code->methods.resize(2);
 	{
 		std::shared_ptr<vnx::TypeCode> call_type = std::make_shared<vnx::TypeCode>();
 		call_type->name = "automy.basic.Transform3D.get_inverse";
@@ -157,6 +157,40 @@ std::shared_ptr<vnx::TypeCode> Transform3D::static_create_type_code() {
 		}
 		call_type->build();
 		type_code->methods[0] = vnx::register_type_code(call_type);
+	}
+	{
+		std::shared_ptr<vnx::TypeCode> call_type = std::make_shared<vnx::TypeCode>();
+		call_type->name = "automy.basic.Transform3D.from_config";
+		call_type->type_hash = vnx::Hash64(0x8750cc8078e42d09ull);
+		call_type->code_hash = vnx::Hash64(0xa2b90d3dd73ddd5eull);
+		call_type->is_native = true;
+		call_type->is_method = true;
+		{
+			std::shared_ptr<vnx::TypeCode> return_type = std::make_shared<vnx::TypeCode>();
+			return_type->name = "automy.basic.Transform3D.from_config.return";
+			return_type->type_hash = vnx::Hash64(0xbed57a55dbe2021bull);
+			return_type->code_hash = vnx::Hash64(0xbac1e0fa2da1f947ull);
+			return_type->is_native = true;
+			return_type->is_return = true;
+			return_type->fields.resize(1);
+			{
+				vnx::TypeField& field = return_type->fields[0];
+				field.is_extended = true;
+				field.name = "_ret_0";
+				field.code = {16};
+			}
+			return_type->build();
+			call_type->return_type = vnx::register_type_code(return_type);
+		}
+		call_type->fields.resize(1);
+		{
+			vnx::TypeField& field = call_type->fields[0];
+			field.is_extended = true;
+			field.name = "config";
+			field.code = {24};
+		}
+		call_type->build();
+		type_code->methods[1] = vnx::register_type_code(call_type);
 	}
 	type_code->fields.resize(4);
 	{
