@@ -7,6 +7,7 @@
 #include <automy/basic/package.hxx>
 #include <automy/basic/Transform3D.hxx>
 #include <vnx/Module.h>
+#include <vnx/Object.h>
 
 
 namespace automy {
@@ -18,6 +19,7 @@ public:
 	::std::string domain = "tf";
 	::int32_t interval_ms = 500;
 	::vnx::bool_t both_ways = true;
+	::std::vector<::vnx::Object> config;
 	::std::vector<::std::shared_ptr<const ::automy::basic::Transform3D>> transforms;
 	
 	typedef ::vnx::Module Super;

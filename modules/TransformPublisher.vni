@@ -8,6 +8,8 @@ module TransformPublisher {
 	
 	bool both_ways = true;						// if to publish inverse transforms also
 	
+	vector<vnx.Object> config;					// list of transforms to read via. Transform::from_config()
+	
 	vector<Transform3D*> transforms;			// list of transforms to publish
 	
 	
