@@ -2,15 +2,15 @@ package automy.basic;
 
 module TransformPublisher {
 	
-	string domain;
+	string domain = "tf";						// base domain, topics will be: "domain.parent.frame"
 	
-	int interval_ms = 500;
+	int interval_ms = 500;						// publish interval [ms]
 	
-	bool both_ways = true;
+	bool both_ways = true;						// if to publish inverse transforms also
 	
-	Transform3D transform;
+	vector<Transform3D*> transforms;			// list of transforms to publish
 	
 	
-	void set_transform(Transform3D* new_transform);
+	void set_transform(Transform3D* new_transform);		// update or add a new transform
 	
 }

@@ -27,12 +27,6 @@ protected:
 private:
 	void update();
 
-private:
-	vnx::TopicPtr output;
-	vnx::TopicPtr output_inverse;
-
-	std::shared_ptr<const Transform3D> m_current;
-
 };
 
 
