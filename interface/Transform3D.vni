@@ -19,7 +19,8 @@ class Transform3D {
 	 * Reads an Object and creates a Transform3D out of it.
 	 * It accepts different fields for easier setting of a transform:
 	 * - "offset_xyz": X, Y, Z translation (after rotation) [m]
-	 * - "rotation_rpy": extrinsic rotation, first yaw, then pitch, then roll [rad]
+	 * - "rotation_rpy": intrinsic rotation, first yaw, then pitch, then roll [rad]
+	 * - "rotation_rpy_deg": same as rotation_rpy but in [deg]
 	 * - otherwise sets the matrix directly from "matrix" field
 	 */
 	static Transform3D* from_config(vnx.Object config);

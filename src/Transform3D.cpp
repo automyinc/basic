@@ -24,9 +24,15 @@ std::shared_ptr<const Transform3D> Transform3D::from_config(const vnx::Object& c
 	auto result = Transform3D::create();
 	result->frame = config["frame"].to_string_value();
 	result->parent = config["parent"].to_string_value();
-	if(config.field.count("offset_xyz") || config.field.count("rotation_rpy")) {
+	if(config.field.count("offset_xyz") || config.field.count("rotation_rpy") || config.field.count("rotation_rpy_deg")) {
 		const auto offset = config["offset_xyz"].to<math::Vector3d>();
-		const auto rotation = config["rotation_rpy"].to<math::Vector3d>();
+		math::Vector3d rotation;
+		if(config.field.count("rotation_rpy_deg")) {
+			const auto tmp = config["rotation_rpy_deg"].to<math::Vector3d>();
+			rotation = tmp * M_PI / 180;
+		} else {
+			rotation = config["rotation_rpy"].to<math::Vector3d>();
+		}
 		result->matrix = math::translate3(offset) * math::rotate3_xyz_intrinsic(rotation);
 	} else {
 		result->matrix = config["matrix"].to<math::Matrix4d>();
