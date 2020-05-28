@@ -22,7 +22,7 @@ TransformPublisher::TransformPublisher(const std::string& _vnx_name)
 void TransformPublisher::main()
 {
 	for(auto value : transforms) {
-		log(INFO).out << "Publishing transform: parent \"" << value->parent << "\" -> child \"" << value->frame << "\"";
+		log(INFO).out << "Publishing transform: \"" << value->parent << "\" -> \"" << value->frame << "\"";
 	}
 	set_timer_millis(interval_ms, std::bind(&TransformPublisher::update, this));
 
@@ -38,7 +38,7 @@ void TransformPublisher::set_transform(const std::shared_ptr<const Transform3D>&
 		}
 	}
 	transforms.push_back(new_transform);
-	log(INFO).out << "Added new transform: parent \"" << new_transform->parent << "\" -> child \"" << new_transform->frame << "\"";
+	log(INFO).out << "Added new transform: \"" << new_transform->parent << "\" -> \"" << new_transform->frame << "\"";
 }
 
 void TransformPublisher::update()
