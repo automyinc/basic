@@ -44,9 +44,11 @@ void TransformPublisher::set_transform(const std::shared_ptr<const Transform3D>&
 void TransformPublisher::update()
 {
 	for(auto value : transforms) {
-		publish(value, domain + "." + value->parent + "." + value->frame);
+		auto copy = vnx::clone(value);
+		copy->time = vnx::get_time_micros();
+		publish(copy, domain + "." + value->parent + "." + value->frame);
 		if(both_ways) {
-			auto inverse = value->get_inverse();
+			auto inverse = copy->get_inverse();
 			publish(inverse, domain + "." + inverse->parent + "." + inverse->frame);
 		}
 	}
