@@ -1,9 +1,3 @@
-/*
- * TransformPublisher.cpp
- *
- *  Created on: May 18, 2020
- *      Author: mad
- */
 
 #include <automy/basic/TransformPublisher.h>
 

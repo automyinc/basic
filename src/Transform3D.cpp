@@ -1,12 +1,6 @@
-/*
- * Transform3D.cpp
- *
- *  Created on: May 20, 2020
- *      Author: mad
- */
 
+#include <automy/math/math.h>
 #include <automy/basic/Transform3D.hxx>
-#include <automy/math/Math3D.h>
 
 
 namespace automy {

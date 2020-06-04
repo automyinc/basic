@@ -1,9 +1,8 @@
 
-#ifndef INCLUDE_AUTOMY_BASIC_IMAGE8_H_
-#define INCLUDE_AUTOMY_BASIC_IMAGE8_H_
+#ifndef INCLUDE_AUTOMY_BASIC_IMAGE8_HPP_
+#define INCLUDE_AUTOMY_BASIC_IMAGE8_HPP_
 
-#include "Image.h"
-#include <memory>
+#include <automy/basic/Image.hpp>
 
 
 namespace automy {
@@ -12,15 +11,15 @@ namespace basic {
 class Image8 : public Image<uint8_t> {
 public:
 	Image8() {}
-	
+
 	Image8(size_t width_, size_t height_, size_t depth_ = 1) : Image(width_, height_, depth_) {}
-	
+
 	Image8(const Image<uint8_t>& image) : Image(image) {}
-	
+
 	static std::shared_ptr<Image8> create() {
 		return std::make_shared<Image8>();
 	}
-	
+
 };
 
 
@@ -43,4 +42,4 @@ void accept(Visitor& visitor, const ::automy::basic::Image8& value);
 
 } // vnx
 
-#endif /* INCLUDE_AUTOMY_BASIC_IMAGE8_H_ */
+#endif /* INCLUDE_AUTOMY_BASIC_IMAGE8_HPP_ */

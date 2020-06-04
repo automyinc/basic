@@ -1,5 +1,5 @@
 
-#include <automy/basic/ImageF32.h>
+#include <automy/basic/ImageF32.hpp>
 
 
 namespace vnx {

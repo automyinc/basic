@@ -1,5 +1,5 @@
 
-#include <automy/basic/Image8.h>
+#include <automy/basic/Image8.hpp>
 
 
 namespace vnx {

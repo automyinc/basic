@@ -1,9 +1,8 @@
 
-#ifndef INCLUDE_AUTOMY_BASIC_IMAGEF32_H_
-#define INCLUDE_AUTOMY_BASIC_IMAGEF32_H_
+#ifndef INCLUDE_AUTOMY_BASIC_IMAGEF32_HPP_
+#define INCLUDE_AUTOMY_BASIC_IMAGEF32_HPP_
 
-#include "Image.h"
-#include <memory>
+#include <automy/basic/Image.hpp>
 
 
 namespace automy {
@@ -12,15 +11,15 @@ namespace basic {
 class ImageF32 : public Image<float> {
 public:
 	ImageF32() {}
-	
+
 	ImageF32(size_t width_, size_t height_, size_t depth_ = 1) : Image(width_, height_, depth_) {}
-	
+
 	ImageF32(const Image<float>& image) : Image(image) {}
-	
+
 	static std::shared_ptr<ImageF32> create() {
 		return std::make_shared<ImageF32>();
 	}
-	
+
 };
 
 
@@ -43,4 +42,4 @@ void accept(Visitor& visitor, const ::automy::basic::ImageF32& value);
 
 } // vnx
 
-#endif /* INCLUDE_AUTOMY_BASIC_IMAGEF32_H_ */
+#endif /* INCLUDE_AUTOMY_BASIC_IMAGEF32_HPP_ */

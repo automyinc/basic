@@ -1,5 +1,5 @@
 
-#include <automy/basic/Image.h>
+#include <automy/basic/Image.hpp>
 
 #include <algorithm>
 

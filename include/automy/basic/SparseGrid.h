@@ -2,10 +2,10 @@
 #ifndef INCLUDE_AUTOMY_BASIC_SPARSEGRID_H_
 #define INCLUDE_AUTOMY_BASIC_SPARSEGRID_H_
 
-#include <automy/math/Vector2i.h>
-#include <automy/math/Vector3i.h>
+#include <automy/math/Vector2i.hpp>
+#include <automy/math/Vector3i.hpp>
 
-#include "matrix_hash.h"
+#include <automy/basic/matrix_hash.h>
 
 #include <unordered_map>
 

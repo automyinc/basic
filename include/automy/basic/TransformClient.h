@@ -3,6 +3,7 @@
 #define INCLUDE_AUTOMY_BASIC_TRANSFORMCLIENT_H_
 
 #include <automy/basic/TransformBuffer.h>
+
 #include <vnx/Subscriber.h>
 #include <vnx/Sample.hxx>
 #include <vnx/TopicPtr.h>

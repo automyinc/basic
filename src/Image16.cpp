@@ -1,5 +1,5 @@
 
-#include <automy/basic/Image16.h>
+#include <automy/basic/Image16.hpp>
 
 
 namespace vnx {
