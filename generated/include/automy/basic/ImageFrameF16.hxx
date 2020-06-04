@@ -5,7 +5,7 @@
 #define INCLUDE_automy_basic_ImageFrameF16_HXX_
 
 #include <automy/basic/package.hxx>
-#include <automy/basic/Image16.h>
+#include <automy/basic/Image16.hpp>
 #include <automy/basic/ImageFrame.hxx>
 
 

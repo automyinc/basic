@@ -7,7 +7,7 @@
 #include <vnx/Client.h>
 #include <automy/basic/Transform3D.hxx>
 #include <vnx/Module.h>
-#include <vnx/Object.h>
+#include <vnx/Object.hpp>
 
 
 namespace automy {
@@ -19,9 +19,9 @@ public:
 	
 	TransformPublisherClient(vnx::Hash64 service_addr);
 	
-	void set_transform(const ::std::shared_ptr<const ::automy::basic::Transform3D>& new_transform);
+	void set_transform(const std::shared_ptr<const ::automy::basic::Transform3D>& new_transform);
 	
-	void set_transform_async(const ::std::shared_ptr<const ::automy::basic::Transform3D>& new_transform);
+	void set_transform_async(const std::shared_ptr<const ::automy::basic::Transform3D>& new_transform);
 	
 };
 

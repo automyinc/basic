@@ -7,7 +7,7 @@
 #include <automy/basic/package.hxx>
 #include <automy/basic/Transform3D.hxx>
 #include <vnx/Module.h>
-#include <vnx/Object.h>
+#include <vnx/Object.hpp>
 
 
 namespace automy {
@@ -16,11 +16,11 @@ namespace basic {
 class TransformPublisherBase : public ::vnx::Module {
 public:
 	
-	::std::string domain = "tf";
-	::int32_t interval_ms = 500;
-	::vnx::bool_t both_ways = true;
-	::std::vector<::vnx::Object> config;
-	::std::vector<::std::shared_ptr<const ::automy::basic::Transform3D>> transforms;
+	std::string domain = "tf";
+	int32_t interval_ms = 500;
+	vnx::bool_t both_ways = true;
+	std::vector<::vnx::Object> config;
+	std::vector<std::shared_ptr<const ::automy::basic::Transform3D>> transforms;
 	
 	typedef ::vnx::Module Super;
 	
@@ -48,10 +48,10 @@ public:
 	static std::shared_ptr<vnx::TypeCode> static_create_type_code();
 	
 protected:
-	virtual void set_transform(const ::std::shared_ptr<const ::automy::basic::Transform3D>& new_transform) = 0;
+	virtual void set_transform(const std::shared_ptr<const ::automy::basic::Transform3D>& new_transform) = 0;
 	
-	void vnx_handle_switch(std::shared_ptr<const ::vnx::Sample> _sample) override;
-	std::shared_ptr<vnx::Value> vnx_call_switch(vnx::TypeInput& _in, const vnx::TypeCode* _call_type, const vnx::request_id_t& _request_id) override;
+	void vnx_handle_switch(std::shared_ptr<const vnx::Sample> _sample) override;
+	std::shared_ptr<vnx::Value> vnx_call_switch(std::shared_ptr<const vnx::Value> _value, const vnx::request_id_t& _request_id) override;
 	
 private:
 	

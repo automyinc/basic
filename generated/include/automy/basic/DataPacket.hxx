@@ -14,8 +14,8 @@ namespace basic {
 class DataPacket : public ::vnx::Value {
 public:
 	
-	::int64_t time = 0;
-	::std::vector<::uint8_t> payload;
+	int64_t time = 0;
+	std::vector<uint8_t> payload;
 	
 	typedef ::vnx::Value Super;
 	

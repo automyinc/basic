@@ -14,7 +14,7 @@ namespace basic {
 class MultiImageFrame : public ::automy::basic::ImageFrame {
 public:
 	
-	::std::vector<::std::shared_ptr<const ::automy::basic::ImageFrame>> frames;
+	std::vector<std::shared_ptr<const ::automy::basic::ImageFrame>> frames;
 	
 	typedef ::automy::basic::ImageFrame Super;
 	

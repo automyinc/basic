@@ -5,8 +5,8 @@
 #define INCLUDE_automy_basic_Transform3D_HXX_
 
 #include <automy/basic/package.hxx>
-#include <automy/math/Matrix4d.h>
-#include <vnx/Object.h>
+#include <automy/math/Matrix4d.hpp>
+#include <vnx/Object.hpp>
 #include <vnx/Value.h>
 
 
@@ -16,9 +16,9 @@ namespace basic {
 class Transform3D : public ::vnx::Value {
 public:
 	
-	::int64_t time = 0;
-	::std::string frame;
-	::std::string parent;
+	int64_t time = 0;
+	std::string frame;
+	std::string parent;
 	::automy::math::Matrix4d matrix;
 	
 	typedef ::vnx::Value Super;
@@ -30,8 +30,8 @@ public:
 	const char* get_type_name() const override;
 	const vnx::TypeCode* get_type_code() const override;
 	
-	virtual ::std::shared_ptr<const ::automy::basic::Transform3D> get_inverse() const;
-	static ::std::shared_ptr<const ::automy::basic::Transform3D> from_config(const ::vnx::Object& config);
+	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_inverse() const;
+	static std::shared_ptr<const ::automy::basic::Transform3D> from_config(const ::vnx::Object& config);
 	
 	static std::shared_ptr<Transform3D> create();
 	std::shared_ptr<vnx::Value> clone() const;

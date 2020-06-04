@@ -5,7 +5,7 @@
 #define INCLUDE_automy_basic_ImageFrameF64_HXX_
 
 #include <automy/basic/package.hxx>
-#include <automy/basic/ImageF64.h>
+#include <automy/basic/ImageF64.hpp>
 #include <automy/basic/ImageFrame.hxx>
 
 

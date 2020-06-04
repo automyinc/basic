@@ -6,7 +6,7 @@
 
 #include <automy/basic/package.hxx>
 #include <vnx/Value.h>
-#include <vnx/Variant.h>
+#include <vnx/Variant.hpp>
 
 
 namespace automy {
@@ -15,10 +15,10 @@ namespace basic {
 class ImageFrame : public ::vnx::Value {
 public:
 	
-	::int64_t time = 0;
-	::std::string frame;
-	::std::string format;
-	::std::map<::std::string, ::vnx::Variant> properties;
+	int64_t time = 0;
+	std::string frame;
+	std::string format;
+	std::map<std::string, ::vnx::Variant> properties;
 	
 	typedef ::vnx::Value Super;
 	
@@ -29,8 +29,8 @@ public:
 	const char* get_type_name() const override;
 	const vnx::TypeCode* get_type_code() const override;
 	
-	virtual ::vnx::Variant get_property(const ::std::string& key);
-	virtual ::vnx::Variant get_property_default(const ::std::string& key, const ::vnx::Variant& def_value);
+	virtual ::vnx::Variant get_property(const std::string& key);
+	virtual ::vnx::Variant get_property_default(const std::string& key, const ::vnx::Variant& def_value);
 	
 	static std::shared_ptr<ImageFrame> create();
 	std::shared_ptr<vnx::Value> clone() const;

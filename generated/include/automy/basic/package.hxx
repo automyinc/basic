@@ -31,13 +31,12 @@ class MultiImageFrame;
 class Scalar;
 class Transform3D;
 class TransformPublisherBase;
+class TransformPublisher_set_transform;
+class TransformPublisher_set_transform_return;
 class Trigger;
+
 extern const vnx::TypeCode* const vnx_native_type_code_DataPacket; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame; ///< \private
-extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property; ///< \private
-extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property_return; ///< \private
-extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property_default; ///< \private
-extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame_get_property_default_return; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame16; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame32; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_ImageFrame8; ///< \private
@@ -47,11 +46,7 @@ extern const vnx::TypeCode* const vnx_native_type_code_ImageFrameF64; ///< \priv
 extern const vnx::TypeCode* const vnx_native_type_code_MultiImageFrame; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_Scalar; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_Transform3D; ///< \private
-extern const vnx::TypeCode* const vnx_native_type_code_Transform3D_from_config; ///< \private
-extern const vnx::TypeCode* const vnx_native_type_code_Transform3D_from_config_return; ///< \private
-extern const vnx::TypeCode* const vnx_native_type_code_Transform3D_get_inverse; ///< \private
-extern const vnx::TypeCode* const vnx_native_type_code_Transform3D_get_inverse_return; ///< \private
-extern const vnx::TypeCode* const vnx_native_type_code_TransformPublisher; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_TransformPublisherBase; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_TransformPublisher_set_transform; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_TransformPublisher_set_transform_return; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_Trigger; ///< \private
@@ -79,6 +74,8 @@ void read(TypeInput& in, ::automy::basic::MultiImageFrame& value, const TypeCode
 void read(TypeInput& in, ::automy::basic::Scalar& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::automy::basic::Transform3D& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::automy::basic::TransformPublisherBase& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void read(TypeInput& in, ::automy::basic::TransformPublisher_set_transform& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void read(TypeInput& in, ::automy::basic::TransformPublisher_set_transform_return& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::automy::basic::Trigger& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 
 void write(TypeOutput& out, const ::automy::basic::DataPacket& value, const TypeCode* type_code, const uint16_t* code); ///< \private
@@ -98,6 +95,8 @@ void write(TypeOutput& out, const ::automy::basic::MultiImageFrame& value, const
 void write(TypeOutput& out, const ::automy::basic::Scalar& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::automy::basic::Transform3D& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::automy::basic::TransformPublisherBase& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void write(TypeOutput& out, const ::automy::basic::TransformPublisher_set_transform& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void write(TypeOutput& out, const ::automy::basic::TransformPublisher_set_transform_return& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::automy::basic::Trigger& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 
 void read(std::istream& in, ::automy::basic::DataPacket& value); ///< \private
@@ -117,6 +116,8 @@ void read(std::istream& in, ::automy::basic::MultiImageFrame& value); ///< \priv
 void read(std::istream& in, ::automy::basic::Scalar& value); ///< \private
 void read(std::istream& in, ::automy::basic::Transform3D& value); ///< \private
 void read(std::istream& in, ::automy::basic::TransformPublisherBase& value); ///< \private
+void read(std::istream& in, ::automy::basic::TransformPublisher_set_transform& value); ///< \private
+void read(std::istream& in, ::automy::basic::TransformPublisher_set_transform_return& value); ///< \private
 void read(std::istream& in, ::automy::basic::Trigger& value); ///< \private
 
 void write(std::ostream& out, const ::automy::basic::DataPacket& value); ///< \private
@@ -136,6 +137,8 @@ void write(std::ostream& out, const ::automy::basic::MultiImageFrame& value); //
 void write(std::ostream& out, const ::automy::basic::Scalar& value); ///< \private
 void write(std::ostream& out, const ::automy::basic::Transform3D& value); ///< \private
 void write(std::ostream& out, const ::automy::basic::TransformPublisherBase& value); ///< \private
+void write(std::ostream& out, const ::automy::basic::TransformPublisher_set_transform& value); ///< \private
+void write(std::ostream& out, const ::automy::basic::TransformPublisher_set_transform_return& value); ///< \private
 void write(std::ostream& out, const ::automy::basic::Trigger& value); ///< \private
 
 void accept(Visitor& visitor, const ::automy::basic::DataPacket& value); ///< \private
@@ -155,6 +158,8 @@ void accept(Visitor& visitor, const ::automy::basic::MultiImageFrame& value); //
 void accept(Visitor& visitor, const ::automy::basic::Scalar& value); ///< \private
 void accept(Visitor& visitor, const ::automy::basic::Transform3D& value); ///< \private
 void accept(Visitor& visitor, const ::automy::basic::TransformPublisherBase& value); ///< \private
+void accept(Visitor& visitor, const ::automy::basic::TransformPublisher_set_transform& value); ///< \private
+void accept(Visitor& visitor, const ::automy::basic::TransformPublisher_set_transform_return& value); ///< \private
 void accept(Visitor& visitor, const ::automy::basic::Trigger& value); ///< \private
 
 /// \private
@@ -546,6 +551,52 @@ struct type<::automy::basic::TransformPublisherBase> {
 		vnx::write(out, value);
 	}
 	void accept(Visitor& visitor, const ::automy::basic::TransformPublisherBase& value) {
+		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
+	}
+};
+
+/// \private
+template<>
+struct type<::automy::basic::TransformPublisher_set_transform> {
+	void read(TypeInput& in, ::automy::basic::TransformPublisher_set_transform& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::read(in, value, type_code, code);
+	}
+	void write(TypeOutput& out, const ::automy::basic::TransformPublisher_set_transform& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::write(out, value, type_code, code);
+	}
+	void read(std::istream& in, ::automy::basic::TransformPublisher_set_transform& value) {
+		vnx::read(in, value);
+	}
+	void write(std::ostream& out, const ::automy::basic::TransformPublisher_set_transform& value) {
+		vnx::write(out, value);
+	}
+	void accept(Visitor& visitor, const ::automy::basic::TransformPublisher_set_transform& value) {
+		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code) {
+		code.push_back(CODE_ANY);
+	}
+};
+
+/// \private
+template<>
+struct type<::automy::basic::TransformPublisher_set_transform_return> {
+	void read(TypeInput& in, ::automy::basic::TransformPublisher_set_transform_return& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::read(in, value, type_code, code);
+	}
+	void write(TypeOutput& out, const ::automy::basic::TransformPublisher_set_transform_return& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::write(out, value, type_code, code);
+	}
+	void read(std::istream& in, ::automy::basic::TransformPublisher_set_transform_return& value) {
+		vnx::read(in, value);
+	}
+	void write(std::ostream& out, const ::automy::basic::TransformPublisher_set_transform_return& value) {
+		vnx::write(out, value);
+	}
+	void accept(Visitor& visitor, const ::automy::basic::TransformPublisher_set_transform_return& value) {
 		vnx::accept(visitor, value);
 	}
 	void create_dynamic_code(std::vector<uint16_t>& code) {

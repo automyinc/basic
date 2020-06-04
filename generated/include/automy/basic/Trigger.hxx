@@ -14,8 +14,8 @@ namespace basic {
 class Trigger : public ::vnx::Value {
 public:
 	
-	::int64_t time = 0;
-	::int64_t seq_num = 0;
+	int64_t time = 0;
+	int64_t seq_num = 0;
 	
 	typedef ::vnx::Value Super;
 	

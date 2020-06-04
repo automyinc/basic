@@ -7,7 +7,7 @@
 #include <vnx/AsyncClient.h>
 #include <automy/basic/Transform3D.hxx>
 #include <vnx/Module.h>
-#include <vnx/Object.h>
+#include <vnx/Object.hpp>
 
 
 namespace automy {
@@ -19,7 +19,7 @@ public:
 	
 	TransformPublisherAsyncClient(vnx::Hash64 service_addr);
 	
-	uint64_t set_transform(const ::std::shared_ptr<const ::automy::basic::Transform3D>& new_transform, 
+	uint64_t set_transform(const std::shared_ptr<const ::automy::basic::Transform3D>& new_transform, 
 			const std::function<void()>& _callback = std::function<void()>());
 	
 	std::vector<uint64_t> vnx_get_pending_ids() const override;
@@ -27,7 +27,7 @@ public:
 protected:
 	void vnx_purge_request(uint64_t _request_id) override;
 	
-	void vnx_callback_switch(uint64_t _request_id, std::shared_ptr<const vnx::Binary> _data) override;
+	void vnx_callback_switch(uint64_t _request_id, std::shared_ptr<const vnx::Value> _value) override;
 	
 private:
 	std::map<uint64_t, std::function<void()>> vnx_queue_set_transform;

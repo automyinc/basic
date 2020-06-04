@@ -14,9 +14,9 @@ namespace basic {
 class Scalar : public ::vnx::Value {
 public:
 	
-	::int64_t time = 0;
-	::std::string key;
-	::vnx::float64_t value = 0;
+	int64_t time = 0;
+	std::string key;
+	vnx::float64_t value = 0;
 	
 	typedef ::vnx::Value Super;
 	

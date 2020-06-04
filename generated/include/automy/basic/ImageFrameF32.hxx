@@ -5,7 +5,7 @@
 #define INCLUDE_automy_basic_ImageFrameF32_HXX_
 
 #include <automy/basic/package.hxx>
-#include <automy/basic/ImageF32.h>
+#include <automy/basic/ImageF32.hpp>
 #include <automy/basic/ImageFrame.hxx>
 
 

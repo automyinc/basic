@@ -5,7 +5,7 @@
 #define INCLUDE_automy_basic_ImageFrame8_HXX_
 
 #include <automy/basic/package.hxx>
-#include <automy/basic/Image8.h>
+#include <automy/basic/Image8.hpp>
 #include <automy/basic/ImageFrame.hxx>
 
 
