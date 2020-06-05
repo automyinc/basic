@@ -71,6 +71,7 @@ void Trigger::read(std::istream& _in) {
 
 vnx::Object Trigger::to_object() const {
 	vnx::Object _object;
+	_object["__type"] = "automy.basic.Trigger";
 	_object["time"] = time;
 	_object["seq_num"] = seq_num;
 	return _object;

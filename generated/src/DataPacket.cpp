@@ -71,6 +71,7 @@ void DataPacket::read(std::istream& _in) {
 
 vnx::Object DataPacket::to_object() const {
 	vnx::Object _object;
+	_object["__type"] = "automy.basic.DataPacket";
 	_object["time"] = time;
 	_object["payload"] = payload;
 	return _object;

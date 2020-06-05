@@ -84,6 +84,7 @@ void ImageFrameF32::read(std::istream& _in) {
 
 vnx::Object ImageFrameF32::to_object() const {
 	vnx::Object _object;
+	_object["__type"] = "automy.basic.ImageFrameF32";
 	_object["time"] = time;
 	_object["frame"] = frame;
 	_object["format"] = format;

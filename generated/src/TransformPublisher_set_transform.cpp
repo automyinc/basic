@@ -69,6 +69,7 @@ void TransformPublisher_set_transform::read(std::istream& _in) {
 
 vnx::Object TransformPublisher_set_transform::to_object() const {
 	vnx::Object _object;
+	_object["__type"] = "automy.basic.TransformPublisher.set_transform";
 	_object["new_transform"] = new_transform;
 	return _object;
 }

@@ -81,6 +81,7 @@ void Transform3D::read(std::istream& _in) {
 
 vnx::Object Transform3D::to_object() const {
 	vnx::Object _object;
+	_object["__type"] = "automy.basic.Transform3D";
 	_object["time"] = time;
 	_object["frame"] = frame;
 	_object["parent"] = parent;

@@ -84,6 +84,7 @@ void ImageFrame16::read(std::istream& _in) {
 
 vnx::Object ImageFrame16::to_object() const {
 	vnx::Object _object;
+	_object["__type"] = "automy.basic.ImageFrame16";
 	_object["time"] = time;
 	_object["frame"] = frame;
 	_object["format"] = format;

@@ -75,6 +75,7 @@ void Scalar::read(std::istream& _in) {
 
 vnx::Object Scalar::to_object() const {
 	vnx::Object _object;
+	_object["__type"] = "automy.basic.Scalar";
 	_object["time"] = time;
 	_object["key"] = key;
 	_object["value"] = value;

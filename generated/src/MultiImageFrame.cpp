@@ -83,6 +83,7 @@ void MultiImageFrame::read(std::istream& _in) {
 
 vnx::Object MultiImageFrame::to_object() const {
 	vnx::Object _object;
+	_object["__type"] = "automy.basic.MultiImageFrame";
 	_object["time"] = time;
 	_object["frame"] = frame;
 	_object["format"] = format;

@@ -82,6 +82,7 @@ void TransformPublisherBase::read(std::istream& _in) {
 
 vnx::Object TransformPublisherBase::to_object() const {
 	vnx::Object _object;
+	_object["__type"] = "automy.basic.TransformPublisher";
 	_object["domain"] = domain;
 	_object["interval_ms"] = interval_ms;
 	_object["both_ways"] = both_ways;
