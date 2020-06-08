@@ -30,6 +30,20 @@ public:
 		subscribe(topic, history_ms);
 	}
 	
+	/*
+	 * @param domain Base name for topics, eg. "tf".
+	 * @param from Source frame for transformation.
+	 * @param to Resulting frame after transformation.
+	 * @param history_ms History length in ms.
+	 */
+	TransformClient(	const std::string& domain,
+						const std::string& from,
+						const std::string& to,
+						int64_t history_ms = 10000)
+		:	TransformClient(domain + "." + to + "." + from, history_ms)
+	{
+	}
+
 	bool empty() {
 		poll();
 		return m_buffer.empty();
@@ -51,7 +65,7 @@ public:
 	
 	/*
 	 * @param time Timestamp in usec, zero = latest available.
-	 * @param timeout_ms Maximum wait time in ms.
+	 * @param timeout_ms Maximum wait time in ms. (zero = no waiting)
 	 */
 	std::shared_ptr<const Transform3D> query(int64_t time, int64_t timeout_ms) {
 		while(vnx::do_run()) {
