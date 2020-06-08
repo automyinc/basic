@@ -10,11 +10,14 @@ namespace basic {
 
 class Image32 : public Image<uint32_t> {
 public:
-	Image32() {}
+	Image32() = default;
 
 	Image32(size_t width_, size_t height_, size_t depth_ = 1) : Image(width_, height_, depth_) {}
 
 	Image32(const Image<uint32_t>& image) : Image(image) {}
+
+	template<typename S>
+	explicit Image32(const Image<S>& image) : Image(image) {}
 
 	static std::shared_ptr<Image32> create() {
 		return std::make_shared<Image32>();

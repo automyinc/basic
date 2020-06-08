@@ -10,11 +10,14 @@ namespace basic {
 
 class Image8 : public Image<uint8_t> {
 public:
-	Image8() {}
+	Image8() = default;
 
 	Image8(size_t width_, size_t height_, size_t depth_ = 1) : Image(width_, height_, depth_) {}
 
 	Image8(const Image<uint8_t>& image) : Image(image) {}
+
+	template<typename S>
+	explicit Image8(const Image<S>& image) : Image(image) {}
 
 	static std::shared_ptr<Image8> create() {
 		return std::make_shared<Image8>();

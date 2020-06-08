@@ -10,11 +10,14 @@ namespace basic {
 
 class ImageF64 : public Image<double> {
 public:
-	ImageF64() {}
+	ImageF64() = default;
 
 	ImageF64(size_t width_, size_t height_, size_t depth_ = 1) : Image(width_, height_, depth_) {}
 
 	ImageF64(const Image<double>& image) : Image(image) {}
+
+	template<typename S>
+	explicit ImageF64(const Image<S>& image) : Image(image) {}
 
 	static std::shared_ptr<ImageF64> create() {
 		return std::make_shared<ImageF64>();

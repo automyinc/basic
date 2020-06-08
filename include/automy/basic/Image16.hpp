@@ -10,11 +10,14 @@ namespace basic {
 
 class Image16 : public Image<uint16_t> {
 public:
-	Image16() {}
+	Image16() = default;
 
 	Image16(size_t width_, size_t height_, size_t depth_ = 1) : Image(width_, height_, depth_) {}
 
 	Image16(const Image<uint16_t>& image) : Image(image) {}
+
+	template<typename S>
+	explicit Image16(const Image<S>& image) : Image(image) {}
 
 	static std::shared_ptr<Image16> create() {
 		return std::make_shared<Image16>();
