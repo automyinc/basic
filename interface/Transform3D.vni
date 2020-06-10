@@ -13,6 +13,8 @@ class Transform3D {
 	Matrix4d matrix;				// left multiplying transforms a point from 'frame' to 'parent'
 	
 	
+	vnx.TopicPtr get_topic(string tf_domain) const;		// returns tf topic name based on 'tf_domain', 'frame' and 'parent'
+	
 	Transform3D* get_inverse() const;
 	
 	/* 

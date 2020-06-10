@@ -6,6 +6,10 @@
 namespace automy {
 namespace basic {
 
+vnx::TopicPtr Transform3D::get_topic(const std::string& tf_domain) const {
+	return "tf." + parent + "." + frame;
+}
+
 std::shared_ptr<const Transform3D> Transform3D::get_inverse() const {
 	auto result = vnx::clone(*this);
 	result->parent = frame;
