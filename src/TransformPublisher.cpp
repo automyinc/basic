@@ -40,10 +40,10 @@ void TransformPublisher::update()
 	for(auto value : transforms) {
 		auto copy = vnx::clone(value);
 		copy->time = vnx::get_time_micros();
-		publish(copy, domain + "." + value->parent + "." + value->frame);
+		publish(copy, value->get_topic(domain));
 		if(both_ways) {
 			auto inverse = copy->get_inverse();
-			publish(inverse, domain + "." + inverse->parent + "." + inverse->frame);
+			publish(inverse, inverse->get_topic(domain));
 		}
 	}
 }
