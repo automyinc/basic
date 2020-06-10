@@ -6,6 +6,7 @@
 #include <automy/basic/Transform3D.hxx>
 #include <automy/math/Matrix4d.hpp>
 #include <vnx/Object.hpp>
+#include <vnx/TopicPtr.hpp>
 #include <vnx/Value.h>
 
 

@@ -7,6 +7,7 @@
 #include <automy/basic/package.hxx>
 #include <automy/math/Matrix4d.hpp>
 #include <vnx/Object.hpp>
+#include <vnx/TopicPtr.hpp>
 #include <vnx/Value.h>
 
 
@@ -30,6 +31,7 @@ public:
 	const char* get_type_name() const override;
 	const vnx::TypeCode* get_type_code() const override;
 	
+	virtual ::vnx::TopicPtr get_topic(const std::string& tf_domain) const;
 	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_inverse() const;
 	static std::shared_ptr<const ::automy::basic::Transform3D> from_config(const ::vnx::Object& config);
 	
