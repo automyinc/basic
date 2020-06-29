@@ -68,26 +68,36 @@ public:
 	 * @param timeout_ms Maximum wait time in ms. (zero = no waiting)
 	 */
 	std::shared_ptr<const Transform3D> query(int64_t time, int64_t timeout_ms) {
+		const auto time_begin = vnx::get_time_millis();
+		poll();
 		while(vnx::do_run()) {
-			poll();
-			if(time == 0) {
-				return m_buffer.back();
+			if(!m_buffer.empty()) {
+				if(time == 0) {
+					return m_buffer.back();
+				}
+				if(time <= m_buffer.back_time()) {
+					return m_buffer.query(time);
+				}
 			}
-			if(time <= m_buffer.back_time()) {
-				return m_buffer.query(time);
+			if(timeout_ms > 0) {
+				const auto time_left = timeout_ms - (vnx::get_time_millis() - time_begin);
+				if(time_left > 0) {
+					poll(time_left);
+				} else {
+					break;
+				}
+			} else if(timeout_ms < 0) {
+				poll(-1);
+			} else {
+				break;
 			}
-			const int64_t wait_time = time - m_buffer.back_time();
-			if(wait_time > timeout_ms * 1000) {
-				return 0;
-			}
-			::usleep(wait_time + 100);
 		}
 		return 0;
 	}
 	
 protected:
-	void poll() {
-		while(auto msg = read()) {
+	void poll(int64_t timeout_ms = 0) {
+		while(auto msg = read_blocking(timeout_ms * 1000)) {
 			auto sample = std::dynamic_pointer_cast<const vnx::Sample>(msg);
 			if(sample) {
 				auto transform = std::dynamic_pointer_cast<const Transform3D>(sample->value);
@@ -95,6 +105,7 @@ protected:
 					m_buffer.push(transform);
 				}
 			}
+			timeout_ms = 0;		// wait only once
 		}
 	}
 	
