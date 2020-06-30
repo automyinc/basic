@@ -33,6 +33,7 @@ public:
 	
 	virtual ::vnx::TopicPtr get_topic(const std::string& tf_domain) const;
 	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_inverse() const;
+	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_interpolated(const std::shared_ptr<const ::automy::basic::Transform3D>& sample_1, const vnx::float64_t& t) const;
 	static std::shared_ptr<const ::automy::basic::Transform3D> from_config(const ::vnx::Object& config);
 	
 	static std::shared_ptr<Transform3D> create();

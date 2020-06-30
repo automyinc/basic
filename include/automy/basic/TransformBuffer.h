@@ -62,19 +62,18 @@ public:
 	
 	std::shared_ptr<const Transform3D> query(int64_t time) const {
 		if(history.empty()) {
-			return 0;
+			return nullptr;
 		}
 		if(time < history.front()->time) {
-			return 0;
+			return nullptr;
 		}
 		if(time > history.back()->time) {
-			return 0;
+			return nullptr;
 		}
 		auto iter = --history.cend();
 		if(time >= (*iter)->time) {
 			return *iter;
 		}
-		// TODO: interpolate transform
 		auto prev = iter;
 		while(true) {
 			if(iter == history.cbegin()) {
@@ -84,6 +83,13 @@ public:
 			const int64_t delta_0 = time - (*iter)->time;
 			const int64_t delta_1 = (*prev)->time - time;
 			if(delta_0 >= 0 && delta_1 >= 0) {
+				const auto delta = (*prev)->time - (*iter)->time;
+				if(delta > 0) {
+					const auto tmp = (*iter)->get_interpolated(*prev, delta_0 / double(delta));
+					if(tmp) {
+						return tmp;
+					}
+				}
 				if(delta_0 < delta_1) {
 					return *iter;
 				} else {

@@ -18,6 +18,12 @@ std::shared_ptr<const Transform3D> Transform3D::get_inverse() const {
 	return result;
 }
 
+std::shared_ptr<const Transform3D> Transform3D::get_interpolated(
+		const std::shared_ptr<const Transform3D>& sample_1, const vnx::float64_t& t) const
+{
+	return nullptr;
+}
+
 std::shared_ptr<const Transform3D> Transform3D::from_config(const vnx::Object& config) {
 	auto result = Transform3D::create();
 	result->frame = config["frame"].to_string_value();

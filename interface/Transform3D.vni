@@ -17,6 +17,12 @@ class Transform3D {
 	
 	Transform3D* get_inverse() const;
 	
+	/*
+	 * Computes an interpolation between this and sample_1, at point t (0 to 1).
+	 * Returns null in case interpolation is not supported.
+	 */
+	Transform3D* get_interpolated(Transform3D* sample_1, double t) const;
+	
 	/* 
 	 * Reads an Object and creates a Transform3D out of it.
 	 * It accepts different fields for easier setting of a transform:
