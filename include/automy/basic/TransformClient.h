@@ -65,7 +65,7 @@ public:
 	
 	/*
 	 * @param time Timestamp in usec, zero = latest available.
-	 * @param timeout_ms Maximum wait time in ms. (zero = no waiting)
+	 * @param timeout_ms Maximum wait time in ms. (zero = no waiting, -1 = infinite wait)
 	 */
 	std::shared_ptr<const Transform3D> query(int64_t time, int64_t timeout_ms) {
 		const auto time_begin = vnx::get_time_millis();
