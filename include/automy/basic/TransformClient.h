@@ -80,9 +80,14 @@ public:
 				}
 			}
 			if(timeout_ms > 0) {
-				const auto time_left = timeout_ms - (vnx::get_time_millis() - time_begin);
-				if(time_left > 0) {
-					poll(time_left);
+				const auto now = vnx::get_time_millis();
+				if(now >= time_begin) {
+					const auto time_left = timeout_ms - (now - time_begin);
+					if(time_left > 0) {
+						poll(time_left);
+					} else {
+						break;
+					}
 				} else {
 					break;
 				}
