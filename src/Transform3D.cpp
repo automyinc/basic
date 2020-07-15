@@ -10,6 +10,19 @@ vnx::TopicPtr Transform3D::get_topic(const std::string& tf_domain) const {
 	return "tf." + parent + "." + frame;
 }
 
+void Transform3D::transform(const std::shared_ptr<const Transform3D>& sample) {
+	if(sample->frame != parent) {
+		throw std::logic_error("transform mismatch");
+	}
+	parent = sample->parent;
+	matrix = sample->matrix * matrix;
+}
+
+automy::math::Matrix4d Transform3D::get_transform25() const
+{
+	throw std::logic_error("Transform3D::get_transform25() not implemented");
+}
+
 std::shared_ptr<const Transform3D> Transform3D::get_inverse() const {
 	auto result = vnx::clone(*this);
 	result->parent = frame;
