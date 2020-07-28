@@ -28,6 +28,9 @@ void write_image(const Image<T>& image, const std::string& filename, int number 
 template<typename T>
 Image<T> draw_text(int width, int font_size, const std::vector<std::string>& text, const float front_color[3], const float back_color[3]);
 
+template<typename T>
+void draw_polygon(Image<T>& image, const Image<float>& points, const T* color, bool fill = true);
+
 
 /** \brief Generic image class for 2D and 2.5D images.
  * 
@@ -307,6 +310,10 @@ public:
 		draw_image_ll(x0, y0, tmp);
 	}
 	
+	void draw_polygon(const Image<float>& points, const T* color, bool fill) {
+		basic::draw_polygon(*this, points, color, fill);
+	}
+
 	void read_from_file(const std::string& filename);
 	
 	void write_to_file(const std::string& filename, int number = -1, int digits = 6) const;

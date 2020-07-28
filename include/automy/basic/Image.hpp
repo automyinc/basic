@@ -130,8 +130,16 @@ Image<T> draw_text(int width, int font_size, const std::vector<std::string>& tex
 	throw std::logic_error("not implemented");
 }
 
+template<typename T>
+void draw_polygon(Image<T>& image, const Image<float>& points, const T* color, bool fill) {
+	throw std::logic_error("not implemented");
+}
+
 template<>
 Image<uint8_t> draw_text(int width, int font_size, const std::vector<std::string>& text, const float front_color[3], const float back_color[3]);
+
+template<>
+void draw_polygon(Image<uint8_t>& image, const Image<float>& points, const uint8_t* color, bool fill);
 
 
 } // basic

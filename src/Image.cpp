@@ -72,6 +72,22 @@ Image<uint8_t> draw_text(int width, int font_size, const std::vector<std::string
 	return convert_from_cimg<uint8_t>(tmp);
 }
 
+template<>
+void draw_polygon(Image<uint8_t>& image, const Image<float>& points, const uint8_t* color, bool fill) {
+	auto image_ = convert_to_cimg(image);
+	CImg<float> points_(points.width(), points.height());
+	for(int i = 0; i < points.width(); ++i) {
+		points_(i, 0) = points(i, 0);
+		points_(i, 1) = image_.height() - points(i, 1);
+	}
+	if(fill) {
+		image_.draw_polygon(points_, color);
+	} else {
+		image_.draw_polygon(points_, color, 1, 0xFFFFFFFF);
+	}
+	image = convert_from_cimg(image_);
+}
+
 
 } // basic
 } // automy
