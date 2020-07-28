@@ -19,6 +19,8 @@ public:
 	
 	TransformPublisherClient(vnx::Hash64 service_addr);
 	
+	::vnx::TypeCode vnx_get_type_code();
+	
 	void set_transform(const std::shared_ptr<const ::automy::basic::Transform3D>& new_transform);
 	
 	void set_transform_async(const std::shared_ptr<const ::automy::basic::Transform3D>& new_transform);

@@ -8,6 +8,8 @@
 #include <automy/basic/TransformPublisher_set_transform.hxx>
 #include <automy/basic/TransformPublisher_set_transform_return.hxx>
 #include <vnx/Module.h>
+#include <vnx/ModuleInterface_vnx_get_type_code.hxx>
+#include <vnx/ModuleInterface_vnx_get_type_code_return.hxx>
 #include <vnx/Object.hpp>
 
 #include <vnx/vnx.h>
@@ -53,8 +55,8 @@ void TransformPublisherBase::accept(vnx::Visitor& _visitor) const {
 }
 
 void TransformPublisherBase::write(std::ostream& _out) const {
-	_out << "{\"__type\": \"automy.basic.TransformPublisher\"";
-	_out << ", \"domain\": "; vnx::write(_out, domain);
+	_out << "{";
+	_out << "\"domain\": "; vnx::write(_out, domain);
 	_out << ", \"interval_ms\": "; vnx::write(_out, interval_ms);
 	_out << ", \"both_ways\": "; vnx::write(_out, both_ways);
 	_out << ", \"config\": "; vnx::write(_out, config);
@@ -82,7 +84,6 @@ void TransformPublisherBase::read(std::istream& _in) {
 
 vnx::Object TransformPublisherBase::to_object() const {
 	vnx::Object _object;
-	_object["__type"] = "automy.basic.TransformPublisher";
 	_object["domain"] = domain;
 	_object["interval_ms"] = interval_ms;
 	_object["both_ways"] = both_ways;
@@ -133,15 +134,16 @@ std::shared_ptr<vnx::TypeCode> TransformPublisherBase::static_create_type_code()
 	type_code->type_hash = vnx::Hash64(0x88d77b971994875dull);
 	type_code->code_hash = vnx::Hash64(0x9a442e8c134cf17bull);
 	type_code->is_native = true;
-	type_code->methods.resize(1);
-	type_code->methods[0] = ::automy::basic::TransformPublisher_set_transform::static_get_type_code();
+	type_code->methods.resize(2);
+	type_code->methods[0] = ::vnx::ModuleInterface_vnx_get_type_code::static_get_type_code();
+	type_code->methods[1] = ::automy::basic::TransformPublisher_set_transform::static_get_type_code();
 	type_code->fields.resize(5);
 	{
 		vnx::TypeField& field = type_code->fields[0];
 		field.is_extended = true;
 		field.name = "domain";
 		field.value = vnx::to_string("tf");
-		field.code = {12, 5};
+		field.code = {32};
 	}
 	{
 		vnx::TypeField& field = type_code->fields[1];
@@ -153,7 +155,7 @@ std::shared_ptr<vnx::TypeCode> TransformPublisherBase::static_create_type_code()
 		vnx::TypeField& field = type_code->fields[2];
 		field.name = "both_ways";
 		field.value = vnx::to_string(true);
-		field.code = {1};
+		field.code = {31};
 	}
 	{
 		vnx::TypeField& field = type_code->fields[3];
@@ -176,7 +178,15 @@ void TransformPublisherBase::vnx_handle_switch(std::shared_ptr<const vnx::Sample
 
 std::shared_ptr<vnx::Value> TransformPublisherBase::vnx_call_switch(std::shared_ptr<const vnx::Value> _method, const vnx::request_id_t& _request_id) {
 	const auto _type_hash = _method->get_type_hash();
-	if(_type_hash == vnx::Hash64(0x4b8ec99ea30fd92cull)) {
+	if(_type_hash == vnx::Hash64(0x305ec4d628960e5dull)) {
+		auto _args = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_get_type_code>(_method);
+		if(!_args) {
+			throw std::logic_error("vnx_call_switch(): !_args");
+		}
+		auto _return_value = ::vnx::ModuleInterface_vnx_get_type_code_return::create();
+		_return_value->_ret_0 = vnx_get_type_code();
+		return _return_value;
+	} else if(_type_hash == vnx::Hash64(0x4b8ec99ea30fd92cull)) {
 		auto _args = std::dynamic_pointer_cast<const ::automy::basic::TransformPublisher_set_transform>(_method);
 		if(!_args) {
 			throw std::logic_error("vnx_call_switch(): !_args");

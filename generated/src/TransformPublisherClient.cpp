@@ -7,6 +7,8 @@
 #include <automy/basic/TransformPublisher_set_transform.hxx>
 #include <automy/basic/TransformPublisher_set_transform_return.hxx>
 #include <vnx/Module.h>
+#include <vnx/ModuleInterface_vnx_get_type_code.hxx>
+#include <vnx/ModuleInterface_vnx_get_type_code_return.hxx>
 #include <vnx/Object.hpp>
 
 #include <vnx/vnx.h>
@@ -23,6 +25,16 @@ TransformPublisherClient::TransformPublisherClient(const std::string& service_na
 TransformPublisherClient::TransformPublisherClient(vnx::Hash64 service_addr)
 	:	Client::Client(service_addr)
 {
+}
+
+::vnx::TypeCode TransformPublisherClient::vnx_get_type_code() {
+	auto _method = ::vnx::ModuleInterface_vnx_get_type_code::create();
+	auto _return_value = vnx_request(_method);
+	auto _result = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_get_type_code_return>(_return_value);
+	if(!_result) {
+		throw std::logic_error("TransformPublisherClient: !_result");
+	}
+	return _result->_ret_0;
 }
 
 void TransformPublisherClient::set_transform(const std::shared_ptr<const ::automy::basic::Transform3D>& new_transform) {

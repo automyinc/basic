@@ -140,19 +140,19 @@ std::shared_ptr<vnx::TypeCode> ImageFrame::static_create_type_code() {
 		vnx::TypeField& field = type_code->fields[1];
 		field.is_extended = true;
 		field.name = "frame";
-		field.code = {12, 5};
+		field.code = {32};
 	}
 	{
 		vnx::TypeField& field = type_code->fields[2];
 		field.is_extended = true;
 		field.name = "format";
-		field.code = {12, 5};
+		field.code = {32};
 	}
 	{
 		vnx::TypeField& field = type_code->fields[3];
 		field.is_extended = true;
 		field.name = "properties";
-		field.code = {13, 4, 12, 5, 17};
+		field.code = {13, 3, 32, 17};
 	}
 	type_code->build();
 	return type_code;
