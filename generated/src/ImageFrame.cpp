@@ -102,6 +102,36 @@ void ImageFrame::from_object(const vnx::Object& _object) {
 	}
 }
 
+vnx::Variant ImageFrame::get_field(const std::string& _name) const {
+	if(_name == "time") {
+		return vnx::Variant(time);
+	}
+	if(_name == "frame") {
+		return vnx::Variant(frame);
+	}
+	if(_name == "format") {
+		return vnx::Variant(format);
+	}
+	if(_name == "properties") {
+		return vnx::Variant(properties);
+	}
+	return vnx::Variant();
+}
+
+void ImageFrame::set_field(const std::string& _name, const vnx::Variant& _value) {
+	if(_name == "time") {
+		_value.to(time);
+	} else if(_name == "frame") {
+		_value.to(frame);
+	} else if(_name == "format") {
+		_value.to(format);
+	} else if(_name == "properties") {
+		_value.to(properties);
+	} else {
+		throw std::logic_error("no such field: '" + _name + "'");
+	}
+}
+
 /// \private
 std::ostream& operator<<(std::ostream& _out, const ImageFrame& _value) {
 	_value.write(_out);

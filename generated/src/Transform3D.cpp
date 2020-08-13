@@ -104,6 +104,36 @@ void Transform3D::from_object(const vnx::Object& _object) {
 	}
 }
 
+vnx::Variant Transform3D::get_field(const std::string& _name) const {
+	if(_name == "time") {
+		return vnx::Variant(time);
+	}
+	if(_name == "frame") {
+		return vnx::Variant(frame);
+	}
+	if(_name == "parent") {
+		return vnx::Variant(parent);
+	}
+	if(_name == "matrix") {
+		return vnx::Variant(matrix);
+	}
+	return vnx::Variant();
+}
+
+void Transform3D::set_field(const std::string& _name, const vnx::Variant& _value) {
+	if(_name == "time") {
+		_value.to(time);
+	} else if(_name == "frame") {
+		_value.to(frame);
+	} else if(_name == "parent") {
+		_value.to(parent);
+	} else if(_name == "matrix") {
+		_value.to(matrix);
+	} else {
+		throw std::logic_error("no such field: '" + _name + "'");
+	}
+}
+
 /// \private
 std::ostream& operator<<(std::ostream& _out, const Transform3D& _value) {
 	_value.write(_out);

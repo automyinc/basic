@@ -94,6 +94,31 @@ void Scalar::from_object(const vnx::Object& _object) {
 	}
 }
 
+vnx::Variant Scalar::get_field(const std::string& _name) const {
+	if(_name == "time") {
+		return vnx::Variant(time);
+	}
+	if(_name == "key") {
+		return vnx::Variant(key);
+	}
+	if(_name == "value") {
+		return vnx::Variant(value);
+	}
+	return vnx::Variant();
+}
+
+void Scalar::set_field(const std::string& _name, const vnx::Variant& _value) {
+	if(_name == "time") {
+		_value.to(time);
+	} else if(_name == "key") {
+		_value.to(key);
+	} else if(_name == "value") {
+		_value.to(value);
+	} else {
+		throw std::logic_error("no such field: '" + _name + "'");
+	}
+}
+
 /// \private
 std::ostream& operator<<(std::ostream& _out, const Scalar& _value) {
 	_value.write(_out);

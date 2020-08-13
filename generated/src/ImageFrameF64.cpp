@@ -109,6 +109,41 @@ void ImageFrameF64::from_object(const vnx::Object& _object) {
 	}
 }
 
+vnx::Variant ImageFrameF64::get_field(const std::string& _name) const {
+	if(_name == "time") {
+		return vnx::Variant(time);
+	}
+	if(_name == "frame") {
+		return vnx::Variant(frame);
+	}
+	if(_name == "format") {
+		return vnx::Variant(format);
+	}
+	if(_name == "properties") {
+		return vnx::Variant(properties);
+	}
+	if(_name == "image") {
+		return vnx::Variant(image);
+	}
+	return vnx::Variant();
+}
+
+void ImageFrameF64::set_field(const std::string& _name, const vnx::Variant& _value) {
+	if(_name == "time") {
+		_value.to(time);
+	} else if(_name == "frame") {
+		_value.to(frame);
+	} else if(_name == "format") {
+		_value.to(format);
+	} else if(_name == "properties") {
+		_value.to(properties);
+	} else if(_name == "image") {
+		_value.to(image);
+	} else {
+		throw std::logic_error("no such field: '" + _name + "'");
+	}
+}
+
 /// \private
 std::ostream& operator<<(std::ostream& _out, const ImageFrameF64& _value) {
 	_value.write(_out);

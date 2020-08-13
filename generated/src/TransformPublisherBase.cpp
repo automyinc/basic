@@ -108,6 +108,41 @@ void TransformPublisherBase::from_object(const vnx::Object& _object) {
 	}
 }
 
+vnx::Variant TransformPublisherBase::get_field(const std::string& _name) const {
+	if(_name == "domain") {
+		return vnx::Variant(domain);
+	}
+	if(_name == "interval_ms") {
+		return vnx::Variant(interval_ms);
+	}
+	if(_name == "both_ways") {
+		return vnx::Variant(both_ways);
+	}
+	if(_name == "config") {
+		return vnx::Variant(config);
+	}
+	if(_name == "transforms") {
+		return vnx::Variant(transforms);
+	}
+	return vnx::Variant();
+}
+
+void TransformPublisherBase::set_field(const std::string& _name, const vnx::Variant& _value) {
+	if(_name == "domain") {
+		_value.to(domain);
+	} else if(_name == "interval_ms") {
+		_value.to(interval_ms);
+	} else if(_name == "both_ways") {
+		_value.to(both_ways);
+	} else if(_name == "config") {
+		_value.to(config);
+	} else if(_name == "transforms") {
+		_value.to(transforms);
+	} else {
+		throw std::logic_error("no such field: '" + _name + "'");
+	}
+}
+
 /// \private
 std::ostream& operator<<(std::ostream& _out, const TransformPublisherBase& _value) {
 	_value.write(_out);

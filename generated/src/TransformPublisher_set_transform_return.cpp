@@ -67,6 +67,14 @@ vnx::Object TransformPublisher_set_transform_return::to_object() const {
 void TransformPublisher_set_transform_return::from_object(const vnx::Object& _object) {
 }
 
+vnx::Variant TransformPublisher_set_transform_return::get_field(const std::string& _name) const {
+	return vnx::Variant();
+}
+
+void TransformPublisher_set_transform_return::set_field(const std::string& _name, const vnx::Variant& _value) {
+	throw std::logic_error("no such field: '" + _name + "'");
+}
+
 /// \private
 std::ostream& operator<<(std::ostream& _out, const TransformPublisher_set_transform_return& _value) {
 	_value.write(_out);

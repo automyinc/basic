@@ -87,6 +87,26 @@ void Trigger::from_object(const vnx::Object& _object) {
 	}
 }
 
+vnx::Variant Trigger::get_field(const std::string& _name) const {
+	if(_name == "time") {
+		return vnx::Variant(time);
+	}
+	if(_name == "seq_num") {
+		return vnx::Variant(seq_num);
+	}
+	return vnx::Variant();
+}
+
+void Trigger::set_field(const std::string& _name, const vnx::Variant& _value) {
+	if(_name == "time") {
+		_value.to(time);
+	} else if(_name == "seq_num") {
+		_value.to(seq_num);
+	} else {
+		throw std::logic_error("no such field: '" + _name + "'");
+	}
+}
+
 /// \private
 std::ostream& operator<<(std::ostream& _out, const Trigger& _value) {
 	_value.write(_out);
