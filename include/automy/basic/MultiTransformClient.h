@@ -81,7 +81,7 @@ public:
 			if(sample) {
 				transforms.push_back(sample);
 			} else {
-				return 0;		// timeout
+				return nullptr;		// timeout
 			}
 		}
 		auto result = Transform3D::create();

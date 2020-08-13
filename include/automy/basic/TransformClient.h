@@ -9,8 +9,6 @@
 #include <vnx/TopicPtr.h>
 #include <vnx/Process.h>
 
-#include <unistd.h>
-
 
 namespace automy {
 namespace basic {
@@ -97,7 +95,7 @@ public:
 				break;
 			}
 		}
-		return 0;
+		return nullptr;
 	}
 	
 protected:
