@@ -12,7 +12,7 @@ vnx::TopicPtr Transform3D::get_topic(const std::string& tf_domain) const {
 
 void Transform3D::transform(const std::shared_ptr<const Transform3D>& sample) {
 	if(sample->frame != parent) {
-		throw std::logic_error("transform mismatch");
+		throw std::logic_error("transform mismatch ('" + sample->frame + "' != '" + parent + "')");
 	}
 	parent = sample->parent;
 	matrix = sample->matrix * matrix;
