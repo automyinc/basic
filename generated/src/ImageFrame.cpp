@@ -23,6 +23,7 @@ vnx::Hash64 ImageFrame::get_type_hash() const {
 const char* ImageFrame::get_type_name() const {
 	return "automy.basic.ImageFrame";
 }
+
 const vnx::TypeCode* ImageFrame::get_type_code() const {
 	return automy::basic::vnx_native_type_code_ImageFrame;
 }
@@ -241,6 +242,10 @@ void read(TypeInput& in, ::automy::basic::ImageFrame& value, const TypeCode* typ
 }
 
 void write(TypeOutput& out, const ::automy::basic::ImageFrame& value, const TypeCode* type_code, const uint16_t* code) {
+	if(code && code[0] == CODE_OBJECT) {
+		vnx::write(out, value.to_object(), nullptr, code);
+		return;
+	}
 	if(!type_code || (code && code[0] == CODE_ANY)) {
 		type_code = automy::basic::vnx_native_type_code_ImageFrame;
 		out.write_type_code(type_code);

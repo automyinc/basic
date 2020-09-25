@@ -25,6 +25,7 @@ vnx::Hash64 Transform3D::get_type_hash() const {
 const char* Transform3D::get_type_name() const {
 	return "automy.basic.Transform3D";
 }
+
 const vnx::TypeCode* Transform3D::get_type_code() const {
 	return automy::basic::vnx_native_type_code_Transform3D;
 }
@@ -243,6 +244,10 @@ void read(TypeInput& in, ::automy::basic::Transform3D& value, const TypeCode* ty
 }
 
 void write(TypeOutput& out, const ::automy::basic::Transform3D& value, const TypeCode* type_code, const uint16_t* code) {
+	if(code && code[0] == CODE_OBJECT) {
+		vnx::write(out, value.to_object(), nullptr, code);
+		return;
+	}
 	if(!type_code || (code && code[0] == CODE_ANY)) {
 		type_code = automy::basic::vnx_native_type_code_Transform3D;
 		out.write_type_code(type_code);

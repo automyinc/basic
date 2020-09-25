@@ -22,6 +22,7 @@ vnx::Hash64 Scalar::get_type_hash() const {
 const char* Scalar::get_type_name() const {
 	return "automy.basic.Scalar";
 }
+
 const vnx::TypeCode* Scalar::get_type_code() const {
 	return automy::basic::vnx_native_type_code_Scalar;
 }
@@ -225,6 +226,10 @@ void read(TypeInput& in, ::automy::basic::Scalar& value, const TypeCode* type_co
 }
 
 void write(TypeOutput& out, const ::automy::basic::Scalar& value, const TypeCode* type_code, const uint16_t* code) {
+	if(code && code[0] == CODE_OBJECT) {
+		vnx::write(out, value.to_object(), nullptr, code);
+		return;
+	}
 	if(!type_code || (code && code[0] == CODE_ANY)) {
 		type_code = automy::basic::vnx_native_type_code_Scalar;
 		out.write_type_code(type_code);

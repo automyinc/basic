@@ -24,6 +24,7 @@ vnx::Hash64 TransformPublisher_set_transform::get_type_hash() const {
 const char* TransformPublisher_set_transform::get_type_name() const {
 	return "automy.basic.TransformPublisher.set_transform";
 }
+
 const vnx::TypeCode* TransformPublisher_set_transform::get_type_code() const {
 	return automy::basic::vnx_native_type_code_TransformPublisher_set_transform;
 }
@@ -182,6 +183,10 @@ void read(TypeInput& in, ::automy::basic::TransformPublisher_set_transform& valu
 }
 
 void write(TypeOutput& out, const ::automy::basic::TransformPublisher_set_transform& value, const TypeCode* type_code, const uint16_t* code) {
+	if(code && code[0] == CODE_OBJECT) {
+		vnx::write(out, value.to_object(), nullptr, code);
+		return;
+	}
 	if(!type_code || (code && code[0] == CODE_ANY)) {
 		type_code = automy::basic::vnx_native_type_code_TransformPublisher_set_transform;
 		out.write_type_code(type_code);

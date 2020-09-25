@@ -32,10 +32,10 @@ public:
 	const vnx::TypeCode* get_type_code() const override;
 	
 	virtual ::vnx::TopicPtr get_topic(const std::string& tf_domain) const;
-	virtual void transform(const std::shared_ptr<const ::automy::basic::Transform3D>& sample);
+	virtual void transform(std::shared_ptr<const ::automy::basic::Transform3D> sample);
 	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_inverse() const;
 	virtual ::automy::math::Matrix4d get_transform25() const;
-	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_interpolated(const std::shared_ptr<const ::automy::basic::Transform3D>& sample_1, const vnx::float64_t& t) const;
+	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_interpolated(std::shared_ptr<const ::automy::basic::Transform3D> sample_1, const vnx::float64_t& t) const;
 	static std::shared_ptr<const ::automy::basic::Transform3D> from_config(const ::vnx::Object& config);
 	
 	static std::shared_ptr<Transform3D> create();
