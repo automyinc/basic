@@ -22,7 +22,7 @@ public:
 protected:
 	void main() override;
 
-	void set_transform(const std::shared_ptr<const Transform3D>& new_transform) override;
+	void set_transform(std::shared_ptr<const Transform3D> new_transform) override;
 
 private:
 	void update();

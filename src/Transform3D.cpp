@@ -10,7 +10,7 @@ vnx::TopicPtr Transform3D::get_topic(const std::string& tf_domain) const {
 	return "tf." + parent + "." + frame;
 }
 
-void Transform3D::transform(const std::shared_ptr<const Transform3D>& sample) {
+void Transform3D::transform(std::shared_ptr<const Transform3D> sample) {
 	if(sample->frame != parent) {
 		throw std::logic_error("transform mismatch ('" + sample->frame + "' != '" + parent + "')");
 	}
@@ -32,7 +32,7 @@ std::shared_ptr<const Transform3D> Transform3D::get_inverse() const {
 }
 
 std::shared_ptr<const Transform3D> Transform3D::get_interpolated(
-		const std::shared_ptr<const Transform3D>& sample_1, const vnx::float64_t& t) const
+		std::shared_ptr<const Transform3D> sample_1, const vnx::float64_t& t) const
 {
 	return nullptr;
 }

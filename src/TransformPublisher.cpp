@@ -23,7 +23,7 @@ void TransformPublisher::main()
 	Super::main();
 }
 
-void TransformPublisher::set_transform(const std::shared_ptr<const Transform3D>& new_transform)
+void TransformPublisher::set_transform(std::shared_ptr<const Transform3D> new_transform)
 {
 	for(auto& value : transforms) {
 		if(value->frame == new_transform->frame && value->parent == new_transform->parent) {
