@@ -22,6 +22,7 @@ vnx::Hash64 MultiImageFrame::get_type_hash() const {
 const char* MultiImageFrame::get_type_name() const {
 	return "automy.basic.MultiImageFrame";
 }
+
 const vnx::TypeCode* MultiImageFrame::get_type_code() const {
 	return automy::basic::vnx_native_type_code_MultiImageFrame;
 }
@@ -261,6 +262,10 @@ void read(TypeInput& in, ::automy::basic::MultiImageFrame& value, const TypeCode
 }
 
 void write(TypeOutput& out, const ::automy::basic::MultiImageFrame& value, const TypeCode* type_code, const uint16_t* code) {
+	if(code && code[0] == CODE_OBJECT) {
+		vnx::write(out, value.to_object(), nullptr, code);
+		return;
+	}
 	if(!type_code || (code && code[0] == CODE_ANY)) {
 		type_code = automy::basic::vnx_native_type_code_MultiImageFrame;
 		out.write_type_code(type_code);

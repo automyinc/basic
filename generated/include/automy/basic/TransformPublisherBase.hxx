@@ -51,7 +51,7 @@ public:
 	static std::shared_ptr<vnx::TypeCode> static_create_type_code();
 	
 protected:
-	virtual void set_transform(const std::shared_ptr<const ::automy::basic::Transform3D>& new_transform) = 0;
+	virtual void set_transform(std::shared_ptr<const ::automy::basic::Transform3D> new_transform) = 0;
 	
 	void vnx_handle_switch(std::shared_ptr<const vnx::Sample> _sample) override;
 	std::shared_ptr<vnx::Value> vnx_call_switch(std::shared_ptr<const vnx::Value> _method, const vnx::request_id_t& _request_id) override;

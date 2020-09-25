@@ -22,6 +22,7 @@ vnx::Hash64 Trigger::get_type_hash() const {
 const char* Trigger::get_type_name() const {
 	return "automy.basic.Trigger";
 }
+
 const vnx::TypeCode* Trigger::get_type_code() const {
 	return automy::basic::vnx_native_type_code_Trigger;
 }
@@ -206,6 +207,10 @@ void read(TypeInput& in, ::automy::basic::Trigger& value, const TypeCode* type_c
 }
 
 void write(TypeOutput& out, const ::automy::basic::Trigger& value, const TypeCode* type_code, const uint16_t* code) {
+	if(code && code[0] == CODE_OBJECT) {
+		vnx::write(out, value.to_object(), nullptr, code);
+		return;
+	}
 	if(!type_code || (code && code[0] == CODE_ANY)) {
 		type_code = automy::basic::vnx_native_type_code_Trigger;
 		out.write_type_code(type_code);

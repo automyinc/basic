@@ -22,6 +22,7 @@ vnx::Hash64 DataPacket::get_type_hash() const {
 const char* DataPacket::get_type_name() const {
 	return "automy.basic.DataPacket";
 }
+
 const vnx::TypeCode* DataPacket::get_type_code() const {
 	return automy::basic::vnx_native_type_code_DataPacket;
 }
@@ -202,6 +203,10 @@ void read(TypeInput& in, ::automy::basic::DataPacket& value, const TypeCode* typ
 }
 
 void write(TypeOutput& out, const ::automy::basic::DataPacket& value, const TypeCode* type_code, const uint16_t* code) {
+	if(code && code[0] == CODE_OBJECT) {
+		vnx::write(out, value.to_object(), nullptr, code);
+		return;
+	}
 	if(!type_code || (code && code[0] == CODE_ANY)) {
 		type_code = automy::basic::vnx_native_type_code_DataPacket;
 		out.write_type_code(type_code);

@@ -23,6 +23,7 @@ vnx::Hash64 ImageFrameF32::get_type_hash() const {
 const char* ImageFrameF32::get_type_name() const {
 	return "automy.basic.ImageFrameF32";
 }
+
 const vnx::TypeCode* ImageFrameF32::get_type_code() const {
 	return automy::basic::vnx_native_type_code_ImageFrameF32;
 }
@@ -262,6 +263,10 @@ void read(TypeInput& in, ::automy::basic::ImageFrameF32& value, const TypeCode* 
 }
 
 void write(TypeOutput& out, const ::automy::basic::ImageFrameF32& value, const TypeCode* type_code, const uint16_t* code) {
+	if(code && code[0] == CODE_OBJECT) {
+		vnx::write(out, value.to_object(), nullptr, code);
+		return;
+	}
 	if(!type_code || (code && code[0] == CODE_ANY)) {
 		type_code = automy::basic::vnx_native_type_code_ImageFrameF32;
 		out.write_type_code(type_code);
