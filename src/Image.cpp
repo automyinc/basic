@@ -18,9 +18,9 @@ template<typename T>
 CImg<T> convert_to_cimg(const Image<T>& image) {
 	CImg<T> out;
 	out.resize(image.width(), image.height(), 1, image.depth());
-	for(int y = 0; y < image.height(); ++y) {
-		for(int x = 0; x < image.width(); ++x) {
-			for(int c = 0; c < image.depth(); ++c) {
+	for(size_t y = 0; y < image.height(); ++y) {
+		for(size_t x = 0; x < image.width(); ++x) {
+			for(size_t c = 0; c < image.depth(); ++c) {
 				out(x, image.height()-y-1, 0, c) = image(x, y, c);
 			}
 		}
@@ -76,7 +76,7 @@ template<>
 void draw_polygon(Image<uint8_t>& image, const Image<float>& points, const uint8_t* color, bool fill) {
 	auto image_ = convert_to_cimg(image);
 	CImg<float> points_(points.width(), points.height());
-	for(int i = 0; i < points.width(); ++i) {
+	for(size_t i = 0; i < points.width(); ++i) {
 		points_(i, 0) = points(i, 0);
 		points_(i, 1) = image_.height() - points(i, 1);
 	}
