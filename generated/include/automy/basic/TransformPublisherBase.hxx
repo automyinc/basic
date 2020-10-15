@@ -18,7 +18,6 @@ public:
 	
 	std::string domain = "tf";
 	int32_t interval_ms = 500;
-	vnx::bool_t both_ways = true;
 	std::vector<::vnx::Object> config;
 	std::vector<std::shared_ptr<const ::automy::basic::Transform3D>> transforms;
 	
@@ -29,20 +28,20 @@ public:
 	
 	TransformPublisherBase(const std::string& _vnx_name);
 	
-	vnx::Hash64 get_type_hash() const;
-	const char* get_type_name() const;
-	const vnx::TypeCode* get_type_code() const;
+	vnx::Hash64 get_type_hash() const override;
+	const char* get_type_name() const override;
+	const vnx::TypeCode* get_type_code() const override;
 	
-	void read(std::istream& _in);
-	void write(std::ostream& _out) const;
+	void read(std::istream& _in) override;
+	void write(std::ostream& _out) const override;
 	
-	void accept(vnx::Visitor& _visitor) const;
+	void accept(vnx::Visitor& _visitor) const override;
 	
-	vnx::Object to_object() const;
-	void from_object(const vnx::Object& object);
+	vnx::Object to_object() const override;
+	void from_object(const vnx::Object& object) override;
 	
-	vnx::Variant get_field(const std::string& name) const;
-	void set_field(const std::string& name, const vnx::Variant& value);
+	vnx::Variant get_field(const std::string& name) const override;
+	void set_field(const std::string& name, const vnx::Variant& value) override;
 	
 	friend std::ostream& operator<<(std::ostream& _out, const TransformPublisherBase& _value);
 	friend std::istream& operator>>(std::istream& _in, TransformPublisherBase& _value);

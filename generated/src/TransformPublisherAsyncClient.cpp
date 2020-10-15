@@ -39,7 +39,7 @@ TransformPublisherAsyncClient::TransformPublisherAsyncClient(vnx::Hash64 service
 {
 }
 
-uint64_t TransformPublisherAsyncClient::vnx_get_config_object(const std::function<void(const ::vnx::Object&)>& _callback, const std::function<void(const std::exception&)>& _error_callback) {
+uint64_t TransformPublisherAsyncClient::vnx_get_config_object(const std::function<void(const ::vnx::Object&)>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
 	auto _method = ::vnx::ModuleInterface_vnx_get_config_object::create();
 	const auto _request_id = ++vnx_next_id;
 	{
@@ -51,7 +51,7 @@ uint64_t TransformPublisherAsyncClient::vnx_get_config_object(const std::functio
 	return _request_id;
 }
 
-uint64_t TransformPublisherAsyncClient::vnx_get_config(const std::string& name, const std::function<void(const ::vnx::Variant&)>& _callback, const std::function<void(const std::exception&)>& _error_callback) {
+uint64_t TransformPublisherAsyncClient::vnx_get_config(const std::string& name, const std::function<void(const ::vnx::Variant&)>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
 	auto _method = ::vnx::ModuleInterface_vnx_get_config::create();
 	_method->name = name;
 	const auto _request_id = ++vnx_next_id;
@@ -64,7 +64,7 @@ uint64_t TransformPublisherAsyncClient::vnx_get_config(const std::string& name, 
 	return _request_id;
 }
 
-uint64_t TransformPublisherAsyncClient::vnx_set_config_object(const ::vnx::Object& config, const std::function<void()>& _callback, const std::function<void(const std::exception&)>& _error_callback) {
+uint64_t TransformPublisherAsyncClient::vnx_set_config_object(const ::vnx::Object& config, const std::function<void()>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
 	auto _method = ::vnx::ModuleInterface_vnx_set_config_object::create();
 	_method->config = config;
 	const auto _request_id = ++vnx_next_id;
@@ -77,7 +77,7 @@ uint64_t TransformPublisherAsyncClient::vnx_set_config_object(const ::vnx::Objec
 	return _request_id;
 }
 
-uint64_t TransformPublisherAsyncClient::vnx_set_config(const std::string& name, const ::vnx::Variant& value, const std::function<void()>& _callback, const std::function<void(const std::exception&)>& _error_callback) {
+uint64_t TransformPublisherAsyncClient::vnx_set_config(const std::string& name, const ::vnx::Variant& value, const std::function<void()>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
 	auto _method = ::vnx::ModuleInterface_vnx_set_config::create();
 	_method->name = name;
 	_method->value = value;
@@ -91,7 +91,7 @@ uint64_t TransformPublisherAsyncClient::vnx_set_config(const std::string& name, 
 	return _request_id;
 }
 
-uint64_t TransformPublisherAsyncClient::vnx_get_type_code(const std::function<void(const ::vnx::TypeCode&)>& _callback, const std::function<void(const std::exception&)>& _error_callback) {
+uint64_t TransformPublisherAsyncClient::vnx_get_type_code(const std::function<void(const ::vnx::TypeCode&)>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
 	auto _method = ::vnx::ModuleInterface_vnx_get_type_code::create();
 	const auto _request_id = ++vnx_next_id;
 	{
@@ -103,7 +103,7 @@ uint64_t TransformPublisherAsyncClient::vnx_get_type_code(const std::function<vo
 	return _request_id;
 }
 
-uint64_t TransformPublisherAsyncClient::vnx_restart(const std::function<void()>& _callback, const std::function<void(const std::exception&)>& _error_callback) {
+uint64_t TransformPublisherAsyncClient::vnx_restart(const std::function<void()>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
 	auto _method = ::vnx::ModuleInterface_vnx_restart::create();
 	const auto _request_id = ++vnx_next_id;
 	{
@@ -115,7 +115,7 @@ uint64_t TransformPublisherAsyncClient::vnx_restart(const std::function<void()>&
 	return _request_id;
 }
 
-uint64_t TransformPublisherAsyncClient::vnx_close(const std::function<void()>& _callback, const std::function<void(const std::exception&)>& _error_callback) {
+uint64_t TransformPublisherAsyncClient::vnx_close(const std::function<void()>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
 	auto _method = ::vnx::ModuleInterface_vnx_close::create();
 	const auto _request_id = ++vnx_next_id;
 	{
@@ -127,7 +127,7 @@ uint64_t TransformPublisherAsyncClient::vnx_close(const std::function<void()>& _
 	return _request_id;
 }
 
-uint64_t TransformPublisherAsyncClient::set_transform(std::shared_ptr<const ::automy::basic::Transform3D> new_transform, const std::function<void()>& _callback, const std::function<void(const std::exception&)>& _error_callback) {
+uint64_t TransformPublisherAsyncClient::set_transform(std::shared_ptr<const ::automy::basic::Transform3D> new_transform, const std::function<void()>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
 	auto _method = ::automy::basic::TransformPublisher_set_transform::create();
 	_method->new_transform = new_transform;
 	const auto _request_id = ++vnx_next_id;
@@ -170,7 +170,7 @@ std::vector<uint64_t> TransformPublisherAsyncClient::vnx_get_pending_ids() const
 	return _list;
 }
 
-void TransformPublisherAsyncClient::vnx_purge_request(uint64_t _request_id, const std::exception& _ex) {
+void TransformPublisherAsyncClient::vnx_purge_request(uint64_t _request_id, const vnx::exception& _ex) {
 	std::unique_lock<std::mutex> _lock(vnx_mutex);
 	{
 		const auto _iter = vnx_queue_vnx_get_config_object.find(_request_id);

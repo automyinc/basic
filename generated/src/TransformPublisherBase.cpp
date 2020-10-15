@@ -32,12 +32,11 @@ namespace basic {
 
 
 const vnx::Hash64 TransformPublisherBase::VNX_TYPE_HASH(0x88d77b971994875dull);
-const vnx::Hash64 TransformPublisherBase::VNX_CODE_HASH(0x9a442e8c134cf17bull);
+const vnx::Hash64 TransformPublisherBase::VNX_CODE_HASH(0x65782a33b4b2775eull);
 
 TransformPublisherBase::TransformPublisherBase(const std::string& _vnx_name)
 	:	Module::Module(_vnx_name)
 {
-	vnx::read_config(vnx_name + ".both_ways", both_ways);
 	vnx::read_config(vnx_name + ".config", config);
 	vnx::read_config(vnx_name + ".domain", domain);
 	vnx::read_config(vnx_name + ".interval_ms", interval_ms);
@@ -61,9 +60,8 @@ void TransformPublisherBase::accept(vnx::Visitor& _visitor) const {
 	_visitor.type_begin(*_type_code);
 	_visitor.type_field(_type_code->fields[0], 0); vnx::accept(_visitor, domain);
 	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, interval_ms);
-	_visitor.type_field(_type_code->fields[2], 2); vnx::accept(_visitor, both_ways);
-	_visitor.type_field(_type_code->fields[3], 3); vnx::accept(_visitor, config);
-	_visitor.type_field(_type_code->fields[4], 4); vnx::accept(_visitor, transforms);
+	_visitor.type_field(_type_code->fields[2], 2); vnx::accept(_visitor, config);
+	_visitor.type_field(_type_code->fields[3], 3); vnx::accept(_visitor, transforms);
 	_visitor.type_end(*_type_code);
 }
 
@@ -71,7 +69,6 @@ void TransformPublisherBase::write(std::ostream& _out) const {
 	_out << "{";
 	_out << "\"domain\": "; vnx::write(_out, domain);
 	_out << ", \"interval_ms\": "; vnx::write(_out, interval_ms);
-	_out << ", \"both_ways\": "; vnx::write(_out, both_ways);
 	_out << ", \"config\": "; vnx::write(_out, config);
 	_out << ", \"transforms\": "; vnx::write(_out, transforms);
 	_out << "}";
@@ -81,9 +78,7 @@ void TransformPublisherBase::read(std::istream& _in) {
 	std::map<std::string, std::string> _object;
 	vnx::read_object(_in, _object);
 	for(const auto& _entry : _object) {
-		if(_entry.first == "both_ways") {
-			vnx::from_string(_entry.second, both_ways);
-		} else if(_entry.first == "config") {
+		if(_entry.first == "config") {
 			vnx::from_string(_entry.second, config);
 		} else if(_entry.first == "domain") {
 			vnx::from_string(_entry.second, domain);
@@ -99,7 +94,6 @@ vnx::Object TransformPublisherBase::to_object() const {
 	vnx::Object _object;
 	_object["domain"] = domain;
 	_object["interval_ms"] = interval_ms;
-	_object["both_ways"] = both_ways;
 	_object["config"] = config;
 	_object["transforms"] = transforms;
 	return _object;
@@ -107,9 +101,7 @@ vnx::Object TransformPublisherBase::to_object() const {
 
 void TransformPublisherBase::from_object(const vnx::Object& _object) {
 	for(const auto& _entry : _object.field) {
-		if(_entry.first == "both_ways") {
-			_entry.second.to(both_ways);
-		} else if(_entry.first == "config") {
+		if(_entry.first == "config") {
 			_entry.second.to(config);
 		} else if(_entry.first == "domain") {
 			_entry.second.to(domain);
@@ -128,9 +120,6 @@ vnx::Variant TransformPublisherBase::get_field(const std::string& _name) const {
 	if(_name == "interval_ms") {
 		return vnx::Variant(interval_ms);
 	}
-	if(_name == "both_ways") {
-		return vnx::Variant(both_ways);
-	}
 	if(_name == "config") {
 		return vnx::Variant(config);
 	}
@@ -145,8 +134,6 @@ void TransformPublisherBase::set_field(const std::string& _name, const vnx::Vari
 		_value.to(domain);
 	} else if(_name == "interval_ms") {
 		_value.to(interval_ms);
-	} else if(_name == "both_ways") {
-		_value.to(both_ways);
 	} else if(_name == "config") {
 		_value.to(config);
 	} else if(_name == "transforms") {
@@ -180,7 +167,7 @@ std::shared_ptr<vnx::TypeCode> TransformPublisherBase::static_create_type_code()
 	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.TransformPublisher";
 	type_code->type_hash = vnx::Hash64(0x88d77b971994875dull);
-	type_code->code_hash = vnx::Hash64(0x9a442e8c134cf17bull);
+	type_code->code_hash = vnx::Hash64(0x65782a33b4b2775eull);
 	type_code->is_native = true;
 	type_code->methods.resize(8);
 	type_code->methods[0] = ::vnx::ModuleInterface_vnx_get_config_object::static_get_type_code();
@@ -191,7 +178,7 @@ std::shared_ptr<vnx::TypeCode> TransformPublisherBase::static_create_type_code()
 	type_code->methods[5] = ::vnx::ModuleInterface_vnx_restart::static_get_type_code();
 	type_code->methods[6] = ::vnx::ModuleInterface_vnx_close::static_get_type_code();
 	type_code->methods[7] = ::automy::basic::TransformPublisher_set_transform::static_get_type_code();
-	type_code->fields.resize(5);
+	type_code->fields.resize(4);
 	{
 		vnx::TypeField& field = type_code->fields[0];
 		field.is_extended = true;
@@ -207,18 +194,12 @@ std::shared_ptr<vnx::TypeCode> TransformPublisherBase::static_create_type_code()
 	}
 	{
 		vnx::TypeField& field = type_code->fields[2];
-		field.name = "both_ways";
-		field.value = vnx::to_string(true);
-		field.code = {31};
-	}
-	{
-		vnx::TypeField& field = type_code->fields[3];
 		field.is_extended = true;
 		field.name = "config";
 		field.code = {12, 24};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[4];
+		vnx::TypeField& field = type_code->fields[3];
 		field.is_extended = true;
 		field.name = "transforms";
 		field.code = {12, 16};
@@ -344,18 +325,12 @@ void read(TypeInput& in, ::automy::basic::TransformPublisherBase& value, const T
 				vnx::read_value(_buf + _field->offset, value.interval_ms, _field->code.data());
 			}
 		}
-		{
-			const vnx::TypeField* const _field = type_code->field_map[2];
-			if(_field) {
-				vnx::read_value(_buf + _field->offset, value.both_ways, _field->code.data());
-			}
-		}
 	}
 	for(const vnx::TypeField* _field : type_code->ext_fields) {
 		switch(_field->native_index) {
 			case 0: vnx::read(in, value.domain, type_code, _field->code.data()); break;
-			case 3: vnx::read(in, value.config, type_code, _field->code.data()); break;
-			case 4: vnx::read(in, value.transforms, type_code, _field->code.data()); break;
+			case 2: vnx::read(in, value.config, type_code, _field->code.data()); break;
+			case 3: vnx::read(in, value.transforms, type_code, _field->code.data()); break;
 			default: vnx::skip(in, type_code, _field->code.data());
 		}
 	}
@@ -374,12 +349,11 @@ void write(TypeOutput& out, const ::automy::basic::TransformPublisherBase& value
 	if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
-	char* const _buf = out.write(5);
+	char* const _buf = out.write(4);
 	vnx::write_value(_buf + 0, value.interval_ms);
-	vnx::write_value(_buf + 4, value.both_ways);
 	vnx::write(out, value.domain, type_code, type_code->fields[0].code.data());
-	vnx::write(out, value.config, type_code, type_code->fields[3].code.data());
-	vnx::write(out, value.transforms, type_code, type_code->fields[4].code.data());
+	vnx::write(out, value.config, type_code, type_code->fields[2].code.data());
+	vnx::write(out, value.transforms, type_code, type_code->fields[3].code.data());
 }
 
 void read(std::istream& in, ::automy::basic::TransformPublisherBase& value) {
