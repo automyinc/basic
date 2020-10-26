@@ -18,10 +18,30 @@ template<typename T>
 CImg<T> convert_to_cimg(const Image<T>& image) {
 	CImg<T> out;
 	out.resize(image.width(), image.height(), 1, image.depth());
-	for(size_t y = 0; y < image.height(); ++y) {
-		for(size_t x = 0; x < image.width(); ++x) {
-			for(size_t c = 0; c < image.depth(); ++c) {
-				out(x, image.height()-y-1, 0, c) = image(x, y, c);
+	for(uint32_t y = 0; y < image.height(); ++y) {
+		switch(image.depth()) {
+		case 1:
+			::memcpy(&out(0, image.height() - y - 1, 0, 0), &image(0, y, 0), sizeof(T) * image.width());
+			break;
+		case 3:
+			for(uint32_t x = 0; x < image.width(); ++x) {
+				for(uint32_t c = 0; c < 3; ++c) {
+					out(x, image.height() - y - 1, 0, c) = image(x, y, c);
+				}
+			}
+			break;
+		case 4:
+			for(uint32_t x = 0; x < image.width(); ++x) {
+				for(uint32_t c = 0; c < 4; ++c) {
+					out(x, image.height() - y - 1, 0, c) = image(x, y, c);
+				}
+			}
+			break;
+		default:
+			for(uint32_t c = 0; c < image.depth(); ++c) {
+				for(uint32_t x = 0; x < image.width(); ++x) {
+					out(x, image.height() - y - 1, 0, c) = image(x, y, c);
+				}
 			}
 		}
 	}
@@ -30,12 +50,35 @@ CImg<T> convert_to_cimg(const Image<T>& image) {
 
 template<typename T>
 Image<T> convert_from_cimg(const CImg<T>& image) {
+	if(image.depth() != 1) {
+		throw std::logic_error("image.depth() != 1");
+	}
 	Image<T> out;
 	out.resize(image.width(), image.height(), image.spectrum());
 	for(int y = 0; y < image.height(); ++y) {
-		for(int x = 0; x < image.width(); ++x) {
-			for(int c = 0; c < image.spectrum(); ++c) {
-				out(x, image.height()-y-1, c) = image(x, y, 0, c);
+		switch(image.spectrum()) {
+		case 1:
+			::memcpy(&out(0, image.height() - y - 1), &image(0, y, 0, 0), sizeof(T) * image.width() * image.spectrum());
+			break;
+		case 3:
+			for(int x = 0; x < image.width(); ++x) {
+				for(int c = 0; c < 3; ++c) {
+					out(x, image.height() - y - 1, c) = image(x, y, 0, c);
+				}
+			}
+			break;
+		case 4:
+			for(int x = 0; x < image.width(); ++x) {
+				for(int c = 0; c < 4; ++c) {
+					out(x, image.height() - y - 1, c) = image(x, y, 0, c);
+				}
+			}
+			break;
+		default:
+			for(int x = 0; x < image.width(); ++x) {
+				for(int c = 0; c < image.spectrum(); ++c) {
+					out(x, image.height() - y - 1, c) = image(x, y, 0, c);
+				}
 			}
 		}
 	}
