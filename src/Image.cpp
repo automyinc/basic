@@ -95,7 +95,7 @@ void read_image(Image<uint8_t>& image, const std::string& filename) {
 
 template<>
 void write_image(const Image<uint8_t>& image, const std::string& filename, int number, int digits, bool flip_y) {
-	convert_to_cimg(image, !flip_y).save(filename.c_str(), number, digits);
+	convert_to_cimg(image, flip_y).save(filename.c_str(), number, digits);
 }
 
 template<>

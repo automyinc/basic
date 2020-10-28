@@ -23,7 +23,7 @@ template<typename T>
 void read_image(Image<T>& image, const std::string& filename);
 
 template<typename T>
-void write_image(const Image<T>& image, const std::string& filename, int number = -1, int digits = 6, bool flip_y = false);
+void write_image(const Image<T>& image, const std::string& filename, int number = -1, int digits = 6, bool flip_y = true);
 
 template<typename T>
 Image<T> draw_text(int width, int font_size, const std::vector<std::string>& text, const float front_color[3], const float back_color[3]);
@@ -316,7 +316,7 @@ public:
 
 	void read_from_file(const std::string& filename);
 	
-	void write_to_file(const std::string& filename, int number = -1, int digits = 6, bool flip_y = false) const;
+	void write_to_file(const std::string& filename, int number = -1, int digits = 6, bool flip_y = true) const;
 	
 	void read(vnx::TypeInput& in, const vnx::TypeCode* type_code, const uint16_t* code);
 	
