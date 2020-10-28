@@ -18,8 +18,8 @@ void Image<T>::read_from_file(const std::string& filename) {
 }
 
 template<typename T>
-void Image<T>::write_to_file(const std::string& filename, int number, int digits) const {
-	basic::write_image(*this, filename, number, digits);
+void Image<T>::write_to_file(const std::string& filename, int number, int digits, bool flip_y) const {
+	basic::write_image(*this, filename, number, digits, flip_y);
 }
 
 template<typename T>
@@ -118,12 +118,12 @@ template<>
 void read_image(Image<uint8_t>& image, const std::string& filename);
 
 template<typename T>
-void write_image(const Image<T>& image, const std::string& filename, int number, int digits) {
+void write_image(const Image<T>& image, const std::string& filename, int number, int digits, bool flip_y) {
 	throw std::logic_error("not implemented");
 }
 
 template<>
-void write_image(const Image<uint8_t>& image, const std::string& filename, int number, int digits);
+void write_image(const Image<uint8_t>& image, const std::string& filename, int number, int digits, bool flip_y);
 
 template<typename T>
 Image<T> draw_text(int width, int font_size, const std::vector<std::string>& text, const float front_color[3], const float back_color[3]) {
