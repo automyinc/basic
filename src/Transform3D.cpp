@@ -20,7 +20,7 @@ void Transform3D::transform(std::shared_ptr<const Transform3D> sample) {
 
 automy::math::Matrix4d Transform3D::get_transform25() const
 {
-	throw std::logic_error("Transform3D::get_transform25() not implemented");
+	throw std::logic_error("get_transform25() not supported");
 }
 
 std::shared_ptr<const Transform3D> Transform3D::get_inverse() const {
