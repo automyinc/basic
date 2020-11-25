@@ -183,7 +183,7 @@ public:
 	 * Pixel centers are at 0.5 offsets, ie. 0.5, 1.5, 2.5, etc..
 	 */
 	template<typename S>
-	const T& lookup_nearest(const S x, const S y, const size_t z) const
+	const T& lookup_nearest(const S x, const S y, const size_t z = 0) const
 	{
 		const uint32_t x0 = std::min(std::max(int32_t(x), 0), int32_t(width_) - 1);
 		const uint32_t y0 = std::min(std::max(int32_t(y), 0), int32_t(height_) - 1);
@@ -195,7 +195,7 @@ public:
 	 * Pixel centers are at 0.5 offsets, ie. 0.5, 1.5, 2.5, etc..
 	 */
 	template<typename S>
-	S lookup_bilinear(const S x, const S y, const size_t z) const
+	S lookup_bilinear(const S x, const S y, const size_t z = 0) const
 	{
 		const S x_ = x - S(0.5);
 		const S y_ = y - S(0.5);
