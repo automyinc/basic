@@ -180,7 +180,8 @@ struct type<::automy::basic::DataPacket> {
 	void accept(Visitor& visitor, const ::automy::basic::DataPacket& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::DataPacket& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -203,7 +204,8 @@ struct type<::automy::basic::Image16> {
 	void accept(Visitor& visitor, const ::automy::basic::Image16& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Image16& value, bool special = false) {
 		const std::vector<int> tmp = {22, 3, 2};
 		code.insert(code.end(), tmp.begin(), tmp.end());
 	}
@@ -227,7 +229,8 @@ struct type<::automy::basic::Image32> {
 	void accept(Visitor& visitor, const ::automy::basic::Image32& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Image32& value, bool special = false) {
 		const std::vector<int> tmp = {22, 3, 3};
 		code.insert(code.end(), tmp.begin(), tmp.end());
 	}
@@ -251,7 +254,8 @@ struct type<::automy::basic::Image8> {
 	void accept(Visitor& visitor, const ::automy::basic::Image8& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Image8& value, bool special = false) {
 		const std::vector<int> tmp = {22, 3, 1};
 		code.insert(code.end(), tmp.begin(), tmp.end());
 	}
@@ -275,7 +279,8 @@ struct type<::automy::basic::ImageF32> {
 	void accept(Visitor& visitor, const ::automy::basic::ImageF32& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageF32& value, bool special = false) {
 		const std::vector<int> tmp = {22, 3, 9};
 		code.insert(code.end(), tmp.begin(), tmp.end());
 	}
@@ -299,7 +304,8 @@ struct type<::automy::basic::ImageF64> {
 	void accept(Visitor& visitor, const ::automy::basic::ImageF64& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageF64& value, bool special = false) {
 		const std::vector<int> tmp = {22, 3, 10};
 		code.insert(code.end(), tmp.begin(), tmp.end());
 	}
@@ -323,7 +329,8 @@ struct type<::automy::basic::ImageFrame> {
 	void accept(Visitor& visitor, const ::automy::basic::ImageFrame& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -346,7 +353,8 @@ struct type<::automy::basic::ImageFrame16> {
 	void accept(Visitor& visitor, const ::automy::basic::ImageFrame16& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame16& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -369,7 +377,8 @@ struct type<::automy::basic::ImageFrame32> {
 	void accept(Visitor& visitor, const ::automy::basic::ImageFrame32& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame32& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -392,7 +401,8 @@ struct type<::automy::basic::ImageFrame8> {
 	void accept(Visitor& visitor, const ::automy::basic::ImageFrame8& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame8& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -415,7 +425,8 @@ struct type<::automy::basic::ImageFrameF16> {
 	void accept(Visitor& visitor, const ::automy::basic::ImageFrameF16& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrameF16& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -438,7 +449,8 @@ struct type<::automy::basic::ImageFrameF32> {
 	void accept(Visitor& visitor, const ::automy::basic::ImageFrameF32& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrameF32& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -461,7 +473,8 @@ struct type<::automy::basic::ImageFrameF64> {
 	void accept(Visitor& visitor, const ::automy::basic::ImageFrameF64& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrameF64& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -484,7 +497,8 @@ struct type<::automy::basic::MultiImageFrame> {
 	void accept(Visitor& visitor, const ::automy::basic::MultiImageFrame& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::MultiImageFrame& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -507,7 +521,8 @@ struct type<::automy::basic::Scalar> {
 	void accept(Visitor& visitor, const ::automy::basic::Scalar& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Scalar& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -530,7 +545,8 @@ struct type<::automy::basic::Transform3D> {
 	void accept(Visitor& visitor, const ::automy::basic::Transform3D& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Transform3D& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -553,9 +569,6 @@ struct type<::automy::basic::TransformPublisherBase> {
 	void accept(Visitor& visitor, const ::automy::basic::TransformPublisherBase& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
-		code.push_back(CODE_OBJECT);
-	}
 };
 
 /// \private
@@ -576,7 +589,8 @@ struct type<::automy::basic::TransformPublisher_set_transform> {
 	void accept(Visitor& visitor, const ::automy::basic::TransformPublisher_set_transform& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::TransformPublisher_set_transform& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -599,7 +613,8 @@ struct type<::automy::basic::TransformPublisher_set_transform_return> {
 	void accept(Visitor& visitor, const ::automy::basic::TransformPublisher_set_transform_return& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::TransformPublisher_set_transform_return& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };
@@ -622,7 +637,8 @@ struct type<::automy::basic::Trigger> {
 	void accept(Visitor& visitor, const ::automy::basic::Trigger& value) {
 		vnx::accept(visitor, value);
 	}
-	void create_dynamic_code(std::vector<uint16_t>& code) {
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Trigger& value, bool special = false) {
 		code.push_back(CODE_OBJECT);
 	}
 };

@@ -21,7 +21,7 @@ vnx::Hash64 TransformPublisher_set_transform::get_type_hash() const {
 	return VNX_TYPE_HASH;
 }
 
-const char* TransformPublisher_set_transform::get_type_name() const {
+std::string TransformPublisher_set_transform::get_type_name() const {
 	return "automy.basic.TransformPublisher.set_transform";
 }
 
@@ -163,13 +163,17 @@ void read(TypeInput& in, ::automy::basic::TransformPublisher_set_transform& valu
 		}
 	}
 	if(!type_code) {
-		throw std::logic_error("read(): type_code == 0");
+		vnx::skip(in, type_code, code);
+		return;
 	}
 	if(code) {
 		switch(code[0]) {
 			case CODE_STRUCT: type_code = type_code->depends[code[1]]; break;
 			case CODE_ALT_STRUCT: type_code = type_code->depends[vnx::flip_bytes(code[1])]; break;
-			default: vnx::skip(in, type_code, code); return;
+			default: {
+				vnx::skip(in, type_code, code);
+				return;
+			}
 		}
 	}
 	if(type_code->is_matched) {

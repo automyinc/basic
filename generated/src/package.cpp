@@ -16,9 +16,97 @@
 #include <automy/basic/TransformPublisher_set_transform.hxx>
 #include <automy/basic/TransformPublisher_set_transform_return.hxx>
 #include <automy/basic/Trigger.hxx>
+#include <automy/basic/Image16.hpp>
+#include <automy/basic/Image32.hpp>
+#include <automy/basic/Image8.hpp>
+#include <automy/basic/ImageF32.hpp>
+#include <automy/basic/ImageF64.hpp>
 
+#include <automy/basic/package.hxx>
 #include <vnx/vnx.h>
 
+
+
+namespace vnx {
+
+void type<::automy::basic::DataPacket>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::DataPacket());
+}
+
+void type<::automy::basic::Image16>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::Image16());
+}
+
+void type<::automy::basic::Image32>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::Image32());
+}
+
+void type<::automy::basic::Image8>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::Image8());
+}
+
+void type<::automy::basic::ImageF32>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::ImageF32());
+}
+
+void type<::automy::basic::ImageF64>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::ImageF64());
+}
+
+void type<::automy::basic::ImageFrame>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::ImageFrame());
+}
+
+void type<::automy::basic::ImageFrame16>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::ImageFrame16());
+}
+
+void type<::automy::basic::ImageFrame32>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::ImageFrame32());
+}
+
+void type<::automy::basic::ImageFrame8>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::ImageFrame8());
+}
+
+void type<::automy::basic::ImageFrameF16>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::ImageFrameF16());
+}
+
+void type<::automy::basic::ImageFrameF32>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::ImageFrameF32());
+}
+
+void type<::automy::basic::ImageFrameF64>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::ImageFrameF64());
+}
+
+void type<::automy::basic::MultiImageFrame>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::MultiImageFrame());
+}
+
+void type<::automy::basic::Scalar>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::Scalar());
+}
+
+void type<::automy::basic::Transform3D>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::Transform3D());
+}
+
+void type<::automy::basic::TransformPublisher_set_transform>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::TransformPublisher_set_transform());
+}
+
+void type<::automy::basic::TransformPublisher_set_transform_return>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::TransformPublisher_set_transform_return());
+}
+
+void type<::automy::basic::Trigger>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::automy::basic::Trigger());
+}
+
+
+} // namespace vnx
 
 
 namespace automy {
