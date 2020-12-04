@@ -6,6 +6,8 @@ class Transform3D {
 	
 	long time;						// posix timestamp [usec]
 	
+	int time_offset;				// optional time offset [usec]
+	
 	string frame;					// child frame
 	
 	string parent;					// parent frame
