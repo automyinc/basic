@@ -25,7 +25,7 @@ public:
 	TransformClient(vnx::TopicPtr topic, int64_t history_ms = 10000)
 		:	m_buffer(history_ms)
 	{
-		subscribe(topic, history_ms);
+		subscribe(topic, history_ms, vnx::Pipe::UNLIMITED, vnx::PIPE_PRIORITY_DEFAULT, vnx::PIPE_MODE_LATEST);
 	}
 	
 	/*
@@ -101,10 +101,8 @@ public:
 protected:
 	void poll(int64_t timeout_ms = 0) {
 		while(auto msg = read_blocking(timeout_ms * 1000)) {
-			auto sample = std::dynamic_pointer_cast<const vnx::Sample>(msg);
-			if(sample) {
-				auto transform = std::dynamic_pointer_cast<const Transform3D>(sample->value);
-				if(transform) {
+			if(auto sample = std::dynamic_pointer_cast<const vnx::Sample>(msg)) {
+				if(auto transform = std::dynamic_pointer_cast<const Transform3D>(sample->value)) {
 					m_buffer.push(transform);
 				}
 			}
