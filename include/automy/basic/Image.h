@@ -64,7 +64,7 @@ public:
 	}
 	
 	virtual ~Image() {
-		delete [] data_;
+		clear();
 	}
 	
 	static std::shared_ptr<Image<T>> create() {
@@ -97,9 +97,9 @@ public:
 		if(new_size != get_size()) {
 			if(data_) {
 				delete [] data_;
-				data_= 0;
+				data_= nullptr;
 			}
-			if(new_size > 0) {
+			if(new_size) {
 				data_ = new T[new_size];
 			}
 		}
@@ -113,7 +113,7 @@ public:
 		height_ = 0;
 		depth_ = 0;
 		delete [] data_;
-		data_ = 0;
+		data_ = nullptr;
 	}
 	
 	T& operator[](size_t i) {
@@ -132,10 +132,22 @@ public:
 		return data_[(y * width_ + x) * depth_ + z];
 	}
 	
-	size_t get_size() const {
+	size_t size() const {
 		return size_t(width_) * size_t(height_) * size_t(depth_);
 	}
+
+	size_t get_size() const {
+		return size();
+	}
 	
+	T* data() {
+		return data_;
+	}
+
+	const T* data() const {
+		return data_;
+	}
+
 	T* get_data() {
 		return data_;
 	}
@@ -150,10 +162,10 @@ public:
 		}
 	}
 	
-	void fill_layer(size_t layer, const T& value) {
-		for(size_t y = 0; y < height_; ++y) {
-			for(size_t x = 0; x < width_; ++x) {
-				(*this)(x, y, layer) = value;
+	void fill_layer(size_t z, const T& value) {
+		for(uint32_t y = 0; y < height_; ++y) {
+			for(uint32_t x = 0; x < width_; ++x) {
+				(*this)(x, y, z) = value;
 			}
 		}
 	}
