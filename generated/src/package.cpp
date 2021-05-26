@@ -33,76 +33,152 @@ void type<::automy::basic::DataPacket>::create_dynamic_code(std::vector<uint16_t
 	create_dynamic_code(code, ::automy::basic::DataPacket());
 }
 
+void type<::automy::basic::DataPacket>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::DataPacket& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
 void type<::automy::basic::Image16>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::Image16());
 }
+
+void type<::automy::basic::Image16>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Image16& value, bool special) {
+	const std::vector<int> tmp = {22, 3, 2};
+	code.insert(code.end(), tmp.begin(), tmp.end());}
 
 void type<::automy::basic::Image32>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::Image32());
 }
 
+void type<::automy::basic::Image32>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Image32& value, bool special) {
+	const std::vector<int> tmp = {22, 3, 3};
+	code.insert(code.end(), tmp.begin(), tmp.end());}
+
 void type<::automy::basic::Image8>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::Image8());
 }
+
+void type<::automy::basic::Image8>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Image8& value, bool special) {
+	const std::vector<int> tmp = {22, 3, 1};
+	code.insert(code.end(), tmp.begin(), tmp.end());}
 
 void type<::automy::basic::ImageF32>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageF32());
 }
 
+void type<::automy::basic::ImageF32>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageF32& value, bool special) {
+	const std::vector<int> tmp = {22, 3, 9};
+	code.insert(code.end(), tmp.begin(), tmp.end());}
+
 void type<::automy::basic::ImageF64>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageF64());
 }
 
+void type<::automy::basic::ImageF64>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageF64& value, bool special) {
+	const std::vector<int> tmp = {22, 3, 10};
+	code.insert(code.end(), tmp.begin(), tmp.end());}
+
 void type<::automy::basic::ImageFrame>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrame());
+}
+
+void type<::automy::basic::ImageFrame>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame& value, bool special) {
+	code.push_back(CODE_OBJECT);
 }
 
 void type<::automy::basic::ImageFrame16>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrame16());
 }
 
+void type<::automy::basic::ImageFrame16>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame16& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
 void type<::automy::basic::ImageFrame32>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrame32());
+}
+
+void type<::automy::basic::ImageFrame32>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame32& value, bool special) {
+	code.push_back(CODE_OBJECT);
 }
 
 void type<::automy::basic::ImageFrame8>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrame8());
 }
 
+void type<::automy::basic::ImageFrame8>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame8& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
 void type<::automy::basic::ImageFrameF16>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrameF16());
+}
+
+void type<::automy::basic::ImageFrameF16>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrameF16& value, bool special) {
+	code.push_back(CODE_OBJECT);
 }
 
 void type<::automy::basic::ImageFrameF32>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrameF32());
 }
 
+void type<::automy::basic::ImageFrameF32>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrameF32& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
 void type<::automy::basic::ImageFrameF64>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrameF64());
+}
+
+void type<::automy::basic::ImageFrameF64>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrameF64& value, bool special) {
+	code.push_back(CODE_OBJECT);
 }
 
 void type<::automy::basic::MultiImageFrame>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::MultiImageFrame());
 }
 
+void type<::automy::basic::MultiImageFrame>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::MultiImageFrame& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
 void type<::automy::basic::Scalar>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::Scalar());
+}
+
+void type<::automy::basic::Scalar>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Scalar& value, bool special) {
+	code.push_back(CODE_OBJECT);
 }
 
 void type<::automy::basic::Transform3D>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::Transform3D());
 }
 
+void type<::automy::basic::Transform3D>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Transform3D& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
 void type<::automy::basic::TransformPublisher_set_transform>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::TransformPublisher_set_transform());
+}
+
+void type<::automy::basic::TransformPublisher_set_transform>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::TransformPublisher_set_transform& value, bool special) {
+	code.push_back(CODE_OBJECT);
 }
 
 void type<::automy::basic::TransformPublisher_set_transform_return>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::TransformPublisher_set_transform_return());
 }
 
+void type<::automy::basic::TransformPublisher_set_transform_return>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::TransformPublisher_set_transform_return& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
 void type<::automy::basic::Trigger>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::Trigger());
+}
+
+void type<::automy::basic::Trigger>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Trigger& value, bool special) {
+	code.push_back(CODE_OBJECT);
 }
 
 

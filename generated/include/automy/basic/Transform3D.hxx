@@ -18,6 +18,7 @@ class Transform3D : public ::vnx::Value {
 public:
 	
 	int64_t time = 0;
+	int32_t time_offset = 0;
 	std::string frame;
 	std::string parent;
 	::automy::math::Matrix4d matrix;
@@ -27,16 +28,18 @@ public:
 	static const vnx::Hash64 VNX_TYPE_HASH;
 	static const vnx::Hash64 VNX_CODE_HASH;
 	
+	static constexpr uint64_t VNX_TYPE_ID = 0xe762feb1b334b36dull;
+	
 	vnx::Hash64 get_type_hash() const override;
 	std::string get_type_name() const override;
 	const vnx::TypeCode* get_type_code() const override;
 	
-	virtual ::vnx::TopicPtr get_topic(const std::string& tf_domain) const;
-	virtual void transform(std::shared_ptr<const ::automy::basic::Transform3D> sample);
+	virtual ::vnx::TopicPtr get_topic(const std::string& tf_domain = "") const;
+	virtual void transform(std::shared_ptr<const ::automy::basic::Transform3D> sample = nullptr);
 	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_inverse() const;
 	virtual ::automy::math::Matrix4d get_transform25() const;
-	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_interpolated(std::shared_ptr<const ::automy::basic::Transform3D> sample_1, const vnx::float64_t& t) const;
-	static std::shared_ptr<const ::automy::basic::Transform3D> from_config(const ::vnx::Object& config);
+	virtual std::shared_ptr<const ::automy::basic::Transform3D> get_interpolated(std::shared_ptr<const ::automy::basic::Transform3D> sample_1 = nullptr, const vnx::float64_t& t = 0) const;
+	static std::shared_ptr<const ::automy::basic::Transform3D> from_config(const ::vnx::Object& config = ::vnx::Object());
 	
 	static std::shared_ptr<Transform3D> create();
 	std::shared_ptr<vnx::Value> clone() const override;
@@ -66,5 +69,10 @@ public:
 
 } // namespace automy
 } // namespace basic
+
+
+namespace vnx {
+
+} // vnx
 
 #endif // INCLUDE_automy_basic_Transform3D_HXX_

@@ -1,6 +1,6 @@
 
 # Dependencies
-vnx-base(>=1.6.0) automy-math libpng-dev libjpeg-dev
+vnx-base(>=1.9.4) automy-math libpng-dev libjpeg-dev
 
 # Install
 

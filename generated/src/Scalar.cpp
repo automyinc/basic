@@ -61,16 +61,8 @@ void Scalar::write(std::ostream& _out) const {
 }
 
 void Scalar::read(std::istream& _in) {
-	std::map<std::string, std::string> _object;
-	vnx::read_object(_in, _object);
-	for(const auto& _entry : _object) {
-		if(_entry.first == "key") {
-			vnx::from_string(_entry.second, key);
-		} else if(_entry.first == "time") {
-			vnx::from_string(_entry.second, time);
-		} else if(_entry.first == "value") {
-			vnx::from_string(_entry.second, value);
-		}
+	if(auto _json = vnx::read_json(_in)) {
+		from_object(_json->to_object());
 	}
 }
 
@@ -141,27 +133,30 @@ const vnx::TypeCode* Scalar::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> Scalar::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
+	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.Scalar";
 	type_code->type_hash = vnx::Hash64(0xc0b8bdb61e0ca70eull);
 	type_code->code_hash = vnx::Hash64(0xa6723f13a3a352bdull);
 	type_code->is_native = true;
 	type_code->is_class = true;
+	type_code->native_size = sizeof(::automy::basic::Scalar);
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<Scalar>(); };
 	type_code->fields.resize(3);
 	{
-		vnx::TypeField& field = type_code->fields[0];
+		auto& field = type_code->fields[0];
+		field.data_size = 8;
 		field.name = "time";
 		field.code = {8};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[1];
+		auto& field = type_code->fields[1];
 		field.is_extended = true;
 		field.name = "key";
 		field.code = {32};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[2];
+		auto& field = type_code->fields[2];
+		field.data_size = 8;
 		field.name = "value";
 		field.code = {10};
 	}
@@ -208,20 +203,14 @@ void read(TypeInput& in, ::automy::basic::Scalar& value, const TypeCode* type_co
 	}
 	const char* const _buf = in.read(type_code->total_field_size);
 	if(type_code->is_matched) {
-		{
-			const vnx::TypeField* const _field = type_code->field_map[0];
-			if(_field) {
-				vnx::read_value(_buf + _field->offset, value.time, _field->code.data());
-			}
+		if(const auto* const _field = type_code->field_map[0]) {
+			vnx::read_value(_buf + _field->offset, value.time, _field->code.data());
 		}
-		{
-			const vnx::TypeField* const _field = type_code->field_map[2];
-			if(_field) {
-				vnx::read_value(_buf + _field->offset, value.value, _field->code.data());
-			}
+		if(const auto* const _field = type_code->field_map[2]) {
+			vnx::read_value(_buf + _field->offset, value.value, _field->code.data());
 		}
 	}
-	for(const vnx::TypeField* _field : type_code->ext_fields) {
+	for(const auto* _field : type_code->ext_fields) {
 		switch(_field->native_index) {
 			case 1: vnx::read(in, value.key, type_code, _field->code.data()); break;
 			default: vnx::skip(in, type_code, _field->code.data());
@@ -239,7 +228,7 @@ void write(TypeOutput& out, const ::automy::basic::Scalar& value, const TypeCode
 		out.write_type_code(type_code);
 		vnx::write_class_header<::automy::basic::Scalar>(out);
 	}
-	if(code && code[0] == CODE_STRUCT) {
+	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
 	char* const _buf = out.write(16);

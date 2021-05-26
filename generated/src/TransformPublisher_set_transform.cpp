@@ -59,12 +59,8 @@ void TransformPublisher_set_transform::write(std::ostream& _out) const {
 }
 
 void TransformPublisher_set_transform::read(std::istream& _in) {
-	std::map<std::string, std::string> _object;
-	vnx::read_object(_in, _object);
-	for(const auto& _entry : _object) {
-		if(_entry.first == "new_transform") {
-			vnx::from_string(_entry.second, new_transform);
-		}
+	if(auto _json = vnx::read_json(_in)) {
+		from_object(_json->to_object());
 	}
 }
 
@@ -119,18 +115,19 @@ const vnx::TypeCode* TransformPublisher_set_transform::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> TransformPublisher_set_transform::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
+	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.TransformPublisher.set_transform";
 	type_code->type_hash = vnx::Hash64(0x4b8ec99ea30fd92cull);
 	type_code->code_hash = vnx::Hash64(0x56494e70cb3526dbull);
 	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->is_method = true;
+	type_code->native_size = sizeof(::automy::basic::TransformPublisher_set_transform);
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<TransformPublisher_set_transform>(); };
 	type_code->return_type = ::automy::basic::TransformPublisher_set_transform_return::static_get_type_code();
 	type_code->fields.resize(1);
 	{
-		vnx::TypeField& field = type_code->fields[0];
+		auto& field = type_code->fields[0];
 		field.is_extended = true;
 		field.name = "new_transform";
 		field.code = {16};
@@ -178,7 +175,7 @@ void read(TypeInput& in, ::automy::basic::TransformPublisher_set_transform& valu
 	}
 	if(type_code->is_matched) {
 	}
-	for(const vnx::TypeField* _field : type_code->ext_fields) {
+	for(const auto* _field : type_code->ext_fields) {
 		switch(_field->native_index) {
 			case 0: vnx::read(in, value.new_transform, type_code, _field->code.data()); break;
 			default: vnx::skip(in, type_code, _field->code.data());
@@ -196,7 +193,7 @@ void write(TypeOutput& out, const ::automy::basic::TransformPublisher_set_transf
 		out.write_type_code(type_code);
 		vnx::write_class_header<::automy::basic::TransformPublisher_set_transform>(out);
 	}
-	if(code && code[0] == CODE_STRUCT) {
+	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
 	vnx::write(out, value.new_transform, type_code, type_code->fields[0].code.data());

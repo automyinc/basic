@@ -25,12 +25,14 @@ public:
 	static const vnx::Hash64 VNX_TYPE_HASH;
 	static const vnx::Hash64 VNX_CODE_HASH;
 	
+	static constexpr uint64_t VNX_TYPE_ID = 0xad5b897ca145c94eull;
+	
 	vnx::Hash64 get_type_hash() const override;
 	std::string get_type_name() const override;
 	const vnx::TypeCode* get_type_code() const override;
 	
-	virtual ::vnx::Variant get_property(const std::string& key);
-	virtual ::vnx::Variant get_property_default(const std::string& key, const ::vnx::Variant& def_value);
+	virtual ::vnx::Variant get_property(const std::string& key = "");
+	virtual ::vnx::Variant get_property_default(const std::string& key = "", const ::vnx::Variant& def_value = ::vnx::Variant());
 	
 	static std::shared_ptr<ImageFrame> create();
 	std::shared_ptr<vnx::Value> clone() const override;
@@ -60,5 +62,10 @@ public:
 
 } // namespace automy
 } // namespace basic
+
+
+namespace vnx {
+
+} // vnx
 
 #endif // INCLUDE_automy_basic_ImageFrame_HXX_

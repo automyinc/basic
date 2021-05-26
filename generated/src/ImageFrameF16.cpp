@@ -66,20 +66,8 @@ void ImageFrameF16::write(std::ostream& _out) const {
 }
 
 void ImageFrameF16::read(std::istream& _in) {
-	std::map<std::string, std::string> _object;
-	vnx::read_object(_in, _object);
-	for(const auto& _entry : _object) {
-		if(_entry.first == "format") {
-			vnx::from_string(_entry.second, format);
-		} else if(_entry.first == "frame") {
-			vnx::from_string(_entry.second, frame);
-		} else if(_entry.first == "image") {
-			vnx::from_string(_entry.second, image);
-		} else if(_entry.first == "properties") {
-			vnx::from_string(_entry.second, properties);
-		} else if(_entry.first == "time") {
-			vnx::from_string(_entry.second, time);
-		}
+	if(auto _json = vnx::read_json(_in)) {
+		from_object(_json->to_object());
 	}
 }
 
@@ -166,41 +154,43 @@ const vnx::TypeCode* ImageFrameF16::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> ImageFrameF16::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
+	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.ImageFrameF16";
 	type_code->type_hash = vnx::Hash64(0x44ca674fb06da90cull);
 	type_code->code_hash = vnx::Hash64(0xb90276290bd202d3ull);
 	type_code->is_native = true;
 	type_code->is_class = true;
+	type_code->native_size = sizeof(::automy::basic::ImageFrameF16);
 	type_code->parents.resize(1);
 	type_code->parents[0] = ::automy::basic::ImageFrame::static_get_type_code();
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<ImageFrameF16>(); };
 	type_code->fields.resize(5);
 	{
-		vnx::TypeField& field = type_code->fields[0];
+		auto& field = type_code->fields[0];
+		field.data_size = 8;
 		field.name = "time";
 		field.code = {8};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[1];
+		auto& field = type_code->fields[1];
 		field.is_extended = true;
 		field.name = "frame";
 		field.code = {32};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[2];
+		auto& field = type_code->fields[2];
 		field.is_extended = true;
 		field.name = "format";
 		field.code = {32};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[3];
+		auto& field = type_code->fields[3];
 		field.is_extended = true;
 		field.name = "properties";
 		field.code = {13, 3, 32, 17};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[4];
+		auto& field = type_code->fields[4];
 		field.is_extended = true;
 		field.name = "image";
 		field.code = {22, 3, 2};
@@ -248,14 +238,11 @@ void read(TypeInput& in, ::automy::basic::ImageFrameF16& value, const TypeCode* 
 	}
 	const char* const _buf = in.read(type_code->total_field_size);
 	if(type_code->is_matched) {
-		{
-			const vnx::TypeField* const _field = type_code->field_map[0];
-			if(_field) {
-				vnx::read_value(_buf + _field->offset, value.time, _field->code.data());
-			}
+		if(const auto* const _field = type_code->field_map[0]) {
+			vnx::read_value(_buf + _field->offset, value.time, _field->code.data());
 		}
 	}
-	for(const vnx::TypeField* _field : type_code->ext_fields) {
+	for(const auto* _field : type_code->ext_fields) {
 		switch(_field->native_index) {
 			case 1: vnx::read(in, value.frame, type_code, _field->code.data()); break;
 			case 2: vnx::read(in, value.format, type_code, _field->code.data()); break;
@@ -276,7 +263,7 @@ void write(TypeOutput& out, const ::automy::basic::ImageFrameF16& value, const T
 		out.write_type_code(type_code);
 		vnx::write_class_header<::automy::basic::ImageFrameF16>(out);
 	}
-	if(code && code[0] == CODE_STRUCT) {
+	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
 	char* const _buf = out.write(8);

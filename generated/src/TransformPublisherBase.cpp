@@ -9,19 +9,21 @@
 #include <automy/basic/TransformPublisher_set_transform_return.hxx>
 #include <vnx/Module.h>
 #include <vnx/ModuleInterface_vnx_get_config.hxx>
+#include <vnx/ModuleInterface_vnx_get_config_return.hxx>
 #include <vnx/ModuleInterface_vnx_get_config_object.hxx>
 #include <vnx/ModuleInterface_vnx_get_config_object_return.hxx>
-#include <vnx/ModuleInterface_vnx_get_config_return.hxx>
 #include <vnx/ModuleInterface_vnx_get_module_info.hxx>
 #include <vnx/ModuleInterface_vnx_get_module_info_return.hxx>
 #include <vnx/ModuleInterface_vnx_get_type_code.hxx>
 #include <vnx/ModuleInterface_vnx_get_type_code_return.hxx>
 #include <vnx/ModuleInterface_vnx_restart.hxx>
 #include <vnx/ModuleInterface_vnx_restart_return.hxx>
+#include <vnx/ModuleInterface_vnx_self_test.hxx>
+#include <vnx/ModuleInterface_vnx_self_test_return.hxx>
 #include <vnx/ModuleInterface_vnx_set_config.hxx>
+#include <vnx/ModuleInterface_vnx_set_config_return.hxx>
 #include <vnx/ModuleInterface_vnx_set_config_object.hxx>
 #include <vnx/ModuleInterface_vnx_set_config_object_return.hxx>
-#include <vnx/ModuleInterface_vnx_set_config_return.hxx>
 #include <vnx/ModuleInterface_vnx_stop.hxx>
 #include <vnx/ModuleInterface_vnx_stop_return.hxx>
 #include <vnx/Object.hpp>
@@ -39,9 +41,9 @@ const vnx::Hash64 TransformPublisherBase::VNX_CODE_HASH(0x65782a33b4b2775eull);
 TransformPublisherBase::TransformPublisherBase(const std::string& _vnx_name)
 	:	Module::Module(_vnx_name)
 {
-	vnx::read_config(vnx_name + ".config", config);
 	vnx::read_config(vnx_name + ".domain", domain);
 	vnx::read_config(vnx_name + ".interval_ms", interval_ms);
+	vnx::read_config(vnx_name + ".config", config);
 	vnx::read_config(vnx_name + ".transforms", transforms);
 }
 
@@ -77,18 +79,8 @@ void TransformPublisherBase::write(std::ostream& _out) const {
 }
 
 void TransformPublisherBase::read(std::istream& _in) {
-	std::map<std::string, std::string> _object;
-	vnx::read_object(_in, _object);
-	for(const auto& _entry : _object) {
-		if(_entry.first == "config") {
-			vnx::from_string(_entry.second, config);
-		} else if(_entry.first == "domain") {
-			vnx::from_string(_entry.second, domain);
-		} else if(_entry.first == "interval_ms") {
-			vnx::from_string(_entry.second, interval_ms);
-		} else if(_entry.first == "transforms") {
-			vnx::from_string(_entry.second, transforms);
-		}
+	if(auto _json = vnx::read_json(_in)) {
+		from_object(_json->to_object());
 	}
 }
 
@@ -167,12 +159,13 @@ const vnx::TypeCode* TransformPublisherBase::static_get_type_code() {
 }
 
 std::shared_ptr<vnx::TypeCode> TransformPublisherBase::static_create_type_code() {
-	std::shared_ptr<vnx::TypeCode> type_code = std::make_shared<vnx::TypeCode>();
+	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "automy.basic.TransformPublisher";
 	type_code->type_hash = vnx::Hash64(0x88d77b971994875dull);
 	type_code->code_hash = vnx::Hash64(0x65782a33b4b2775eull);
 	type_code->is_native = true;
-	type_code->methods.resize(9);
+	type_code->native_size = sizeof(::automy::basic::TransformPublisherBase);
+	type_code->methods.resize(10);
 	type_code->methods[0] = ::vnx::ModuleInterface_vnx_get_config_object::static_get_type_code();
 	type_code->methods[1] = ::vnx::ModuleInterface_vnx_get_config::static_get_type_code();
 	type_code->methods[2] = ::vnx::ModuleInterface_vnx_set_config_object::static_get_type_code();
@@ -181,29 +174,31 @@ std::shared_ptr<vnx::TypeCode> TransformPublisherBase::static_create_type_code()
 	type_code->methods[5] = ::vnx::ModuleInterface_vnx_get_module_info::static_get_type_code();
 	type_code->methods[6] = ::vnx::ModuleInterface_vnx_restart::static_get_type_code();
 	type_code->methods[7] = ::vnx::ModuleInterface_vnx_stop::static_get_type_code();
-	type_code->methods[8] = ::automy::basic::TransformPublisher_set_transform::static_get_type_code();
+	type_code->methods[8] = ::vnx::ModuleInterface_vnx_self_test::static_get_type_code();
+	type_code->methods[9] = ::automy::basic::TransformPublisher_set_transform::static_get_type_code();
 	type_code->fields.resize(4);
 	{
-		vnx::TypeField& field = type_code->fields[0];
+		auto& field = type_code->fields[0];
 		field.is_extended = true;
 		field.name = "domain";
 		field.value = vnx::to_string("tf");
 		field.code = {32};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[1];
+		auto& field = type_code->fields[1];
+		field.data_size = 4;
 		field.name = "interval_ms";
 		field.value = vnx::to_string(500);
 		field.code = {7};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[2];
+		auto& field = type_code->fields[2];
 		field.is_extended = true;
 		field.name = "config";
 		field.code = {12, 24};
 	}
 	{
-		vnx::TypeField& field = type_code->fields[3];
+		auto& field = type_code->fields[3];
 		field.is_extended = true;
 		field.name = "transforms";
 		field.code = {12, 16};
@@ -212,83 +207,79 @@ std::shared_ptr<vnx::TypeCode> TransformPublisherBase::static_create_type_code()
 	return type_code;
 }
 
-void TransformPublisherBase::vnx_handle_switch(std::shared_ptr<const vnx::Sample> _sample) {
+void TransformPublisherBase::vnx_handle_switch(std::shared_ptr<const vnx::Value> _value) {
+	const auto* _type_code = _value->get_type_code();
+	while(_type_code) {
+		switch(_type_code->type_hash) {
+			default:
+				_type_code = _type_code->super;
+		}
+	}
+	handle(std::static_pointer_cast<const vnx::Value>(_value));
 }
 
 std::shared_ptr<vnx::Value> TransformPublisherBase::vnx_call_switch(std::shared_ptr<const vnx::Value> _method, const vnx::request_id_t& _request_id) {
-	const auto _type_hash = _method->get_type_hash();
-	if(_type_hash == vnx::Hash64(0x17f58f68bf83abc0ull)) {
-		auto _args = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_get_config_object>(_method);
-		if(!_args) {
-			throw std::logic_error("vnx_call_switch(): !_args");
+	switch(_method->get_type_hash()) {
+		case 0x17f58f68bf83abc0ull: {
+			auto _args = std::static_pointer_cast<const ::vnx::ModuleInterface_vnx_get_config_object>(_method);
+			auto _return_value = ::vnx::ModuleInterface_vnx_get_config_object_return::create();
+			_return_value->_ret_0 = vnx_get_config_object();
+			return _return_value;
 		}
-		auto _return_value = ::vnx::ModuleInterface_vnx_get_config_object_return::create();
-		_return_value->_ret_0 = vnx_get_config_object();
-		return _return_value;
-	} else if(_type_hash == vnx::Hash64(0xbbc7f1a01044d294ull)) {
-		auto _args = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_get_config>(_method);
-		if(!_args) {
-			throw std::logic_error("vnx_call_switch(): !_args");
+		case 0xbbc7f1a01044d294ull: {
+			auto _args = std::static_pointer_cast<const ::vnx::ModuleInterface_vnx_get_config>(_method);
+			auto _return_value = ::vnx::ModuleInterface_vnx_get_config_return::create();
+			_return_value->_ret_0 = vnx_get_config(_args->name);
+			return _return_value;
 		}
-		auto _return_value = ::vnx::ModuleInterface_vnx_get_config_return::create();
-		_return_value->_ret_0 = vnx_get_config(_args->name);
-		return _return_value;
-	} else if(_type_hash == vnx::Hash64(0xca30f814f17f322full)) {
-		auto _args = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_set_config_object>(_method);
-		if(!_args) {
-			throw std::logic_error("vnx_call_switch(): !_args");
+		case 0xca30f814f17f322full: {
+			auto _args = std::static_pointer_cast<const ::vnx::ModuleInterface_vnx_set_config_object>(_method);
+			auto _return_value = ::vnx::ModuleInterface_vnx_set_config_object_return::create();
+			vnx_set_config_object(_args->config);
+			return _return_value;
 		}
-		auto _return_value = ::vnx::ModuleInterface_vnx_set_config_object_return::create();
-		vnx_set_config_object(_args->config);
-		return _return_value;
-	} else if(_type_hash == vnx::Hash64(0x362aac91373958b7ull)) {
-		auto _args = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_set_config>(_method);
-		if(!_args) {
-			throw std::logic_error("vnx_call_switch(): !_args");
+		case 0x362aac91373958b7ull: {
+			auto _args = std::static_pointer_cast<const ::vnx::ModuleInterface_vnx_set_config>(_method);
+			auto _return_value = ::vnx::ModuleInterface_vnx_set_config_return::create();
+			vnx_set_config(_args->name, _args->value);
+			return _return_value;
 		}
-		auto _return_value = ::vnx::ModuleInterface_vnx_set_config_return::create();
-		vnx_set_config(_args->name, _args->value);
-		return _return_value;
-	} else if(_type_hash == vnx::Hash64(0x305ec4d628960e5dull)) {
-		auto _args = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_get_type_code>(_method);
-		if(!_args) {
-			throw std::logic_error("vnx_call_switch(): !_args");
+		case 0x305ec4d628960e5dull: {
+			auto _args = std::static_pointer_cast<const ::vnx::ModuleInterface_vnx_get_type_code>(_method);
+			auto _return_value = ::vnx::ModuleInterface_vnx_get_type_code_return::create();
+			_return_value->_ret_0 = vnx_get_type_code();
+			return _return_value;
 		}
-		auto _return_value = ::vnx::ModuleInterface_vnx_get_type_code_return::create();
-		_return_value->_ret_0 = vnx_get_type_code();
-		return _return_value;
-	} else if(_type_hash == vnx::Hash64(0xf6d82bdf66d034a1ull)) {
-		auto _args = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_get_module_info>(_method);
-		if(!_args) {
-			throw std::logic_error("vnx_call_switch(): !_args");
+		case 0xf6d82bdf66d034a1ull: {
+			auto _args = std::static_pointer_cast<const ::vnx::ModuleInterface_vnx_get_module_info>(_method);
+			auto _return_value = ::vnx::ModuleInterface_vnx_get_module_info_return::create();
+			_return_value->_ret_0 = vnx_get_module_info();
+			return _return_value;
 		}
-		auto _return_value = ::vnx::ModuleInterface_vnx_get_module_info_return::create();
-		_return_value->_ret_0 = vnx_get_module_info();
-		return _return_value;
-	} else if(_type_hash == vnx::Hash64(0x9e95dc280cecca1bull)) {
-		auto _args = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_restart>(_method);
-		if(!_args) {
-			throw std::logic_error("vnx_call_switch(): !_args");
+		case 0x9e95dc280cecca1bull: {
+			auto _args = std::static_pointer_cast<const ::vnx::ModuleInterface_vnx_restart>(_method);
+			auto _return_value = ::vnx::ModuleInterface_vnx_restart_return::create();
+			vnx_restart();
+			return _return_value;
 		}
-		auto _return_value = ::vnx::ModuleInterface_vnx_restart_return::create();
-		vnx_restart();
-		return _return_value;
-	} else if(_type_hash == vnx::Hash64(0x7ab49ce3d1bfc0d2ull)) {
-		auto _args = std::dynamic_pointer_cast<const ::vnx::ModuleInterface_vnx_stop>(_method);
-		if(!_args) {
-			throw std::logic_error("vnx_call_switch(): !_args");
+		case 0x7ab49ce3d1bfc0d2ull: {
+			auto _args = std::static_pointer_cast<const ::vnx::ModuleInterface_vnx_stop>(_method);
+			auto _return_value = ::vnx::ModuleInterface_vnx_stop_return::create();
+			vnx_stop();
+			return _return_value;
 		}
-		auto _return_value = ::vnx::ModuleInterface_vnx_stop_return::create();
-		vnx_stop();
-		return _return_value;
-	} else if(_type_hash == vnx::Hash64(0x4b8ec99ea30fd92cull)) {
-		auto _args = std::dynamic_pointer_cast<const ::automy::basic::TransformPublisher_set_transform>(_method);
-		if(!_args) {
-			throw std::logic_error("vnx_call_switch(): !_args");
+		case 0x6ce3775b41a42697ull: {
+			auto _args = std::static_pointer_cast<const ::vnx::ModuleInterface_vnx_self_test>(_method);
+			auto _return_value = ::vnx::ModuleInterface_vnx_self_test_return::create();
+			_return_value->_ret_0 = vnx_self_test();
+			return _return_value;
 		}
-		auto _return_value = ::automy::basic::TransformPublisher_set_transform_return::create();
-		set_transform(_args->new_transform);
-		return _return_value;
+		case 0x4b8ec99ea30fd92cull: {
+			auto _args = std::static_pointer_cast<const ::automy::basic::TransformPublisher_set_transform>(_method);
+			auto _return_value = ::automy::basic::TransformPublisher_set_transform_return::create();
+			set_transform(_args->new_transform);
+			return _return_value;
+		}
 	}
 	auto _ex = vnx::NoSuchMethod::create();
 	_ex->dst_mac = vnx_request ? vnx_request->dst_mac : vnx::Hash64();
@@ -335,14 +326,11 @@ void read(TypeInput& in, ::automy::basic::TransformPublisherBase& value, const T
 	}
 	const char* const _buf = in.read(type_code->total_field_size);
 	if(type_code->is_matched) {
-		{
-			const vnx::TypeField* const _field = type_code->field_map[1];
-			if(_field) {
-				vnx::read_value(_buf + _field->offset, value.interval_ms, _field->code.data());
-			}
+		if(const auto* const _field = type_code->field_map[1]) {
+			vnx::read_value(_buf + _field->offset, value.interval_ms, _field->code.data());
 		}
 	}
-	for(const vnx::TypeField* _field : type_code->ext_fields) {
+	for(const auto* _field : type_code->ext_fields) {
 		switch(_field->native_index) {
 			case 0: vnx::read(in, value.domain, type_code, _field->code.data()); break;
 			case 2: vnx::read(in, value.config, type_code, _field->code.data()); break;
@@ -362,7 +350,7 @@ void write(TypeOutput& out, const ::automy::basic::TransformPublisherBase& value
 		out.write_type_code(type_code);
 		vnx::write_class_header<::automy::basic::TransformPublisherBase>(out);
 	}
-	if(code && code[0] == CODE_STRUCT) {
+	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
 	char* const _buf = out.write(4);
