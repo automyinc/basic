@@ -14,6 +14,7 @@ void Transform3D::transform(std::shared_ptr<const Transform3D> sample) {
 	if(sample->frame != parent) {
 		throw std::logic_error("transform mismatch ('" + sample->frame + "' != '" + parent + "')");
 	}
+	time += sample->time_offset;
 	parent = sample->parent;
 	matrix = sample->matrix * matrix;
 }
@@ -25,6 +26,7 @@ automy::math::Matrix4d Transform3D::get_transform25() const
 
 std::shared_ptr<const Transform3D> Transform3D::get_inverse() const {
 	auto result = vnx::clone(*this);
+	result->time_offset = -1 * time_offset;
 	result->parent = frame;
 	result->frame = parent;
 	result->matrix = matrix.inverse();
@@ -39,8 +41,7 @@ std::shared_ptr<const Transform3D> Transform3D::get_interpolated(
 
 std::shared_ptr<const Transform3D> Transform3D::from_config(const vnx::Object& config) {
 	auto result = Transform3D::create();
-	result->frame = config["frame"].to_string_value();
-	result->parent = config["parent"].to_string_value();
+	result->from_object(config);
 	if(config.field.count("offset_xyz") || config.field.count("rotation_rpy") || config.field.count("rotation_rpy_deg")) {
 		const auto offset = config["offset_xyz"].to<math::Vector3d>();
 		math::Vector3d rotation;
