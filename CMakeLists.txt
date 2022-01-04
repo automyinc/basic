@@ -4,6 +4,9 @@ project(automy-basic)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -pthread")
 add_compile_options(-DNOGDI)
 
+find_package(PNG REQUIRED)
+find_package(JPEG REQUIRED)
+
 file(GLOB GENERATED_SOURCE_FILES generated/src/*.cpp)
 
 add_library(automy_basic SHARED
