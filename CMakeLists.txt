@@ -24,7 +24,12 @@ add_library(automy_basic SHARED
 
 target_include_directories(automy_basic PUBLIC include generated/include PRIVATE src/)
 
-target_link_libraries(automy_basic automy_math vnx_base png jpeg)
+target_link_libraries(automy_basic
+	automy_math
+	vnx_base
+	${PNG_LIBRARIES}
+	${JPEG_LIBRARIES}
+)
 
 install(DIRECTORY include/ DESTINATION include)
 install(DIRECTORY generated/include/ DESTINATION include)
