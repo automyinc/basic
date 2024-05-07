@@ -7,7 +7,7 @@ namespace automy {
 namespace basic {
 
 vnx::TopicPtr Transform3D::get_topic(const std::string& tf_domain) const {
-	return "tf." + parent + "." + frame;
+	return tf_domain + "." + parent + "." + frame;
 }
 
 void Transform3D::transform(std::shared_ptr<const Transform3D> sample) {
