@@ -11,7 +11,7 @@
 namespace automy {
 namespace basic {
 
-class Trigger : public ::vnx::Value {
+class AUTOMY_BASIC_EXPORT Trigger : public ::vnx::Value {
 public:
 	
 	int64_t time = 0;
@@ -23,6 +23,8 @@ public:
 	static const vnx::Hash64 VNX_CODE_HASH;
 	
 	static constexpr uint64_t VNX_TYPE_ID = 0xae5ff291c2d59cceull;
+	
+	Trigger() {}
 	
 	vnx::Hash64 get_type_hash() const override;
 	std::string get_type_name() const override;
@@ -37,6 +39,8 @@ public:
 	void read(std::istream& _in) override;
 	void write(std::ostream& _out) const override;
 	
+	template<typename T>
+	void accept_generic(T& _visitor) const;
 	void accept(vnx::Visitor& _visitor) const override;
 	
 	vnx::Object to_object() const override;
@@ -51,7 +55,18 @@ public:
 	static const vnx::TypeCode* static_get_type_code();
 	static std::shared_ptr<vnx::TypeCode> static_create_type_code();
 	
+protected:
+	std::shared_ptr<vnx::Value> vnx_call_switch(std::shared_ptr<const vnx::Value> _method) override;
+	
 };
+
+template<typename T>
+void Trigger::accept_generic(T& _visitor) const {
+	_visitor.template type_begin<Trigger>(2);
+	_visitor.type_field("time", 0); _visitor.accept(time);
+	_visitor.type_field("seq_num", 1); _visitor.accept(seq_num);
+	_visitor.template type_end<Trigger>(2);
+}
 
 
 } // namespace automy

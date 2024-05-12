@@ -11,7 +11,7 @@
 namespace automy {
 namespace basic {
 
-class TransformPublisher_set_transform_return : public ::vnx::Value {
+class AUTOMY_BASIC_EXPORT TransformPublisher_set_transform_return : public ::vnx::Value {
 public:
 	
 	
@@ -21,6 +21,8 @@ public:
 	static const vnx::Hash64 VNX_CODE_HASH;
 	
 	static constexpr uint64_t VNX_TYPE_ID = 0x2798b4f2ee70b0a4ull;
+	
+	TransformPublisher_set_transform_return() {}
 	
 	vnx::Hash64 get_type_hash() const override;
 	std::string get_type_name() const override;
@@ -35,6 +37,8 @@ public:
 	void read(std::istream& _in) override;
 	void write(std::ostream& _out) const override;
 	
+	template<typename T>
+	void accept_generic(T& _visitor) const;
 	void accept(vnx::Visitor& _visitor) const override;
 	
 	vnx::Object to_object() const override;
@@ -50,6 +54,12 @@ public:
 	static std::shared_ptr<vnx::TypeCode> static_create_type_code();
 	
 };
+
+template<typename T>
+void TransformPublisher_set_transform_return::accept_generic(T& _visitor) const {
+	_visitor.template type_begin<TransformPublisher_set_transform_return>(0);
+	_visitor.template type_end<TransformPublisher_set_transform_return>(0);
+}
 
 
 } // namespace automy

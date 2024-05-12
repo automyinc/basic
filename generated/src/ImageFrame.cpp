@@ -118,8 +118,6 @@ void ImageFrame::set_field(const std::string& _name, const vnx::Variant& _value)
 		_value.to(format);
 	} else if(_name == "properties") {
 		_value.to(properties);
-	} else {
-		throw std::logic_error("no such field: '" + _name + "'");
 	}
 }
 
@@ -181,6 +179,12 @@ std::shared_ptr<vnx::TypeCode> ImageFrame::static_create_type_code() {
 	return type_code;
 }
 
+std::shared_ptr<vnx::Value> ImageFrame::vnx_call_switch(std::shared_ptr<const vnx::Value> _method) {
+	switch(_method->get_type_hash()) {
+	}
+	return nullptr;
+}
+
 
 } // namespace automy
 } // namespace basic
@@ -218,7 +222,7 @@ void read(TypeInput& in, ::automy::basic::ImageFrame& value, const TypeCode* typ
 			}
 		}
 	}
-	const char* const _buf = in.read(type_code->total_field_size);
+	const auto* const _buf = in.read(type_code->total_field_size);
 	if(type_code->is_matched) {
 		if(const auto* const _field = type_code->field_map[0]) {
 			vnx::read_value(_buf + _field->offset, value.time, _field->code.data());
@@ -247,7 +251,7 @@ void write(TypeOutput& out, const ::automy::basic::ImageFrame& value, const Type
 	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
-	char* const _buf = out.write(8);
+	auto* const _buf = out.write(8);
 	vnx::write_value(_buf + 0, value.time);
 	vnx::write(out, value.frame, type_code, type_code->fields[1].code.data());
 	vnx::write(out, value.format, type_code, type_code->fields[2].code.data());

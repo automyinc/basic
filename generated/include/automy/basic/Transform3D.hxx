@@ -14,7 +14,7 @@
 namespace automy {
 namespace basic {
 
-class Transform3D : public ::vnx::Value {
+class AUTOMY_BASIC_EXPORT Transform3D : public ::vnx::Value {
 public:
 	
 	int64_t time = 0;
@@ -29,6 +29,8 @@ public:
 	static const vnx::Hash64 VNX_CODE_HASH;
 	
 	static constexpr uint64_t VNX_TYPE_ID = 0xe762feb1b334b36dull;
+	
+	Transform3D() {}
 	
 	vnx::Hash64 get_type_hash() const override;
 	std::string get_type_name() const override;
@@ -50,6 +52,8 @@ public:
 	void read(std::istream& _in) override;
 	void write(std::ostream& _out) const override;
 	
+	template<typename T>
+	void accept_generic(T& _visitor) const;
 	void accept(vnx::Visitor& _visitor) const override;
 	
 	vnx::Object to_object() const override;
@@ -64,7 +68,21 @@ public:
 	static const vnx::TypeCode* static_get_type_code();
 	static std::shared_ptr<vnx::TypeCode> static_create_type_code();
 	
+protected:
+	std::shared_ptr<vnx::Value> vnx_call_switch(std::shared_ptr<const vnx::Value> _method) override;
+	
 };
+
+template<typename T>
+void Transform3D::accept_generic(T& _visitor) const {
+	_visitor.template type_begin<Transform3D>(5);
+	_visitor.type_field("time", 0); _visitor.accept(time);
+	_visitor.type_field("time_offset", 1); _visitor.accept(time_offset);
+	_visitor.type_field("frame", 2); _visitor.accept(frame);
+	_visitor.type_field("parent", 3); _visitor.accept(parent);
+	_visitor.type_field("matrix", 4); _visitor.accept(matrix);
+	_visitor.template type_end<Transform3D>(5);
+}
 
 
 } // namespace automy

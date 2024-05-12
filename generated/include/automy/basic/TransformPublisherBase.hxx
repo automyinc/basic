@@ -13,7 +13,7 @@
 namespace automy {
 namespace basic {
 
-class TransformPublisherBase : public ::vnx::Module {
+class AUTOMY_BASIC_EXPORT TransformPublisherBase : public ::vnx::Module {
 public:
 	
 	std::string domain = "tf";
@@ -37,6 +37,8 @@ public:
 	void read(std::istream& _in) override;
 	void write(std::ostream& _out) const override;
 	
+	template<typename T>
+	void accept_generic(T& _visitor) const;
 	void accept(vnx::Visitor& _visitor) const override;
 	
 	vnx::Object to_object() const override;
@@ -60,6 +62,16 @@ protected:
 	std::shared_ptr<vnx::Value> vnx_call_switch(std::shared_ptr<const vnx::Value> _method, const vnx::request_id_t& _request_id) override;
 	
 };
+
+template<typename T>
+void TransformPublisherBase::accept_generic(T& _visitor) const {
+	_visitor.template type_begin<TransformPublisherBase>(4);
+	_visitor.type_field("domain", 0); _visitor.accept(domain);
+	_visitor.type_field("interval_ms", 1); _visitor.accept(interval_ms);
+	_visitor.type_field("config", 2); _visitor.accept(config);
+	_visitor.type_field("transforms", 3); _visitor.accept(transforms);
+	_visitor.template type_end<TransformPublisherBase>(4);
+}
 
 
 } // namespace automy

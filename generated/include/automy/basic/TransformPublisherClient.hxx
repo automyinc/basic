@@ -19,6 +19,10 @@ public:
 	
 	TransformPublisherClient(vnx::Hash64 service_addr);
 	
+	void set_transform(std::shared_ptr<const ::automy::basic::Transform3D> new_transform = nullptr);
+	
+	void set_transform_async(std::shared_ptr<const ::automy::basic::Transform3D> new_transform = nullptr);
+	
 	::vnx::Object vnx_get_config_object();
 	
 	::vnx::Variant vnx_get_config(const std::string& name = "");
@@ -44,10 +48,6 @@ public:
 	void vnx_stop_async();
 	
 	vnx::bool_t vnx_self_test();
-	
-	void set_transform(std::shared_ptr<const ::automy::basic::Transform3D> new_transform = nullptr);
-	
-	void set_transform_async(std::shared_ptr<const ::automy::basic::Transform3D> new_transform = nullptr);
 	
 };
 

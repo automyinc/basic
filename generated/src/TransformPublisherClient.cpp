@@ -44,6 +44,18 @@ TransformPublisherClient::TransformPublisherClient(vnx::Hash64 service_addr)
 {
 }
 
+void TransformPublisherClient::set_transform(std::shared_ptr<const ::automy::basic::Transform3D> new_transform) {
+	auto _method = ::automy::basic::TransformPublisher_set_transform::create();
+	_method->new_transform = new_transform;
+	vnx_request(_method, false);
+}
+
+void TransformPublisherClient::set_transform_async(std::shared_ptr<const ::automy::basic::Transform3D> new_transform) {
+	auto _method = ::automy::basic::TransformPublisher_set_transform::create();
+	_method->new_transform = new_transform;
+	vnx_request(_method, true);
+}
+
 ::vnx::Object TransformPublisherClient::vnx_get_config_object() {
 	auto _method = ::vnx::ModuleInterface_vnx_get_config_object::create();
 	auto _return_value = vnx_request(_method, false);
@@ -149,18 +161,6 @@ vnx::bool_t TransformPublisherClient::vnx_self_test() {
 	} else {
 		throw std::logic_error("TransformPublisherClient: invalid return value");
 	}
-}
-
-void TransformPublisherClient::set_transform(std::shared_ptr<const ::automy::basic::Transform3D> new_transform) {
-	auto _method = ::automy::basic::TransformPublisher_set_transform::create();
-	_method->new_transform = new_transform;
-	vnx_request(_method, false);
-}
-
-void TransformPublisherClient::set_transform_async(std::shared_ptr<const ::automy::basic::Transform3D> new_transform) {
-	auto _method = ::automy::basic::TransformPublisher_set_transform::create();
-	_method->new_transform = new_transform;
-	vnx_request(_method, true);
 }
 
 

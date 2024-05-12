@@ -29,12 +29,20 @@
 
 namespace vnx {
 
+const TypeCode* type<::automy::basic::DataPacket>::get_type_code() {
+	return automy::basic::vnx_native_type_code_DataPacket;
+}
+
 void type<::automy::basic::DataPacket>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::DataPacket());
 }
 
 void type<::automy::basic::DataPacket>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::DataPacket& value, bool special) {
 	code.push_back(CODE_OBJECT);
+}
+
+const TypeCode* type<::automy::basic::Image16>::get_type_code() {
+	return nullptr;
 }
 
 void type<::automy::basic::Image16>::create_dynamic_code(std::vector<uint16_t>& code) {
@@ -45,6 +53,10 @@ void type<::automy::basic::Image16>::create_dynamic_code(std::vector<uint16_t>& 
 	const std::vector<int> tmp = {22, 3, 2};
 	code.insert(code.end(), tmp.begin(), tmp.end());}
 
+const TypeCode* type<::automy::basic::Image32>::get_type_code() {
+	return nullptr;
+}
+
 void type<::automy::basic::Image32>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::Image32());
 }
@@ -52,6 +64,10 @@ void type<::automy::basic::Image32>::create_dynamic_code(std::vector<uint16_t>& 
 void type<::automy::basic::Image32>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Image32& value, bool special) {
 	const std::vector<int> tmp = {22, 3, 3};
 	code.insert(code.end(), tmp.begin(), tmp.end());}
+
+const TypeCode* type<::automy::basic::Image8>::get_type_code() {
+	return nullptr;
+}
 
 void type<::automy::basic::Image8>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::Image8());
@@ -61,6 +77,10 @@ void type<::automy::basic::Image8>::create_dynamic_code(std::vector<uint16_t>& c
 	const std::vector<int> tmp = {22, 3, 1};
 	code.insert(code.end(), tmp.begin(), tmp.end());}
 
+const TypeCode* type<::automy::basic::ImageF32>::get_type_code() {
+	return nullptr;
+}
+
 void type<::automy::basic::ImageF32>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageF32());
 }
@@ -68,6 +88,10 @@ void type<::automy::basic::ImageF32>::create_dynamic_code(std::vector<uint16_t>&
 void type<::automy::basic::ImageF32>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageF32& value, bool special) {
 	const std::vector<int> tmp = {22, 3, 9};
 	code.insert(code.end(), tmp.begin(), tmp.end());}
+
+const TypeCode* type<::automy::basic::ImageF64>::get_type_code() {
+	return nullptr;
+}
 
 void type<::automy::basic::ImageF64>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageF64());
@@ -77,12 +101,20 @@ void type<::automy::basic::ImageF64>::create_dynamic_code(std::vector<uint16_t>&
 	const std::vector<int> tmp = {22, 3, 10};
 	code.insert(code.end(), tmp.begin(), tmp.end());}
 
+const TypeCode* type<::automy::basic::ImageFrame>::get_type_code() {
+	return automy::basic::vnx_native_type_code_ImageFrame;
+}
+
 void type<::automy::basic::ImageFrame>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrame());
 }
 
 void type<::automy::basic::ImageFrame>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame& value, bool special) {
 	code.push_back(CODE_OBJECT);
+}
+
+const TypeCode* type<::automy::basic::ImageFrame16>::get_type_code() {
+	return automy::basic::vnx_native_type_code_ImageFrame16;
 }
 
 void type<::automy::basic::ImageFrame16>::create_dynamic_code(std::vector<uint16_t>& code) {
@@ -93,12 +125,20 @@ void type<::automy::basic::ImageFrame16>::create_dynamic_code(std::vector<uint16
 	code.push_back(CODE_OBJECT);
 }
 
+const TypeCode* type<::automy::basic::ImageFrame32>::get_type_code() {
+	return automy::basic::vnx_native_type_code_ImageFrame32;
+}
+
 void type<::automy::basic::ImageFrame32>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrame32());
 }
 
 void type<::automy::basic::ImageFrame32>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrame32& value, bool special) {
 	code.push_back(CODE_OBJECT);
+}
+
+const TypeCode* type<::automy::basic::ImageFrame8>::get_type_code() {
+	return automy::basic::vnx_native_type_code_ImageFrame8;
 }
 
 void type<::automy::basic::ImageFrame8>::create_dynamic_code(std::vector<uint16_t>& code) {
@@ -109,12 +149,20 @@ void type<::automy::basic::ImageFrame8>::create_dynamic_code(std::vector<uint16_
 	code.push_back(CODE_OBJECT);
 }
 
+const TypeCode* type<::automy::basic::ImageFrameF16>::get_type_code() {
+	return automy::basic::vnx_native_type_code_ImageFrameF16;
+}
+
 void type<::automy::basic::ImageFrameF16>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrameF16());
 }
 
 void type<::automy::basic::ImageFrameF16>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrameF16& value, bool special) {
 	code.push_back(CODE_OBJECT);
+}
+
+const TypeCode* type<::automy::basic::ImageFrameF32>::get_type_code() {
+	return automy::basic::vnx_native_type_code_ImageFrameF32;
 }
 
 void type<::automy::basic::ImageFrameF32>::create_dynamic_code(std::vector<uint16_t>& code) {
@@ -125,12 +173,20 @@ void type<::automy::basic::ImageFrameF32>::create_dynamic_code(std::vector<uint1
 	code.push_back(CODE_OBJECT);
 }
 
+const TypeCode* type<::automy::basic::ImageFrameF64>::get_type_code() {
+	return automy::basic::vnx_native_type_code_ImageFrameF64;
+}
+
 void type<::automy::basic::ImageFrameF64>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::ImageFrameF64());
 }
 
 void type<::automy::basic::ImageFrameF64>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::ImageFrameF64& value, bool special) {
 	code.push_back(CODE_OBJECT);
+}
+
+const TypeCode* type<::automy::basic::MultiImageFrame>::get_type_code() {
+	return automy::basic::vnx_native_type_code_MultiImageFrame;
 }
 
 void type<::automy::basic::MultiImageFrame>::create_dynamic_code(std::vector<uint16_t>& code) {
@@ -141,12 +197,20 @@ void type<::automy::basic::MultiImageFrame>::create_dynamic_code(std::vector<uin
 	code.push_back(CODE_OBJECT);
 }
 
+const TypeCode* type<::automy::basic::Scalar>::get_type_code() {
+	return automy::basic::vnx_native_type_code_Scalar;
+}
+
 void type<::automy::basic::Scalar>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::Scalar());
 }
 
 void type<::automy::basic::Scalar>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::Scalar& value, bool special) {
 	code.push_back(CODE_OBJECT);
+}
+
+const TypeCode* type<::automy::basic::Transform3D>::get_type_code() {
+	return automy::basic::vnx_native_type_code_Transform3D;
 }
 
 void type<::automy::basic::Transform3D>::create_dynamic_code(std::vector<uint16_t>& code) {
@@ -157,6 +221,10 @@ void type<::automy::basic::Transform3D>::create_dynamic_code(std::vector<uint16_
 	code.push_back(CODE_OBJECT);
 }
 
+const TypeCode* type<::automy::basic::TransformPublisher_set_transform>::get_type_code() {
+	return automy::basic::vnx_native_type_code_TransformPublisher_set_transform;
+}
+
 void type<::automy::basic::TransformPublisher_set_transform>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::TransformPublisher_set_transform());
 }
@@ -165,12 +233,20 @@ void type<::automy::basic::TransformPublisher_set_transform>::create_dynamic_cod
 	code.push_back(CODE_OBJECT);
 }
 
+const TypeCode* type<::automy::basic::TransformPublisher_set_transform_return>::get_type_code() {
+	return automy::basic::vnx_native_type_code_TransformPublisher_set_transform_return;
+}
+
 void type<::automy::basic::TransformPublisher_set_transform_return>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::automy::basic::TransformPublisher_set_transform_return());
 }
 
 void type<::automy::basic::TransformPublisher_set_transform_return>::create_dynamic_code(std::vector<uint16_t>& code, const ::automy::basic::TransformPublisher_set_transform_return& value, bool special) {
 	code.push_back(CODE_OBJECT);
+}
+
+const TypeCode* type<::automy::basic::Trigger>::get_type_code() {
+	return automy::basic::vnx_native_type_code_Trigger;
 }
 
 void type<::automy::basic::Trigger>::create_dynamic_code(std::vector<uint16_t>& code) {
@@ -189,7 +265,7 @@ namespace automy {
 namespace basic {
 
 
-static void register_all_types() {
+void register_all_types() {
 	vnx::register_type_code(::automy::basic::DataPacket::static_create_type_code());
 	vnx::register_type_code(::automy::basic::ImageFrame::static_create_type_code());
 	vnx::register_type_code(::automy::basic::ImageFrame16::static_create_type_code());

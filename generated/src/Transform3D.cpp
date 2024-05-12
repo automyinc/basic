@@ -130,8 +130,6 @@ void Transform3D::set_field(const std::string& _name, const vnx::Variant& _value
 		_value.to(parent);
 	} else if(_name == "matrix") {
 		_value.to(matrix);
-	} else {
-		throw std::logic_error("no such field: '" + _name + "'");
 	}
 }
 
@@ -199,6 +197,12 @@ std::shared_ptr<vnx::TypeCode> Transform3D::static_create_type_code() {
 	return type_code;
 }
 
+std::shared_ptr<vnx::Value> Transform3D::vnx_call_switch(std::shared_ptr<const vnx::Value> _method) {
+	switch(_method->get_type_hash()) {
+	}
+	return nullptr;
+}
+
 
 } // namespace automy
 } // namespace basic
@@ -236,7 +240,7 @@ void read(TypeInput& in, ::automy::basic::Transform3D& value, const TypeCode* ty
 			}
 		}
 	}
-	const char* const _buf = in.read(type_code->total_field_size);
+	const auto* const _buf = in.read(type_code->total_field_size);
 	if(type_code->is_matched) {
 		if(const auto* const _field = type_code->field_map[0]) {
 			vnx::read_value(_buf + _field->offset, value.time, _field->code.data());
@@ -268,7 +272,7 @@ void write(TypeOutput& out, const ::automy::basic::Transform3D& value, const Typ
 	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
-	char* const _buf = out.write(12);
+	auto* const _buf = out.write(12);
 	vnx::write_value(_buf + 0, value.time);
 	vnx::write_value(_buf + 8, value.time_offset);
 	vnx::write(out, value.frame, type_code, type_code->fields[2].code.data());

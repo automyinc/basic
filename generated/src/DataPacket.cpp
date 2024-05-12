@@ -97,8 +97,6 @@ void DataPacket::set_field(const std::string& _name, const vnx::Variant& _value)
 		_value.to(time);
 	} else if(_name == "payload") {
 		_value.to(payload);
-	} else {
-		throw std::logic_error("no such field: '" + _name + "'");
 	}
 }
 
@@ -148,6 +146,12 @@ std::shared_ptr<vnx::TypeCode> DataPacket::static_create_type_code() {
 	return type_code;
 }
 
+std::shared_ptr<vnx::Value> DataPacket::vnx_call_switch(std::shared_ptr<const vnx::Value> _method) {
+	switch(_method->get_type_hash()) {
+	}
+	return nullptr;
+}
+
 
 } // namespace automy
 } // namespace basic
@@ -185,7 +189,7 @@ void read(TypeInput& in, ::automy::basic::DataPacket& value, const TypeCode* typ
 			}
 		}
 	}
-	const char* const _buf = in.read(type_code->total_field_size);
+	const auto* const _buf = in.read(type_code->total_field_size);
 	if(type_code->is_matched) {
 		if(const auto* const _field = type_code->field_map[0]) {
 			vnx::read_value(_buf + _field->offset, value.time, _field->code.data());
@@ -212,7 +216,7 @@ void write(TypeOutput& out, const ::automy::basic::DataPacket& value, const Type
 	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
-	char* const _buf = out.write(8);
+	auto* const _buf = out.write(8);
 	vnx::write_value(_buf + 0, value.time);
 	vnx::write(out, value.payload, type_code, type_code->fields[1].code.data());
 }

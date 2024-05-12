@@ -74,7 +74,6 @@ vnx::Variant TransformPublisher_set_transform_return::get_field(const std::strin
 }
 
 void TransformPublisher_set_transform_return::set_field(const std::string& _name, const vnx::Variant& _value) {
-	throw std::logic_error("no such field: '" + _name + "'");
 }
 
 /// \private
@@ -148,6 +147,7 @@ void read(TypeInput& in, ::automy::basic::TransformPublisher_set_transform_retur
 			}
 		}
 	}
+	in.read(type_code->total_field_size);
 	if(type_code->is_matched) {
 	}
 	for(const auto* _field : type_code->ext_fields) {

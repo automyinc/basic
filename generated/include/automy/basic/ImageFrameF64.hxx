@@ -12,7 +12,7 @@
 namespace automy {
 namespace basic {
 
-class ImageFrameF64 : public ::automy::basic::ImageFrame {
+class AUTOMY_BASIC_EXPORT ImageFrameF64 : public ::automy::basic::ImageFrame {
 public:
 	
 	::automy::basic::ImageF64 image;
@@ -23,6 +23,8 @@ public:
 	static const vnx::Hash64 VNX_CODE_HASH;
 	
 	static constexpr uint64_t VNX_TYPE_ID = 0x8c0892cc2111c0f1ull;
+	
+	ImageFrameF64() {}
 	
 	vnx::Hash64 get_type_hash() const override;
 	std::string get_type_name() const override;
@@ -37,6 +39,8 @@ public:
 	void read(std::istream& _in) override;
 	void write(std::ostream& _out) const override;
 	
+	template<typename T>
+	void accept_generic(T& _visitor) const;
 	void accept(vnx::Visitor& _visitor) const override;
 	
 	vnx::Object to_object() const override;
@@ -51,7 +55,21 @@ public:
 	static const vnx::TypeCode* static_get_type_code();
 	static std::shared_ptr<vnx::TypeCode> static_create_type_code();
 	
+protected:
+	std::shared_ptr<vnx::Value> vnx_call_switch(std::shared_ptr<const vnx::Value> _method) override;
+	
 };
+
+template<typename T>
+void ImageFrameF64::accept_generic(T& _visitor) const {
+	_visitor.template type_begin<ImageFrameF64>(5);
+	_visitor.type_field("time", 0); _visitor.accept(time);
+	_visitor.type_field("frame", 1); _visitor.accept(frame);
+	_visitor.type_field("format", 2); _visitor.accept(format);
+	_visitor.type_field("properties", 3); _visitor.accept(properties);
+	_visitor.type_field("image", 4); _visitor.accept(image);
+	_visitor.template type_end<ImageFrameF64>(5);
+}
 
 
 } // namespace automy

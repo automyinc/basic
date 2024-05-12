@@ -11,7 +11,7 @@
 namespace automy {
 namespace basic {
 
-class MultiImageFrame : public ::automy::basic::ImageFrame {
+class AUTOMY_BASIC_EXPORT MultiImageFrame : public ::automy::basic::ImageFrame {
 public:
 	
 	std::vector<std::shared_ptr<const ::automy::basic::ImageFrame>> frames;
@@ -22,6 +22,8 @@ public:
 	static const vnx::Hash64 VNX_CODE_HASH;
 	
 	static constexpr uint64_t VNX_TYPE_ID = 0x5ee9279d2299dc0dull;
+	
+	MultiImageFrame() {}
 	
 	vnx::Hash64 get_type_hash() const override;
 	std::string get_type_name() const override;
@@ -36,6 +38,8 @@ public:
 	void read(std::istream& _in) override;
 	void write(std::ostream& _out) const override;
 	
+	template<typename T>
+	void accept_generic(T& _visitor) const;
 	void accept(vnx::Visitor& _visitor) const override;
 	
 	vnx::Object to_object() const override;
@@ -50,7 +54,21 @@ public:
 	static const vnx::TypeCode* static_get_type_code();
 	static std::shared_ptr<vnx::TypeCode> static_create_type_code();
 	
+protected:
+	std::shared_ptr<vnx::Value> vnx_call_switch(std::shared_ptr<const vnx::Value> _method) override;
+	
 };
+
+template<typename T>
+void MultiImageFrame::accept_generic(T& _visitor) const {
+	_visitor.template type_begin<MultiImageFrame>(5);
+	_visitor.type_field("time", 0); _visitor.accept(time);
+	_visitor.type_field("frame", 1); _visitor.accept(frame);
+	_visitor.type_field("format", 2); _visitor.accept(format);
+	_visitor.type_field("properties", 3); _visitor.accept(properties);
+	_visitor.type_field("frames", 4); _visitor.accept(frames);
+	_visitor.template type_end<MultiImageFrame>(5);
+}
 
 
 } // namespace automy
