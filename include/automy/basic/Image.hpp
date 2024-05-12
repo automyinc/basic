@@ -28,10 +28,14 @@ void Image<T>::read(vnx::TypeInput& in, const vnx::TypeCode* type_code, const ui
 		case vnx::CODE_IMAGE:
 		case vnx::CODE_ALT_IMAGE: {
 			// new format since vnx-1.2.0
-			std::array<size_t, 3> size_;
-			vnx::read_image_size<3>(in, size_, code);
-			resize(size_[1], size_[2], size_[0]);
-			vnx::read_image_data<T, 3>(in, data_, size_, code);
+			std::vector<size_t> size_;
+			vnx::read_image_size(in, size_, code);
+			if(size_.size() == 3) {
+				resize(size_[1], size_[2], size_[0]);
+				vnx::read_image_data<T>(in, data_, size_, code);
+			} else {
+				vnx::read_image_data<T>(in, nullptr, size_, code);
+			}
 			break;
 		}
 		case vnx::CODE_OBJECT:
